@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
+
 .App {
   text-align: center;
 }
@@ -16,14 +17,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  background-image: url('medium-background.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
 .App-link {
@@ -36,14 +38,14 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(29, 32, 38, 0.75);
+  background-color: rgb(00, 00, 00, 0.75);
   transition: 0.5s ease;
   overflow-x: hidden;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url("https://www.transparenttextures.com/patterns/black-mamba.png");
+  border-bottom-right-radius: 25px;
 }
 
 .nav-title {
@@ -53,29 +55,48 @@
 }
 
 .nav-header {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 5px;
   font-family: "Unbuntu", sans-serif;
 }
 .nav-header:link {
-  color: #f2f3f4;
+  color: #bcbdbd;
   text-decoration: none;
 }
 
 .nav-header:visited {
-  color: #f2f3f4;
+  color: #bcbdbd;
   text-decoration: none;
 }
 
 .nav-header:hover {
-  text-decoration: underline;
-  transform: translate(4px, -2px);
+  color:#ffffff;
+  transform: translate(0px, -2.5px);
+  font-size: 110%;
+}
+
+.nav-subtitle { 
+  opacity: 0;
+  transition: all .2s ease-in-out;
+  font-size: 6px;
+  padding-left: 5px;
+  color: #a7afb2;
+}
+
+.hover-to-show-link:hover .hover-to-show {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+  font-size: 12px;  
+}
+
+.hover-to-show-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .nav-subtitle {
-  padding-left: 5px;
-  font-size: 12px;
-  color: #a7afb2;
+ 
 }
 
 @keyframes App-logo-spin {
