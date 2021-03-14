@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
 .App {
   text-align: center;
 }
@@ -26,6 +28,54 @@
 
 .App-link {
   color: #61dafb;
+}
+.side-nav {
+  height: 75%;
+  width: 12.5%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(29, 32, 38, 0.75);
+  transition: 0.5s ease;
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: url("https://www.transparenttextures.com/patterns/black-mamba.png");
+}
+
+.nav-title {
+  align-self: center;
+  font-family: "Ubuntu", sans-serif;
+  color: #f8f8ff;
+}
+
+.nav-header {
+  padding-top: 20px;
+  padding-left: 5px;
+  font-family: "Unbuntu", sans-serif;
+}
+.nav-header:link {
+  color: #f2f3f4;
+  text-decoration: none;
+}
+
+.nav-header:visited {
+  color: #f2f3f4;
+  text-decoration: none;
+}
+
+.nav-header:hover {
+  text-decoration: underline;
+  transform: translate(4px, -2px);
+}
+
+.nav-subtitle {
+  padding-left: 5px;
+  font-size: 12px;
+  color: #a7afb2;
 }
 
 @keyframes App-logo-spin {
