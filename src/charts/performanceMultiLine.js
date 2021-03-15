@@ -244,17 +244,45 @@ const price = [
   '10497.47',
   '10265.18',
 ];
-export default function PerformanceLine() {
+
+const secondaryPrice = price.map((x) => x / 2);
+const tertiaryPrice = secondaryPrice
+  .slice()
+  .reverse()
+  .map((x) => x * 1.5);
+export default function PerformanceMultiLine() {
   const data = {
     //x axis data
     labels: days,
     datasets: [
       {
-        label: 'Portoflio Value',
+        label: 'Value 1',
         //y axis data
         data: price,
         fill: false,
         borderColor: 'rgb(55, 155, 255)',
+        //sets chart line straight
+        lineTension: 0,
+        pointRadius: 1,
+        pointHitRadius: 10,
+      },
+      {
+        label: 'Value 2',
+        //y axis data
+        data: secondaryPrice,
+        fill: false,
+        borderColor: 'rgb(255, 100, 100)',
+        //sets chart line straight
+        lineTension: 0,
+        pointRadius: 1,
+        pointHitRadius: 10,
+      },
+      {
+        label: 'Value 3',
+        //y axis data
+        data: tertiaryPrice,
+        fill: false,
+        borderColor: 'rgb(105, 100, 100)',
         //sets chart line straight
         lineTension: 0,
         pointRadius: 1,
