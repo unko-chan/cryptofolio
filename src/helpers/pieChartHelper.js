@@ -1,73 +1,6 @@
-const accounts = [
-  {
-    "id": "58542935-67b5-56e1-a3f9-42686e07fa40",
-    "name": "My Vault",
-    "primary": false,
-    "type": "vault",
-    "currency": "BTC",
-    "balance": {
-      "amount": "0.00600000",
-      "currency": "BTC"
-    },
-    "created_at": "2015-01-31T20:49:02Z",
-    "updated_at": "2015-01-31T20:49:02Z",
-    "resource": "account",
-    "resource_path": "/v2/accounts/58542935-67b5-56e1-a3f9-42686e07fa40",
-    "ready": true
-  },
-  {
-    "id": "2bbf394c-193b-5b2a-9155-3b4732659ede",
-    "name": "My Wallet",
-    "primary": true,
-    "type": "wallet",
-    "currency": "BTC",
-    "balance": {
-      "amount": "0.00385253",
-      "currency": "BTC"
-    },
-    "created_at": "2015-01-31T20:49:02Z",
-    "updated_at": "2015-01-31T20:49:02Z",
-    "resource": "account",
-    "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede"
-  },
-  {
-    "id": "2bbf394c-193b-5b2a-9155-3b4732659ede",
-    "name": "My Wallet",
-    "primary": true,
-    "type": "wallet",
-    "currency": "ETH",
-    "balance": {
-      "amount": "0.15059839",
-      "currency": "ETH"
-    },
-    "created_at": "2015-01-31T20:49:02Z",
-    "updated_at": "2015-01-31T20:49:02Z",
-    "resource": "account",
-    "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede"
-  },
-  {
-    "id": "58542935-67b5-56e1-a3f9-42686e07fa40",
-    "name": "My Vault",
-    "primary": false,
-    "type": "vault",
-    "currency": "0x",
-    "balance": {
-      "amount": "500.35000000",
-      "currency": "0x"
-    },
-    "created_at": "2015-01-31T20:49:02Z",
-    "updated_at": "2015-01-31T20:49:02Z",
-    "resource": "account",
-    "resource_path": "/v2/accounts/58542935-67b5-56e1-a3f9-42686e07fa40",
-    "ready": true
-  }
-];
-
-const conversions = {
-  "BTC": 75825.02,
-  "ETH": 2367.82,
-  "0x": 1.74
-};
+import accounts from '../data/accounts.json';
+import conversions from '../data/conversions.json';
+import colors from '../data/colors.json';
 
 const getBalances = function(accounts) {
   let balances = {};
@@ -123,11 +56,11 @@ const getConvertedOwnings = function(balances, conversions) {
 };
 
 const getTotalOwnings = function(ownings) {
-  return ownings.reduce((accum, cur) => accum + cur);
+  return ownings.reduce((accum, cur) => accum + cur).toFixed(2);
 }
 
 const getOwningRatios = function(ownings, totalOwnings) {
-  return ownings.map(owning => (owning / totalOwnings).toPrecision(2));
+  return ownings.map(owning => (owning / totalOwnings).toFixed(2));
 };
 
 // const rand = () => Math.floor(Math.random() * 255);
@@ -138,23 +71,17 @@ const currencyColors = function(colors) {
 
 const balances = getBalances(accounts);
 
-const currencies = getCurrencies(balances);
-console.log(currencies);
+export const currencies = getCurrencies(balances);
+export const convertedOwnings = getConvertedOwnings(balances, conversions);
+export const totalOwnings = getTotalOwnings(convertedOwnings);
+export const owningRatios = getOwningRatios(convertedOwnings, totalOwnings);
+export const filteredColors = currencyColors(colors);
 
-const convertedOwnings = getConvertedOwnings(balances, conversions);
-console.log(convertedOwnings);
-
-const totalOwnings = getTotalOwnings(convertedOwnings);
-console.log(totalOwnings);
-
-const owningRatios = getOwningRatios(convertedOwnings, totalOwnings);
-console.log(owningRatios);
-
-export {
-  getBalances,
-  getCurrencies,
-  getConvertedOwnings,
-  getTotalOwnings,
-  getOwningRatios,
-  currencyColors
-};
+// export {
+//   getBalances,
+//   getCurrencies,
+//   getConvertedOwnings,
+//   getTotalOwnings,
+//   getOwningRatios,
+//   currencyColors
+// };
