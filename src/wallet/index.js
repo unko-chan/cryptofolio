@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,8 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 
 import { totalOwnings } from '../helpers/pieChartHelper';
-import { findTransactions, findTransactionAmount } from '../helpers/transactionHelper'
+import { findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth } from '../helpers/transactionHelper'
 import transactions from '../data/transactions.json';
+import { Breadcrumbs } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,26 +26,60 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     padding: theme.spacing(2)
+  },
+  breadcrumbs: {
+    padding: theme.spacing(3)
   }
 }));
 
-const monthlyTransactions = findTransactions(transactions, "month");
-const transactionTotal = findTransactionAmount(transactions);
-
 // find monthly growth amount and percentage
-const monthlyTotal = findTransactionAmount(monthlyTransactions);
-const previousMonthTotal = transactionTotal - monthlyTotal
-const monthlyIncrease = (monthlyTotal / previousMonthTotal * 100).toFixed(2);
+const monthlyDollarGrowth = calculateDollarGrowth("month", transactions);
+const monthlyPercentGrowth = calculatePercentGrowth("month", transactions);
+
+// find yearly growth amount and percentage
+const yearlyDollarGrowth = calculateDollarGrowth("year", transactions);
+const yearlyPercentGrowth = calculatePercentGrowth("year", transactions);
+
+// find weekly growth amount and percentage
+const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
+const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
+
+// daily
+const dailyDollarGrowth = calculateDollarGrowth("day", transactions);
+const dailyPercentGrowth = calculatePercentGrowth("day", transactions);
 
 export default function WalletCard() {
   const classes = useStyles();
+  const [period, setPeriod] = useState("month");
 
   return (
     <Card>
-      <Typography variant="h4" className={classes.heading}>
-        Wallet
-        <AccountBalanceWalletIcon className={classes.icon}/>
-      </Typography>
+      <Grid container>
+        <Grid item xs={8}>
+          <Typography variant="h4" className={classes.heading}>
+            Wallet
+            <AccountBalanceWalletIcon className={classes.icon}/>
+          </Typography>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Breadcrumbs className={classes.breadcrumbs}>
+            <Typography onClick={() => setPeriod("year")}>
+              Y
+            </Typography>
+            <Typography onClick={() => setPeriod("month")}>
+              M
+            </Typography>
+            <Typography onClick={() => setPeriod("week")}>
+              W
+            </Typography>
+            <Typography onClick={() => setPeriod("day")}>
+              D
+            </Typography>
+          </Breadcrumbs>
+        </Grid>
+
+      </Grid>
 
       <Grid
         container
@@ -64,18 +99,34 @@ export default function WalletCard() {
         <Grid item xs={3} spacing={3}>
             <Paper className={classes.paper}>
               <Typography>
-                Monthly Growth ($)
+                { period === "month" ? "Monthly" 
+                  : period === "year" ? "Yearly"
+                  : period === "week" ? "Weekly"
+                  : "Daily"
+                } Growth ($)
               </Typography>
-              ${monthlyTotal}
+              ${ period === "month" ? monthlyDollarGrowth 
+                : period === "year" ? yearlyDollarGrowth
+                : period === "week" ? weeklyDollarGrowth
+                : dailyDollarGrowth
+              }
             </Paper>
         </Grid>
 
         <Grid item xs={3} spacing={3}>
             <Paper className={classes.paper}>              
               <Typography>
-                Monthly Growth (%)
+                { period === "month" ? "Monthly" 
+                  : period === "year" ? "Yearly"
+                  : period === "week" ? "Weekly"
+                  : "Daily"
+                } Growth (%)
               </Typography>
-              {monthlyIncrease}%
+              { period === "month" ? monthlyPercentGrowth 
+                : period === "year" ? yearlyPercentGrowth
+                : period === "week" ? weeklyPercentGrowth
+                : dailyPercentGrowth
+              }%
             </Paper>
         </Grid>
       </Grid>

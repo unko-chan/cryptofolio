@@ -77,11 +77,11 @@ export const totalOwnings = getTotalOwnings(convertedOwnings);
 export const owningRatios = getOwningRatios(convertedOwnings, totalOwnings);
 export const filteredColors = currencyColors(colors);
 
-// export {
-//   getBalances,
-//   getCurrencies,
-//   getConvertedOwnings,
-//   getTotalOwnings,
-//   getOwningRatios,
-//   currencyColors
-// };
+export {
+  getBalances,
+  getCurrencies,
+  getConvertedOwnings,
+  getTotalOwnings,
+  getOwningRatios,
+  currencyColors
+};

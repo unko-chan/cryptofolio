@@ -67,35 +67,66 @@ const transactions = [
      "description" : null
   },
   {
-    "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-    "type": "send",
-    "status": "completed",
-    "amount": {
-      "amount": "0.00500000",
-      "currency": "BTC"
-    },
-    "native_amount": {
-      "amount": "25.65",
-      "currency": "CAD"
-    },
-    "description": null,
-    "created_at": "2015-03-11T13:13:35-07:00",
-    "updated_at": "2015-03-26T15:55:43-07:00",
-    "resource": "transaction",
-    "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-    "network": {
-      "status": "off_blockchain",
-      "name": "bitcoin"
-    },
-    "to": {
-      "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-      "resource": "user",
-      "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-    },
-    "details": {
-      "title": "Send bitcoin",
-      "subtitle": "to User 2"
-    }
+      "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
+      "type": "send",
+      "status": "completed",
+      "amount": {
+         "amount": "0.0032",
+         "currency": "ETH"
+      },
+      "native_amount": {
+         "amount": "56.90",
+         "currency": "CAD"
+      },
+      "description": null,
+      "created_at": "2020-12-11T13:13:35-07:00",
+      "updated_at": "2020-12-11T15:55:43-07:00",
+      "resource": "transaction",
+      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
+      "network": {
+         "status": "off_blockchain",
+         "name": "bitcoin"
+      },
+      "to": {
+         "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
+         "resource": "user",
+         "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
+      },
+      "details": {
+         "title": "Send bitcoin",
+         "subtitle": "to User 2"
+      }
+  },
+  {
+      "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
+      "type": "send",
+      "status": "completed",
+      "amount": {
+         "amount": "0.00500000",
+         "currency": "BTC"
+      },
+      "native_amount": {
+         "amount": "25.65",
+         "currency": "CAD"
+      },
+      "description": null,
+      "created_at": "2015-03-11T13:13:35-07:00",
+      "updated_at": "2015-03-26T15:55:43-07:00",
+      "resource": "transaction",
+      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
+      "network": {
+         "status": "off_blockchain",
+         "name": "bitcoin"
+      },
+      "to": {
+         "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
+         "resource": "user",
+         "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
+      },
+      "details": {
+         "title": "Send bitcoin",
+         "subtitle": "to User 2"
+      }
   }
 ];
 
@@ -133,14 +164,46 @@ const findTransactionAmount = function(transactions) {
   return transactions.reduce((accum, cur) => accum + Number(cur.native_amount.amount), 0);
 };
 
-console.log("year", getPeriodDays("year"));
-console.log("month", getPeriodDays("month"));
-console.log(checkTransaction(transaction, "month"));
+const calculateDollarGrowth = function(period, transactions) {
+  const periodTransactions = findTransactions(transactions, period);
+  return findTransactionAmount(periodTransactions);
+};
 
-const monthlyTransactions = findTransactions(transactions, "month");
-console.log('monthly transactions', monthlyTransactions);
+const calculatePercentGrowth = function(period, transactions) {
+  const transactionTotal = findTransactionAmount(transactions);
+  const periodTotal = calculateDollarGrowth(period, transactions);
+  // console.log('this is period total', period, periodTotal);
+  const previousPeriodTotal = transactionTotal - periodTotal;
 
-const total = findTransactionAmount(monthlyTransactions);
-console.log(total);
+  if (previousPeriodTotal === 0) {
+    return "🚀";
+  }
 
-export { findTransactions, findTransactionAmount };
+  // console.log('this is previous period total', period, previousPeriodTotal);
+  const periodIncrease = (periodTotal / previousPeriodTotal * 100).toFixed(2);
+  return periodIncrease;
+};
+
+// console.log("year", getPeriodDays("year"));
+// console.log("month", getPeriodDays("month"));
+// console.log(checkTransaction(transaction, "month"));
+
+// const monthlyTransactions = findTransactions(transactions, "month");
+// console.log('monthly transactions', monthlyTransactions);
+
+// const total = findTransactionAmount(monthlyTransactions);
+// console.log(total);
+
+// find monthly growth amount and percentage
+// const monthlyPercentGrowth = calculatePercentGrowth("month", transactions);
+// console.log(monthlyPercentGrowth);
+
+// // find yearly growth amount and percentage
+// const yearlyPercentGrowth = calculatePercentGrowth("year", transactions);
+// console.log(yearlyPercentGrowth);
+
+// // find weekly growth amount and percentage
+// const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
+// const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
+
+export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth };
