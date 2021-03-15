@@ -1,6 +1,3 @@
-// import transactions from '../data/transactions.json';
-// import { currencies } from './pieChartHelper';
-
 const transactions = [
   {
      "type" : "send",
@@ -74,11 +71,11 @@ const transactions = [
     "type": "send",
     "status": "completed",
     "amount": {
-      "amount": "-0.00500000",
+      "amount": "0.00500000",
       "currency": "BTC"
     },
     "native_amount": {
-      "amount": "-25.65",
+      "amount": "25.65",
       "currency": "CAD"
     },
     "description": null,
@@ -103,8 +100,8 @@ const transactions = [
 ];
 
 const transaction = {
-    "created_at": "2021-03-12T21:13:04Z"
-  }
+  "created_at": "2021-03-12T21:13:04Z"
+};
 
 // assume that the transactions include all currencies
 const findTransactions = function(transactions, period) {
@@ -118,6 +115,7 @@ const checkTransaction = function(transaction, period) {
   return date > Date.now();
 };
 
+// generic period not pertaining to a particular month or year
 const getPeriodDays = function(period) {
   switch(period) {
     case "year":
@@ -131,7 +129,18 @@ const getPeriodDays = function(period) {
   }
 };
 
+const findTransactionAmount = function(transactions) {
+  return transactions.reduce((accum, cur) => accum + Number(cur.native_amount.amount), 0);
+};
+
 console.log("year", getPeriodDays("year"));
 console.log("month", getPeriodDays("month"));
 console.log(checkTransaction(transaction, "month"));
-console.log(findTransactions(transactions, "month"));
+
+const monthlyTransactions = findTransactions(transactions, "month");
+console.log('monthly transactions', monthlyTransactions);
+
+const total = findTransactionAmount(monthlyTransactions);
+console.log(total);
+
+export { findTransactions, findTransactionAmount };

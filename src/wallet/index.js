@@ -6,10 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 
 import { totalOwnings } from '../helpers/pieChartHelper';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
+import { findTransactions, findTransactionAmount } from '../helpers/transactionHelper'
+import transactions from '../data/transactions.json';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2)
   }
 }));
+
+const monthlyTransactions = findTransactions(transactions, "month");
+const transactionTotal = findTransactionAmount(transactions);
+
+// find monthly growth amount and percentage
+const monthlyTotal = findTransactionAmount(monthlyTransactions);
+const previousMonthTotal = transactionTotal - monthlyTotal
+const monthlyIncrease = (monthlyTotal / previousMonthTotal * 100).toFixed(2);
 
 export default function WalletCard() {
   const classes = useStyles();
@@ -55,18 +64,18 @@ export default function WalletCard() {
         <Grid item xs={3} spacing={3}>
             <Paper className={classes.paper}>
               <Typography>
-                Since Last Month ($)
+                Monthly Growth ($)
               </Typography>
-              $2000.00
+              ${monthlyTotal}
             </Paper>
         </Grid>
 
         <Grid item xs={3} spacing={3}>
             <Paper className={classes.paper}>              
               <Typography>
-                Since Last Month (%)
+                Monthly Growth (%)
               </Typography>
-              $1000.00 
+              {monthlyIncrease}%
             </Paper>
         </Grid>
       </Grid>

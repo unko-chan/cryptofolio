@@ -71,11 +71,11 @@
     "type": "send",
     "status": "completed",
     "amount": {
-      "amount": "-0.00500000",
+      "amount": "0.00500000",
       "currency": "BTC"
     },
     "native_amount": {
-      "amount": "-25.65",
+      "amount": "25.65",
       "currency": "CAD"
     },
     "description": null,
