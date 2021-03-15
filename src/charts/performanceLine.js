@@ -246,12 +246,14 @@ const price = [
 ];
 ;
 
-export default function VoteLine() {
+export default function PerformanceLine() {
   const data = {
+    //x axis data
     labels: days,
     datasets: [
       {
         label: 'Portoflio Value',
+        //y axis data
         data: price,
         fill: false,
         borderColor: 'rgba(255, 99, 132, 0.2)',

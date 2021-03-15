@@ -1,7 +1,9 @@
 import './App.scss';
 import SideNav from './Components/Nav/SideNav';
 import Doughnut from "./charts/doughnut";
-import VoteLine from "./charts/performanceChartLine"
+import PerformanceLine from './charts/performanceLine';
+import PerformanceBar from './charts/performanceBar';
+
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
           </div>
         </div>
         <div class="chart-container">
-          <VoteLine />
+          <PerformanceBar />
 
           <Doughnut />
         </div>
