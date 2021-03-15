@@ -1,9 +1,10 @@
 import './App.scss';
 import SideNav from './Components/Nav/SideNav';
-import Doughnut from "./charts/doughnut";
-import Wallet from "./wallet/index";
+import Doughnut from './charts/doughnut';
+import Wallet from './wallet/index';
 import PerformanceLine from './charts/performanceLine';
 import PerformanceBar from './charts/performanceBar';
+import PerformanceMultiLine from './charts/performanceMultiLine';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           </div>
         </div>
         <div class="chart-container">
+          <PerformanceMultiLine />
           <PerformanceLine />
           <PerformanceBar />
           <Doughnut />
