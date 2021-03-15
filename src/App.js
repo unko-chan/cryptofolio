@@ -1,10 +1,10 @@
 import './App.scss';
-import Pie from "./charts/piechart";
+import Doughnut from "./charts/doughnut";
 
 function App() {
   return (
     <div class="chart-container">
-      <Pie />
+      <Doughnut />
     </div>
   );
 }
