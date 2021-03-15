@@ -127,7 +127,7 @@ const getTotalOwnings = function(ownings) {
 }
 
 const getOwningRatios = function(ownings, totalOwnings) {
-  return ownings.map(owning => owning / totalOwnings);
+  return ownings.map(owning => (owning / totalOwnings).toPrecision(2));
 };
 
 // const rand = () => Math.floor(Math.random() * 255);
