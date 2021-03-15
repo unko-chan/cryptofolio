@@ -15,8 +15,8 @@ function App() {
           </div>
         </div>
         <div class="chart-container">
+          <PerformanceLine />
           <PerformanceBar />
-
           <Doughnut />
         </div>
       </header>

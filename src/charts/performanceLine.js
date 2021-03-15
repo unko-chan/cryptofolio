@@ -256,10 +256,11 @@ export default function PerformanceLine() {
         //y axis data
         data: price,
         fill: false,
-        borderColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(55, 155, 255)',
         //sets chart line straight
         lineTension: 0,
-        pointRadius: 0,
+        pointRadius: 1,
+        pointHitRadius: 10
       },
     ],
   };
