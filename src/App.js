@@ -1,10 +1,9 @@
 import './App.scss';
 import SideNav from './Components/Nav/SideNav';
-import Doughnut from './charts/doughnut';
-import Wallet from './wallet/index';
 import PerformanceLine from './charts/performanceLine';
 import PerformanceBar from './charts/performanceBar';
 import PerformanceMultiLine from './charts/performanceMultiLine';
+import Dashboard from './Components/Dashboard/Dashboard'
 
 function App() {
   return (
@@ -14,17 +13,17 @@ function App() {
           <div className="side-nav">
             <SideNav />
           </div>
+          
         </div>
+        
         <div class="chart-container">
+          <Dashboard />
           <PerformanceMultiLine />
-          <PerformanceLine />
-          <PerformanceBar />
-          <Doughnut />
+          {/* <PerformanceLine />
+          <PerformanceBar /> */}
         </div>
-        <div class="wallet-container">
-          <Wallet />
-        </div>
-      </header>
+
+          </header>
     </div>
   );
 }
