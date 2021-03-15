@@ -1,17 +1,7 @@
 import { Doughnut, Chart } from 'react-chartjs-2';
-import accounts from '../data/accounts.json';
-import conversions from '../data/conversions.json';
-import colors from '../data/colors.json';
-import { getBalances, getCurrencies, getConvertedOwnings, getTotalOwnings, getOwningRatios, currencyColors } from '../helpers/pieChartHelper';
+import { currencies, owningRatios, filteredColors, totalOwnings } from '../helpers/pieChartHelper';
 
 export default function tokenPieChart() {
-  const balances = getBalances(accounts);
-  const currencies = getCurrencies(balances);
-  const convertedOwnings = getConvertedOwnings(balances, conversions);
-  const totalOwnings = getTotalOwnings(convertedOwnings);
-  const ratios = getOwningRatios(convertedOwnings, totalOwnings);
-  const filteredColors = currencyColors(colors);
-
   // format text inside a donut using canvas
   // https://stackoverflow.com/questions/42759306/add-text-inside-doughnut-chart-from-chart-js-2-in-react
   const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
@@ -41,7 +31,7 @@ export default function tokenPieChart() {
     datasets: [
       {
         label: 'owning percentage',
-        data: ratios,
+        data: owningRatios,
         backgroundColor: filteredColors,
         borderColor: filteredColors
       }
