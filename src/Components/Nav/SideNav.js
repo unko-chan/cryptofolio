@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from './C_icon_without_white.png';
 
 
 const SideNav = (props) => {
@@ -6,8 +7,7 @@ const SideNav = (props) => {
   return (
     <div className="side-nav">
       <span className="nav-title">Cryptofolio</span>
-      {/* <img src={logo} /> */}
-      
+
       <div className="nav-links">
       <div className="hover-to-show-link">
         <a href="#section" className="nav-header">Dashboard</a>
@@ -35,6 +35,10 @@ const SideNav = (props) => {
         <span className="nav-subtitle hover-to-show">User settings</span>
       </div>
       </div> 
+
+      <span className="nav-logo">
+       <img src={logo} style={{width: 200, height: 200 }}/> 
+       </span>
     </div>
   )
 

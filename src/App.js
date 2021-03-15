@@ -1,12 +1,12 @@
 
-import './App.css';
-import SideNav from './Nav/SideNav';
+import './App.scss';
+import './Components/Nav/Nav.scss;'
+import SideNav from './Components/Nav/SideNav';
 
 
 function App() {
   return (
-    <div className="App" style={{ backgroundImage: `url('large-background')`
-    }} >
+    <div className="App" >
       <header className="App-header">
 
   <div className="main-container">
