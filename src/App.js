@@ -1,19 +1,19 @@
 import './App.scss';
-import React from 'react';
-import SideNav from './components/nav/SideNav';
-import Dashboard from './components/dashboard/Dashboard'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import SideNav from './Components/nav/SideNav';
+import Dashboard from './Components/dashboard/Dashboard';
+import Market from './Components/market/Market';
 
-
-function App() {
+export default function App() {
   return (
-    <section className="App-container">
-      <SideNav />
-
-      <section className="main-container">
-        <Dashboard />
+    <Router>
+      <section className="App-container">
+        <SideNav />
+        <section className="main-container">
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/market" component={Market} />
+        </section>
       </section>
-    </section>
+    </Router>
   );
 }
-
-export default App;
