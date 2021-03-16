@@ -6,7 +6,7 @@ import PerformanceLine from '../charts/PerformanceLine';
 import PerformanceBar from '../charts/PerformanceBar';
 import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 
-import './Dashboard.scss';
+import './dashboard.scss';
 
 const Dashboard = () => {
   return (
