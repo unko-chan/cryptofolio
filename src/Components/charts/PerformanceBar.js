@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   getBalances,
   getCurrencies,
@@ -7,8 +8,16 @@ import {
 import colors from '../../data/colors.json';
 import accounts from '../../data/accounts.json';
 import { Bar } from 'react-chartjs-2';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 const performance = ['4', '6', '-3', '-6', '8'];
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(1),
+  }
+}));
 
 const getBarColor = function (performance) {
   const color = [];
@@ -30,6 +39,8 @@ const barColors = getBarColor(performance);
 console.log('hello', filteredColors);
 
 export default function () {
+  const classes = useStyles();
+
   const data = {
     labels: currencies,
     datasets: [
@@ -46,5 +57,10 @@ export default function () {
       display: false,
     },
   };
-  return <Bar data={data} options={options} />;
+
+  return (
+    <Paper className={classes.paper}>
+      <Bar data={data} options={options} />
+    </Paper>
+  )
 }

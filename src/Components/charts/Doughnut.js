@@ -1,8 +1,20 @@
+import React from 'react';
 import { Doughnut, Chart } from 'react-chartjs-2';
 import { currencies, owningRatios, filteredColors, totalOwnings } from '../../helpers/pieChartHelper';
 // import './Doughnut.scss';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function tokenPieChart() {
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: "1em",
+    marginRight: "1em"
+  }
+}));
+
+export default function TokenPieChart() {
+  const classes = useStyles();
+
   // format text inside a donut using canvas
   // https://stackoverflow.com/questions/42759306/add-text-inside-doughnut-chart-from-chart-js-2-in-react
   
@@ -27,7 +39,7 @@ export default function tokenPieChart() {
       ctx.fillText(text, textX, textY);
     }
   });
-console.log(owningRatios)
+
   const data = {
     labels: currencies,
     datasets: [
@@ -45,5 +57,9 @@ console.log(owningRatios)
     cutoutPercentage: 65
   }
 
-  return <Doughnut data={data} options={options}/>
+  return (
+    <Paper className={classes.paper} >
+      <Doughnut data={data} options={options}/>
+    </Paper>
+  )
 }
