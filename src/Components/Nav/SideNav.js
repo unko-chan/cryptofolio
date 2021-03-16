@@ -6,7 +6,7 @@ import AttachMoneyOutlinedIcon from '@material-ui/icons/AttachMoneyOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import logo from './C_icon_without_white.png';
 
-import './Nav.scss'
+import './nav.scss'
 
 const SideNav = (props) => {
 
