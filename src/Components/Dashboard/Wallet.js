@@ -14,11 +14,14 @@ import transactions from '../../data/transactions.json';
 import { Breadcrumbs } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2)
+  },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin: "1em"
+    margin: '1em',
   },
   icon: {
     fontSize: 30,
@@ -28,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2)
   },
   breadcrumbs: {
-    padding: theme.spacing(3)
+    padding: theme.spacing(1),
+    marginTop: '0.7em'
   }
 }));
 
@@ -54,11 +58,11 @@ export default function WalletCard() {
 
   return (
     <Card>
-      <Grid container>
-        <Grid item xs={8}>
-          <Typography variant="h4" className={classes.heading}>
-            Wallet
-            <AccountBalanceWalletIcon className={classes.icon}/>
+      <Grid container className={classes.root}>
+        <Grid item xs={8} >
+          <Typography variant="h5" className={classes.heading}>
+            Your Assets
+            {/* <AccountBalanceWalletIcon className={classes.icon}/> */}
           </Typography>
         </Grid>
 
@@ -87,47 +91,47 @@ export default function WalletCard() {
         justify="space-between"
         alignItems="stretch"
       >
-        <Grid item xs={3} spacing={3}>
-            <Paper className={classes.paper}>
-              <Typography>
-                Current Total ($)
-              </Typography>
-              ${totalOwnings}
-            </Paper>
+        <Grid item xs={4} >
+          <Paper className={classes.paper}>
+            <Typography>
+              Current Total ($)
+            </Typography>
+            ${totalOwnings}
+          </Paper>
         </Grid>
 
-        <Grid item xs={3} spacing={3}>
-            <Paper className={classes.paper}>
-              <Typography>
-                { period === "month" ? "Monthly" 
-                  : period === "year" ? "Yearly"
-                  : period === "week" ? "Weekly"
-                  : "Daily"
-                } Growth ($)
-              </Typography>
-              ${ period === "month" ? monthlyDollarGrowth 
-                : period === "year" ? yearlyDollarGrowth
-                : period === "week" ? weeklyDollarGrowth
-                : dailyDollarGrowth
-              }
-            </Paper>
+        <Grid item xs={4} >
+          <Paper className={classes.paper}>
+            <Typography>
+              { period === "month" ? "Monthly" 
+                : period === "year" ? "Yearly"
+                : period === "week" ? "Weekly"
+                : "Daily"
+              } Growth ($)
+            </Typography>
+            ${ period === "month" ? monthlyDollarGrowth 
+              : period === "year" ? yearlyDollarGrowth
+              : period === "week" ? weeklyDollarGrowth
+              : dailyDollarGrowth
+            }
+          </Paper>
         </Grid>
 
-        <Grid item xs={3} spacing={3}>
-            <Paper className={classes.paper}>              
-              <Typography>
-                { period === "month" ? "Monthly" 
-                  : period === "year" ? "Yearly"
-                  : period === "week" ? "Weekly"
-                  : "Daily"
-                } Growth (%)
-              </Typography>
-              { period === "month" ? monthlyPercentGrowth 
-                : period === "year" ? yearlyPercentGrowth
-                : period === "week" ? weeklyPercentGrowth
-                : dailyPercentGrowth
-              }%
-            </Paper>
+        <Grid item xs={4} >
+          <Paper className={classes.paper}>              
+            <Typography>
+              { period === "month" ? "Monthly" 
+                : period === "year" ? "Yearly"
+                : period === "week" ? "Weekly"
+                : "Daily"
+              } Growth (%)
+            </Typography>
+            { period === "month" ? monthlyPercentGrowth 
+              : period === "year" ? yearlyPercentGrowth
+              : period === "week" ? weeklyPercentGrowth
+              : dailyPercentGrowth
+            }%
+          </Paper>
         </Grid>
       </Grid>
     </Card>

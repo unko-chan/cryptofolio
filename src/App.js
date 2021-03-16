@@ -1,23 +1,21 @@
 import './App.scss';
+<<<<<<< HEAD
 import SideNav from './components/nav/SideNav.js';
 import Dashboard from './components/dashboard/Dashboard'
+=======
+import SideNav from './Components/SideNav/SideNav';
+import Dashboard from './Components/Dashboard/Dashboard'
+>>>>>>> cb8d8b6af6189850cd4b619f7ce38412fb542342
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="main-container">
-          <div className="side-nav">
-            <SideNav />
-          </div>
-        </div>
-        
-        <div>
-          <Dashboard />
-        </div>
+    <section className="App-container">
+      <SideNav />
 
-        </header>
-    </div>
+      <section className="main-container">
+        <Dashboard />
+      </section>
+    </section>
   );
 }
 
