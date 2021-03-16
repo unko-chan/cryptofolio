@@ -587,7 +587,6 @@ export default function LineChart() {
       <DateButton onClick={showAll}>All</DateButton>
       <DateButton onClick={showMonth}>Month</DateButton>
       <DateButton onClick={showWeek}>Week</DateButton>
-
       <Line data={data} options={options} />
     </div>
   );
