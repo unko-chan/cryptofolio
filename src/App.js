@@ -1,7 +1,7 @@
 import './App.scss';
-import SideNav from './Components/nav/SideNav';
-import Dashboard from './Components/dashboard/Dashboard'
-import TradingWidget from './Components/TradingWidget';
+import SideNav from './components/nav/SideNav';
+import Dashboard from './components/dashboard/Dashboard'
+import TradingWidget from './components/TradingWidget';
 
 
 function App() {
