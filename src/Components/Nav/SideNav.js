@@ -12,42 +12,40 @@ const SideNav = (props) => {
 
   return (
     <div className="side-nav">
-      <span className="nav-title">Cryptofolio</span>
+      <h1 className="nav-title">Cryptofolio</h1>
 
       <div className="nav-links">
-      <div className="hover-to-show-link">
-        <a href="#section" className="nav-header"> <AccountBalanceWalletOutlinedIcon /> Dashboard</a>
-        <span className="nav-subtitle hover-to-show">View your wallet</span>
-      </div>
+        <div className="hover-to-show-link">
+          <a href="#section" className="nav-header"> <AccountBalanceWalletOutlinedIcon /> Dashboard</a>
+          <span className="nav-subtitle hover-to-show">View your wallet</span>
+        </div>
 
-      <div className="hover-to-show-link">
-        <a href="#section" className="nav-header"><TrendingUpIcon /> Market</a>
-        <span className="nav-subtitle hover-to-show">View market charts</span>
-      </div>
+        <div className="hover-to-show-link">
+          <a href="#section" className="nav-header"><TrendingUpIcon /> Market</a>
+          <span className="nav-subtitle hover-to-show">View market charts</span>
+        </div>
 
-      <div className="hover-to-show-link">
-        <a href="#section" className="nav-header"><ImportContactsOutlinedIcon /> News</a>
-        <span className="nav-subtitle hover-to-show">The latest crypto news</span>
-      </div>
+        <div className="hover-to-show-link">
+          <a href="#section" className="nav-header"><ImportContactsOutlinedIcon /> News</a>
+          <span className="nav-subtitle hover-to-show">The latest crypto news</span>
+        </div>
 
-      <div className="hover-to-show-link">
-        <a href="#section" className="nav-header"><AttachMoneyOutlinedIcon />  Exchange</a>
-        <span className="nav-subtitle hover-to-show">Crypto exchange</span>
+        <div className="hover-to-show-link">
+          <a href="#section" className="nav-header"><AttachMoneyOutlinedIcon />  Exchange</a>
+          <span className="nav-subtitle hover-to-show">Crypto exchange</span>
+        </div>
 
+        <div className="hover-to-show-link">
+          <a href="#section" className="nav-header"><SettingsOutlinedIcon /> Settings</a>
+          <span className="nav-subtitle hover-to-show">User settings</span>
+        </div>
       </div>
-
-      <div className="hover-to-show-link">
-        <a href="#section" className="nav-header"><SettingsOutlinedIcon /> Settings</a>
-        <span className="nav-subtitle hover-to-show">User settings</span>
-      </div>
-      </div> 
 
       <span className="nav-logo">
-       <img src={logo} style={{width: 200, height: 200 }} alt={""}/> 
-       </span>
+        <img src={logo} style={{width: 200, height: 200 }} alt={""}/> 
+      </span>
     </div>
   )
-
-
 }
+
 export default SideNav;

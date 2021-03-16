@@ -1,14 +1,21 @@
 .dashboard-container {
+  display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
-// .pie-chart {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   padding-top: 100px;
-//   padding-left: 100px;
-// }
+.top-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-stretch;
+}
+
+.chart-container, .wallet-container {
+  // position: relative;
+  height: 40vh;
+  width: 40vw;
+  border-color: red;
+}
 
 // .username-display {
 //   position: absolute;
@@ -17,7 +24,3 @@
 //   padding-right: 20px;
 //   padding-top:50px;
 // }
-
-.top-section {
-  flex-direction: row;
-}

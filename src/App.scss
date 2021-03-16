@@ -1,12 +1,8 @@
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.App-container {
+  font-size: calc(10px + 1.25vmin);
+  background-color: rgba(235, 243, 255, 0.3);
 }
 
-.App {
-  background-color: rgba(235, 243, 255, 0.3);
+.main-container {
+  margin: 0% 20%;
 }

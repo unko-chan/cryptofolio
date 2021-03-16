@@ -4,20 +4,14 @@ import Dashboard from './components/dashboard/Dashboard'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="main-container">
-          <div className="side-nav">
-            <SideNav />
-          </div>
-        </div>
-        
-        <div>
-          <Dashboard />
-        </div>
+    <section className="App-container">
+      <SideNav />
 
-        </header>
-    </div>
+      <section className="main-container">
+        <Dashboard />
+      </section>
+      
+    </section>
   );
 }
 

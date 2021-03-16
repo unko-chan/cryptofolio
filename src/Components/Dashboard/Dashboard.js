@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import Doughnut from '../charts/Doughnut';
 import Transaction from './PastTransaction';
 import Wallet from './Wallet';
@@ -10,11 +10,19 @@ import './Dashboard.scss';
 
 const Dashboard = () => {
   return (
-    <div className="dashboard-container">
+    <section className="dashboard-container">
 
       <section className="top-section">
-        <Doughnut />
-        <Wallet />
+
+        {/* https://www.chartjs.org/docs/latest/general/responsive.html */}
+        <div className="chart-container">
+          <Doughnut />
+        </div>
+
+        <div className="wallet-container">
+          <Wallet />
+        </div>
+        
       </section>
       
       <section className="transactions">
@@ -25,7 +33,7 @@ const Dashboard = () => {
       <PerformanceLine />
       <PerformanceBar />
     
-    </div>
+    </section>
   )
 }
 

@@ -1,9 +1,11 @@
 import { Doughnut, Chart } from 'react-chartjs-2';
 import { currencies, owningRatios, filteredColors, totalOwnings } from '../../helpers/pieChartHelper';
+// import './Doughnut.scss';
 
 export default function tokenPieChart() {
   // format text inside a donut using canvas
   // https://stackoverflow.com/questions/42759306/add-text-inside-doughnut-chart-from-chart-js-2-in-react
+  
   const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
   Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
     draw: function() {
