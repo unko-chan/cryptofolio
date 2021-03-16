@@ -5,11 +5,14 @@
   margin: 1em;
 }
 
-.top-section, .middle-section {
+.top-section, .middle-section, .bottom-section {
   margin: 1em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.bottom-section {
+  justify-content: flex-end;
 }
 
 .chart-container {

@@ -6,6 +6,7 @@ import PerformanceLine from '../charts/PerformanceLine';
 import PerformanceBar from '../charts/PerformanceBar';
 import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 import LineChart from '../LineChart'
+import Currency from './CurrentUserCurrency';
 
 import './dashboard.scss';
 
@@ -36,6 +37,14 @@ const Dashboard = () => {
 
         <div className="transactions">
           <Transaction />
+        </div>
+
+
+      </section>
+
+      <section className="bottom-section">
+        <div className="current-currency">
+         <Currency />
         </div>
       </section>
     </div>
