@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import DateButton from './DateButton';
 import { Line } from 'react-chartjs-2';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const chartData = [
   {
@@ -484,7 +488,17 @@ const chartData = [
   },
 ];
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(1),
+  },
+  buttonGroup: {
+    marginBottom: theme.spacing(3) 
+  }
+}));
+
 export default function LineChart() {
+  const classes = useStyles();
   const dataCopy = [...chartData];
   const [viewState, setViewState] = useState('showAll');
   const [dataState, setDataState] = useState(dataCopy);
@@ -493,6 +507,7 @@ export default function LineChart() {
     displayFormats: { month: 'MMM YYYY' },
   });
 
+  
   const data = {
     datasets: [
       {
@@ -583,11 +598,14 @@ export default function LineChart() {
   };
 
   return (
-    <div>
-      <DateButton onClick={showAll}>All</DateButton>
-      <DateButton onClick={showMonth}>Month</DateButton>
-      <DateButton onClick={showWeek}>Week</DateButton>
+    <Paper className={classes.paper}>
+      <ButtonGroup size="small" aria-label="small outlined button group" className={classes.buttonGroup}>
+        <Button onClick={showAll}>All</Button>
+        <Button onClick={showMonth}>Month</Button>
+        <Button onClick={showWeek}>Week</Button>
+      </ButtonGroup>
+
       <Line data={data} options={options} />
-    </div>
+    </Paper>
   );
 }

@@ -1,7 +1,7 @@
 import './App.scss';
-import SideNav from './Components/nav/SideNav';
-import Dashboard from './Components/dashboard/Dashboard'
-import TradingWidget from './Components/TradingWidget';
+import React from 'react';
+import SideNav from './components/nav/SideNav';
+import Dashboard from './components/dashboard/Dashboard'
 
 
 function App() {
@@ -10,7 +10,6 @@ function App() {
       <SideNav />
 
       <section className="main-container">
-        <TradingWidget />
         <Dashboard />
       </section>
     </section>

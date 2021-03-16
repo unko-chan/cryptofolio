@@ -8,41 +8,36 @@
 .top-section,
 .middle-section,
 .bottom-section {
-  margin: 1em;
+  margin: 2em;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-}
-.bottom-section {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .chart-container {
-  height: 40vh;
   width: 40vw;
 }
 
 .wallet-container {
-  height: 40vh;
   width: 40vw;
 }
 
-.performance-chart-container {
-  padding: 1.5em;
+.currency-container {
+  width: 60vw;
 }
 
-.pc1 {
+.pc1, .pc2 {
   position: relative;
   //using vh messes with chart on window-resize
-  width: 1000px !important;
-  height: 200px !important;
+  width: 450px !important;
+  height: 300px !important;
 }
 
 .pc2 {
-  margin-top: 3em;
+  margin-top: 5em;
+  margin-left: 2em;
 }
 
 .transactions {
-  margin: 1em;
-  padding: 1em;
+  padding: 0 1em;
 }
