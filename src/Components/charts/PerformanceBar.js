@@ -27,8 +27,6 @@ const currencies = getCurrencies(balances);
 const filteredColors = currencyColors(colors);
 const barColors = getBarColor(performance);
 
-console.log('hello', filteredColors);
-
 export default function () {
   const data = {
     labels: currencies,
