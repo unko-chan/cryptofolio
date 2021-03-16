@@ -1,6 +1,8 @@
 import './App.scss';
-import SideNav from './components/nav/SideNav.js';
-import Dashboard from './components/dashboard/Dashboard'
+import SideNav from './Components/nav/SideNav';
+import Dashboard from './Components/dashboard/Dashboard'
+import TradingWidget from './Components/TradingWidget';
+
 
 function App() {
   return (
@@ -8,6 +10,7 @@ function App() {
       <SideNav />
 
       <section className="main-container">
+        <TradingWidget />
         <Dashboard />
       </section>
     </section>

@@ -5,7 +5,9 @@
   margin: 1em;
 }
 
-.top-section, .middle-section, .bottom-section {
+.top-section,
+.middle-section,
+.bottom-section {
   margin: 1em;
   display: flex;
   flex-direction: row;
@@ -26,9 +28,14 @@
 }
 
 .performance-chart-container {
-  width: 50vw;
-  height: 40vh;
   padding: 1.5em;
+}
+
+.pc1 {
+  position: relative;
+  //using vh messes with chart on window-resize
+  width: 1000px !important;
+  height: 200px !important;
 }
 
 .pc2 {
