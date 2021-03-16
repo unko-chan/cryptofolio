@@ -174,11 +174,9 @@ const calculatePercentGrowth = function(period, transactions) {
   const periodTotal = calculateDollarGrowth(period, transactions);
   // console.log('this is period total', period, periodTotal);
   const previousPeriodTotal = transactionTotal - periodTotal;
-
   if (previousPeriodTotal === 0) {
     return "🚀";
   }
-
   // console.log('this is previous period total', period, previousPeriodTotal);
   const periodIncrease = (periodTotal / previousPeriodTotal * 100).toFixed(2);
   return periodIncrease;

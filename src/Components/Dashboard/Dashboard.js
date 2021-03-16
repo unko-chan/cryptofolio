@@ -8,22 +8,19 @@ import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 
 import './Dashboard.scss';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   return (
     <div className="dashboard-container">
 
-      <section className="username-display">
-        Username
-        <h2 >Recent Transactions</h2>
+      <section className="top-section">
+        <Doughnut />
+        <Wallet />
+      </section>
+      
+      <section className="transactions">
         <Transaction />
-        <a href="#section">All previous transactions</a> 
       </section>
 
-      <div className="doughnut">
-        <Doughnut />
-      </div>
-      
-      <Wallet />
       <PerformanceMultiLine />
       <PerformanceLine />
       <PerformanceBar />
