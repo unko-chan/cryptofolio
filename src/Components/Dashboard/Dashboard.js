@@ -1,37 +1,35 @@
 import react from 'react';
-import Doughnut from '../../charts/doughnut';
+import Doughnut from '../charts/Doughnut';
 import Transaction from './PastTransaction';
-import Wallet from '../../wallet/index';
+import Wallet from './Wallet';
+import PerformanceLine from '../charts/PerformanceLine';
+import PerformanceBar from '../charts/PerformanceBar';
+import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 
-import './dashboard.scss';
-
+import './Dashboard.scss';
 
 const Dashboard = (props) => {
-return (
-  <div className="dashboard-container">
-    <section className="username-display">
-      Username
-    <h2 >Recent Transactions</h2>
-      <div>
+  return (
+    <div className="dashboard-container">
+
+      <section className="username-display">
+        Username
+        <h2 >Recent Transactions</h2>
         <Transaction />
+        <a href="#section">All previous transactions</a> 
+      </section>
+
+      <div className="doughnut">
+        <Doughnut />
       </div>
-      <a href="#section">All previous transactions</a> 
-
-    </section>
+      
+      <Wallet />
+      <PerformanceMultiLine />
+      <PerformanceLine />
+      <PerformanceBar />
     
-    <div class="pie-chart">
-      <Doughnut />
     </div>
-
-    <div class="wallet-container">
-          <Wallet />
-        </div>
-    
-
-
-  </div>
-)
-
+  )
 }
 
 export default Dashboard;

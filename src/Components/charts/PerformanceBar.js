@@ -2,10 +2,10 @@ import {
   getBalances,
   getCurrencies,
   currencyColors,
-} from '../helpers/pieChartHelper';
+} from '../../helpers/pieChartHelper';
 
-import colors from '../data/colors.json';
-import accounts from '../data/accounts.json';
+import colors from '../../data/colors.json';
+import accounts from '../../data/accounts.json';
 import { Bar } from 'react-chartjs-2';
 
 const performance = ['4', '6', '-3', '-6', '8'];
