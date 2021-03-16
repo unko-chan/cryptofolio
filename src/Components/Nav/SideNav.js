@@ -8,8 +8,6 @@ import logo from './C_icon_without_white.png';
 
 import './Nav.scss'
 
-
-
 const SideNav = (props) => {
 
   return (

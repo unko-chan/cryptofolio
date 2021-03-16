@@ -1,5 +1,5 @@
 import { Doughnut, Chart } from 'react-chartjs-2';
-import { currencies, owningRatios, filteredColors, totalOwnings } from '../helpers/pieChartHelper';
+import { currencies, owningRatios, filteredColors, totalOwnings } from '../../helpers/pieChartHelper';
 
 export default function tokenPieChart() {
   // format text inside a donut using canvas

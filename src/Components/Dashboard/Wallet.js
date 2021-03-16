@@ -8,9 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 
-import { totalOwnings } from '../helpers/pieChartHelper';
-import { findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth } from '../helpers/transactionHelper'
-import transactions from '../data/transactions.json';
+import { totalOwnings } from '../../helpers/pieChartHelper';
+import { findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth } from '../../helpers/transactionHelper';
+import transactions from '../../data/transactions.json';
 import { Breadcrumbs } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
