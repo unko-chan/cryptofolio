@@ -10,11 +10,10 @@ import './Dashboard.scss';
 
 const Dashboard = () => {
   return (
-    <section className="dashboard-container">
+    <div className="dashboard-container">
 
       <section className="top-section">
-
-        {/* https://www.chartjs.org/docs/latest/general/responsive.html */}
+      {/* https://www.chartjs.org/docs/latest/general/responsive.html */}
         <div className="chart-container">
           <Doughnut />
         </div>
@@ -22,19 +21,21 @@ const Dashboard = () => {
         <div className="wallet-container">
           <Wallet />
         </div>
-        
-      </section>
-      
-      <section className="transactions">
-        <Transaction />
       </section>
 
-      <PerformanceMultiLine />
-      <PerformanceLine />
-      <PerformanceBar />
-    
-    </section>
+      <section className="middle-section">
+        <div className="performance-chart-container">
+          <PerformanceMultiLine />
+          <PerformanceBar />
+        </div>
+
+        <div className="transactions">
+          <Transaction />
+        </div>
+      </section>
+
+    </div>
   )
-}
+};
 
 export default Dashboard;

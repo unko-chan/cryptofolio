@@ -4,23 +4,24 @@
   justify-content: flex-start;
 }
 
-.top-section {
+.top-section, .middle-section {
+  margin: 1em;
   display: flex;
   flex-direction: row;
-  justify-content: flex-stretch;
+  justify-content: space-around;
 }
 
-.chart-container, .wallet-container {
-  // position: relative;
+.chart-container {
   height: 40vh;
   width: 40vw;
-  border-color: red;
 }
 
-// .username-display {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   padding-right: 20px;
-//   padding-top:50px;
-// }
+.wallet-container {
+  height: 40vh;
+  width: 40vw;
+}
+
+.performance-chart-container {
+  width: 50vw;
+  height: 40vh;
+}

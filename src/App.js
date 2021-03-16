@@ -10,7 +10,6 @@ function App() {
       <section className="main-container">
         <Dashboard />
       </section>
-      
     </section>
   );
 }
