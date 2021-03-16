@@ -1,7 +1,7 @@
 
 .side-nav {
   height: 100%;
-  width: 12.5%;
+  width: 16%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -28,6 +28,7 @@
   font-family: "Unbuntu", sans-serif;
   font-size: larger;
 }
+
 .nav-header:link {
   color: #bcbdbd;
   text-decoration: none;
@@ -63,7 +64,8 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .nav-logo {
-position: absolute;
-bottom: 0;
+  position: absolute;
+  bottom: 0;
 }

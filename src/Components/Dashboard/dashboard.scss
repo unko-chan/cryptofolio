@@ -1,23 +1,38 @@
 .dashboard-container {
+  display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  margin: 1em;
 }
 
-// .pie-chart {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   padding-top: 100px;
-//   padding-left: 100px;
-// }
-
-// .username-display {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   padding-right: 20px;
-//   padding-top:50px;
-// }
-
-.top-section {
+.top-section, .middle-section {
+  margin: 1em;
+  display: flex;
   flex-direction: row;
+  justify-content: space-around;
+}
+
+.chart-container {
+  height: 40vh;
+  width: 40vw;
+}
+
+.wallet-container {
+  height: 40vh;
+  width: 40vw;
+}
+
+.performance-chart-container {
+  width: 50vw;
+  height: 40vh;
+  padding: 1.5em;
+}
+
+.pc2 {
+  margin-top: 3em;
+}
+
+.transactions {
+  margin: 1em;
+  padding: 1em;
 }
