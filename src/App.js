@@ -16,10 +16,10 @@ function App() {
           
         </div>
         
-        <div class="chart-container">
+        <div className="chart-container">
           <Dashboard />
-          <PerformanceMultiLine />
           {/* <PerformanceLine />
+          <PerformanceMultiLine />
           <PerformanceBar /> */}
         </div>
 

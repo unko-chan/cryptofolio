@@ -1,7 +1,7 @@
-import react from 'react';
 import Doughnut from '../../charts/doughnut';
 import Transaction from './PastTransaction';
 import Wallet from '../../wallet/index';
+import Currency from './CurrentUserCurrency';
 
 import './dashboard.scss';
 
@@ -19,14 +19,17 @@ return (
 
     </section>
     
-    <div class="pie-chart">
+    <div className="pie-chart">
       <Doughnut />
     </div>
 
-    <div class="wallet-container">
+    <div className="wallet-container">
           <Wallet />
         </div>
     
+    <div className="current-currency">
+      <Currency />
+    </div>
 
 
   </div>

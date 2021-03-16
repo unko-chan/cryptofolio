@@ -25,7 +25,7 @@ export default function tokenPieChart() {
       ctx.fillText(text, textX, textY);
     }
   });
-
+console.log(owningRatios)
   const data = {
     labels: currencies,
     datasets: [
