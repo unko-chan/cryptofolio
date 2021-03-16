@@ -25,8 +25,15 @@ const Dashboard = () => {
 
       <section className="middle-section">
         <div className="performance-chart-container">
-          <PerformanceMultiLine />
-          <PerformanceBar />
+
+          <div className="pc1">
+            <PerformanceMultiLine />
+          </div>
+
+          <div className="pc2">
+            <PerformanceBar />
+          </div>
+          
         </div>
 
         <div className="transactions">
