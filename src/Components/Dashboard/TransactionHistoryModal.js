@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Transaction from './PastTransaction';
 
-
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -46,7 +45,6 @@ export default function SimpleModal() {
 
   const body = (
     <div>
-
     </div>
   );
 
@@ -55,6 +53,7 @@ export default function SimpleModal() {
       <button type="button" onClick={handleOpen} className="past-transaction-button">
         Recent Transactions
       </button>
+      
       <Modal
         open={open}
         onClose={handleClose}
