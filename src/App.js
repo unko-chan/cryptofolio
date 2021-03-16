@@ -3,6 +3,10 @@ import SideNav from './Components/Nav/SideNav';
 import Doughnut from './charts/doughnut';
 import Wallet from './wallet/index';
 import PerformanceLine from './charts/performanceLine';
+import PerformanceLineMonth from './charts/performanceLineMonth';
+import LineChart from './Components/LineChart';
+
+
 import PerformanceBar from './charts/performanceBar';
 import PerformanceMultiLine from './charts/performanceMultiLine';
 
@@ -16,14 +20,13 @@ function App() {
           </div>
         </div>
         <div class="chart-container">
-          <PerformanceMultiLine />
-          <PerformanceLine />
+          <LineChart />
           <PerformanceBar />
-          <Doughnut />
+          <PerformanceMultiLine />
         </div>
-        <div class="wallet-container">
+        {/* <div class="wallet-container">
           <Wallet />
-        </div>
+        </div> */}
       </header>
     </div>
   );

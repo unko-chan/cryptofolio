@@ -1,6 +1,21 @@
 import { Line } from 'react-chartjs-2';
 
 const days = [
+  '2020-11-01',
+  '2020-11-02',
+  '2020-11-03',
+  '2020-11-04',
+  '2020-11-05',
+  '2020-11-06',
+  '2020-11-07',
+  '2020-11-08',
+  '2020-11-09',
+  '2020-11-10',
+  '2020-11-11',
+  '2020-11-12',
+  '2020-11-13',
+  '2020-11-14',
+  '2020-11-15',
   '2020-11-16',
   '2020-11-17',
   '2020-11-18',
@@ -244,16 +259,15 @@ const price = [
   '10497.47',
   '10265.18',
 ];
-
-export default function PerformanceLine() {
+export default function PerformanceLineMonth() {
   const data = {
     //x axis data
-    labels: days,
+    labels: days.slice(-30),
     datasets: [
       {
         label: 'Portoflio Value',
         //y axis data
-        data: price,
+        data: price.slice(-30),
         fill: false,
         borderColor: 'rgb(55, 155, 255)',
         //sets chart line straight
@@ -265,17 +279,19 @@ export default function PerformanceLine() {
   };
 
   const options = {
-    maintainAspectRatio: false,
+    //HIDE LABEL
     legend: {
       display: false,
     },
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       xAxes: [
         {
           type: 'time',
           time: {
-            unit: 'month',
-            displayFormats: { month: 'MMM YYYY' },
+            unit: 'week',
+            displayFormats: { week: 'MMM DD' },
           },
           gridLines: {
             offsetGridLines: true,
