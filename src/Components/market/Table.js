@@ -42,7 +42,7 @@ const convertCurrency = function(labelValue) {
 
 const useStyles = makeStyles(theme => ({
   table: {
-    fontFamily: 'Arial',
+    fontFamily: 'Roberta',
     margin: '1%',
     width: '98%',
     marginTop: '3em'
@@ -138,7 +138,7 @@ const MarketTable = (props) => {
 
   return (
     <TableContainer component={Paper} className={classes.table}>
-      <Table aria-label="simple table">
+      <Table aria-label="table">
         <TableHead>
           <TableRow>
             <TableCell> # </TableCell>
