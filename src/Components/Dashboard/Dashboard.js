@@ -25,26 +25,22 @@ const Dashboard = () => {
       </section>
 
       <section className="middle-section">
-        <div className="performance-chart-container">
-          <div className="pc1">
-            <LineChart />
-          </div>
+        <div className="pc1">
+          <LineChart />
+        </div>
 
-          <div className="pc2">
-            <PerformanceBar />
-          </div>
+        <div className="pc2">
+          <PerformanceBar />
+        </div>
+      </section>
+
+      <section className="bottom-section">
+        <div className="currency-container">
+         <Currency />
         </div>
 
         <div className="transactions">
           <Transaction />
-        </div>
-
-
-      </section>
-
-      <section className="bottom-section">
-        <div className="current-currency">
-         <Currency />
         </div>
       </section>
     </div>
