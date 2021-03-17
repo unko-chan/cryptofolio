@@ -2,7 +2,7 @@ import './App.scss';
 import React from 'react';
 import SideNav from './components/nav/SideNav';
 import Dashboard from './components/dashboard/Dashboard'
-
+import Market from './components/market/Market';
 
 function App() {
   return (
@@ -10,7 +10,8 @@ function App() {
       <SideNav />
 
       <section className="main-container">
-        <Dashboard />
+        {/* <Dashboard /> */}
+        <Market />
       </section>
     </section>
   );
