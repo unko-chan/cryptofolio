@@ -3,15 +3,18 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import SideNav from './components/nav/SideNav';
 import Dashboard from './components/dashboard/Dashboard';
 import Market from './components/market/Market';
+import Exchange from './components/exchange/Exchange';
+
 
 export default function App() {
   return (
     <Router>
       <section className="App-container">
-        <SideNav />
+          <SideNav />
         <section className="main-container">
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/market" component={Market} />
+          <Route exact path="/exchange" component={Exchange} />
         </section>
       </section>
     </Router>

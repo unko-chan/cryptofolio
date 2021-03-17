@@ -15,20 +15,22 @@ const NavLink = ({ page }) => {
 };
 
 const SideNav = () => {
-    const { page } = useParams();
+  const { page } = useParams();
   return (
-    <nav>
-      <div className="side-nav">
-        <ul>
-          <li>
-            <NavLink page="dashboard" />
-          </li>
-          <li>
-            <NavLink page="market" />
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div className="side-nav">
+      <ul>
+        <li>
+          <NavLink page="dashboard" />
+        </li>
+        <li>
+          <NavLink page="market" />
+        </li>
+        <li>
+          <NavLink page="exchange" />
+        </li>
+      </ul>
+    </div>
+
     // <div className="side-nav">
     //   <h1 className="nav-title">Cryptofolio</h1>
 
