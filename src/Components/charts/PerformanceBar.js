@@ -50,15 +50,14 @@ export default function () {
       },
     ],
   };
+
   const options = {
     legend: {
       display: false,
     },
+    scales: {
+    }
   };
 
-  return (
-    <Paper className={classes.paper}>
-      <Bar data={data} options={options} />
-    </Paper>
-  )
+  return <Bar data={data} options={options} />
 }

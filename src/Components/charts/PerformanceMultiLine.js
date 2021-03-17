@@ -250,6 +250,7 @@ const tertiaryPrice = secondaryPrice
   .slice()
   .reverse()
   .map((x) => x * 1.5);
+
 export default function PerformanceMultiLine() {
   const data = {
     //x axis data

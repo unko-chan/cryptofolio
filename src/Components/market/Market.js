@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TradingWidget from '../TradingWidget';
+import TradingWidget from './TradingWidget';
 import Table from './Table';
 import './Market.scss';
 
