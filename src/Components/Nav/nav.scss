@@ -1,17 +1,29 @@
 .side-nav {
-  background-color: rgba(00, 00, 00, 0.55);
+  background-color: #073763;
   height: 100%;
   width: 15%;
   position: fixed;
   top: 0;
   left: 0;
-  border: black 1px solid;
 
   // z-index: 1;
   // transition: 0.5s ease;
   // overflow-x: hidden;
   // padding-top: 20px;
   // align-items: flex-start;
+}
+
+.link-list {
+  ul {
+    li {
+      list-style-type: none;
+      margin-bottom: 1em;
+    }
+  }
+}
+.link-item {
+  text-decoration: none;
+  color: white;
 }
 
 .nav-title {
