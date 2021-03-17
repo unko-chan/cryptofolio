@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CheckIcon from '@material-ui/icons/Check';
 import { makeStyles } from '@material-ui/core/styles';
 import transactions from '../../data/transactions.json';
+import { fullCurrencyName } from '../../helpers/transactionHelper'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,16 +29,6 @@ const changeString = (stringToChange) => {
     return 'Sent';
   } else if (stringToChange === 'buy') {
     return "Bought";
-  }
-};
-
-const fullCurrencyName = (currencyName) => {
-  if (currencyName === 'BTC') {
-    return 'Bitcoin';
-  } else if (currencyName === 'ETH') {
-    return 'Ethereum';
-  } else {
-    return currencyName;
   }
 };
 

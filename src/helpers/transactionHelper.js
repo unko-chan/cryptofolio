@@ -182,6 +182,20 @@ const calculatePercentGrowth = function(period, transactions) {
   return periodIncrease;
 };
 
+const fullCurrencyName = (currencyName) => {
+   if (currencyName === 'BTC') {
+     return 'Bitcoin';
+   } else if (currencyName === 'ETH') {
+     return 'Ethereum';
+   } else if (currencyName === 'NU'){ 
+      return 'NuCypher'
+   } else if (currencyName === 'LTC'){
+      return 'Litecoin'
+   } else {
+     return currencyName;
+   }
+ };
+
 // console.log("year", getPeriodDays("year"));
 // console.log("month", getPeriodDays("month"));
 // console.log(checkTransaction(transaction, "month"));
@@ -204,4 +218,4 @@ const calculatePercentGrowth = function(period, transactions) {
 // const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
 // const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
 
-export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth };
+export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth, fullCurrencyName };
