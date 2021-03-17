@@ -12,9 +12,29 @@ import StarIcon from '@material-ui/icons/Star';
 import { yellow } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
 
-function createData(number, name, price, change, marketCap, symbol) {
-  return { number, name, price, change, marketCap, symbol };
+function createData(number, name, price, change, marketCap, symbol, image) {
+  return { number, name, price, change, marketCap, symbol, image };
 };
+
+// borrowed from stack overflow
+// https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript/36734774
+function convertCurrency (labelValue) {
+  // Nine Zeroes for Billions
+  return Math.abs(Number(labelValue)) >= 1.0e+9
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+  // Six Zeroes for Millions 
+  : Math.abs(Number(labelValue)) >= 1.0e+6
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+  // Three Zeroes for Thousands
+  : Math.abs(Number(labelValue)) >= 1.0e+3
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+
+  : Math.abs(Number(labelValue));
+
+}
 
 // const rows = [
 //   createData(1, "Bitcoin", "70149.74", "-0.52", "1.3T", "BTC"),
@@ -40,12 +60,13 @@ const MarketTable = (props) => {
   const axios = require('axios');
 
   useEffect(() => {
+    // using CoinGecko's API endpoints
     const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
     axios.get(url)
       .then(res => {
         setRows(res.data.map((currency, index) => {
-          const { name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol } = currency;
-          return createData(index, name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol);
+          const { name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol, image } = currency;
+          return createData(index, name, current_price.toFixed(2), price_change_percentage_1h_in_currency.toFixed(2), convertCurrency(market_cap), symbol, image);
         }))
       });
   }, []);
@@ -69,7 +90,12 @@ const MarketTable = (props) => {
           {row.number}
         </Typography>
       </TableCell>
-      <TableCell>{row.name}</TableCell>
+      <TableCell>
+        <img src={row.image} width="40" height="40"/>
+        <Typography variant="h6" color="inherit">
+        {row.name}
+        </Typography>
+      </TableCell>
       <TableCell>{row.price}</TableCell>
       <TableCell>{row.change}</TableCell>
       <TableCell>{row.marketCap}</TableCell>
