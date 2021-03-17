@@ -8,10 +8,13 @@ const Market = () => {
 
   return (
     <div className="market-container">
-      <TradingWidget symbol={symbol} className="trading-widget"/>
-      <Table symbol={symbol} className="table"/>
+      <div className="page-header">
+        <h1> Market </h1>
+      </div>
+      <TradingWidget symbol={symbol} className="trading-widget" />
+      <Table symbol={symbol} className="table" />
     </div>
-  )
+  );
 };
 
 export default Market;
