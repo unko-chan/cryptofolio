@@ -1,5 +1,4 @@
-import { ArtTrackOutlined } from '@material-ui/icons';
-import { react, useEffect, useLayoutEffect, useState } from 'react';
+import { react, useEffect, useState } from 'react';
 
 import data from '../../data/accounts.json';
 import { getBalances } from '../../helpers/pieChartHelper.js';
@@ -25,12 +24,11 @@ const ArticleList = (props) => {
   
   useEffect(() => {
     getArticles()
-    console.log()
   }, [])
 
   const getArticles = () => {
   userCurrenciesFullNames.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q='${currency}'&from=${date}&language=en&pageSize=2&apiKey=${process.env.REACT_APP_NEWS3}`)
+    axios.get(`https://newsapi.org/v2/everything?q='${currency}'&from=${date}&language=en&pageSize=2&apiKey=${process.env.REACT_APP_NEWS2}`)
     .then(results => setArticles(prevState =>
       [...prevState, results.data.articles]
     ))
@@ -54,7 +52,7 @@ const ArticleList = (props) => {
 
   return (
       <section className='article-container'>
-        <div className='currency-title'>News stories for you:</div>
+        <h2>News Articles</h2>
         <div className="article-container">
         {articleData}
         </div>
