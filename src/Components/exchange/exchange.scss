@@ -1,0 +1,22 @@
+.trade-select {
+  margin-top: 2em;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px lightgrey solid;
+
+  button {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    // border: none;
+    // background: none;
+  }
+}
+.rebalance-view {
+  display: flex;
+  flex-direction: row;
+
+  .allocation-chart {
+    width: 35vw;
+    margin-left: -10%;
+  }
+}
