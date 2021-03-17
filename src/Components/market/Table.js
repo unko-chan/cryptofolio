@@ -21,13 +21,13 @@ function createData(number, name, price, change, marketCap, symbol, image) {
 const convertCurrency = function(labelValue) {
   const number = Math.abs(Number(labelValue));
   return number >= 1.0e+12
-  ? (number / 1.0e+12).toFixed(2) + "T"
+  ? (number / 1.0e+12).toFixed(1) + "T"
   : number >= 1.0e+9
-  ? (number / 1.0e+9).toFixed(2) + "B"
+  ? (number / 1.0e+9).toFixed(1) + "B"
   : number >= 1.0e+6
-  ? (number / 1.0e+6).toFixed(2) + "M"
+  ? (number / 1.0e+6).toFixed(1) + "M"
   : number >= 1.0e+3
-  ? (number / 1.0e+3).toFixed(2) + "K"
+  ? (number / 1.0e+3).toFixed(1) + "K"
   : number;
 };
 
@@ -42,6 +42,7 @@ const convertCurrency = function(labelValue) {
 
 const useStyles = makeStyles(theme => ({
   table: {
+    fontFamily: 'Arial',
     margin: '1%',
     width: '98%',
     marginTop: '3em'
@@ -81,30 +82,47 @@ const MarketTable = (props) => {
 
   const tableRows = rows.map(row => (
     <TableRow key={row.name}>
+
       <TableCell>
-        <Typography variant="h6" color="inherit">
+        <Typography variant="h6" color="inherit" >
           {row.number}
         </Typography>
       </TableCell>
+
       <TableCell>
         <img src={row.image} width="40" height="40"/>
         <Typography variant="h6" color="inherit">
           {row.name}
         </Typography>
       </TableCell>
-      <TableCell>${row.price}</TableCell>
+
+      <TableCell>
+        <Typography variant="h6" color="inherit">
+          CA${row.price}
+        </Typography>
+      </TableCell>
+
       <TableCell
         style={ row.change >= 0 ?
           { color: green[600] } :
           { color: red[600] }
         }
       >
-        { row.change >= 0 ? "+" + row.change : row.change }
+        <Typography variant="h6" color="inherit">
+          { row.change >= 0 ? "+" + row.change : row.change }%
+        </Typography>
       </TableCell>
-      <TableCell>{row.marketCap}</TableCell>
+
+      <TableCell>
+        <Typography variant="h6" color="inherit">
+          CA${row.marketCap}
+        </Typography>
+      </TableCell>
+
       <TableCell>
         <Button variant="contained" color="primary">Trade</Button>
       </TableCell>
+
       <TableCell>
         <StarIcon 
           fontSize="large"
@@ -114,6 +132,7 @@ const MarketTable = (props) => {
           }
         />
       </TableCell>
+
     </TableRow>
   ));
 
