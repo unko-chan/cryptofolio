@@ -499,9 +499,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LineChart() {
   const classes = useStyles();
-  const dataCopy = [...chartData];
   const [viewState, setViewState] = useState('showAll');
-  const [dataState, setDataState] = useState(dataCopy);
+  const [tickState, setTickState] = useState('2020-11-16');
+  const [yTickState, setyTickState] = useState(0);
   const [timeState, setTimeState] = useState({
     unit: 'month',
     displayFormats: { month: 'MMM YYYY' },
@@ -512,7 +512,7 @@ export default function LineChart() {
     datasets: [
       {
         label: 'Portoflio Value',
-        data: dataState,
+        data: chartData,
         fill: false,
         borderColor: 'rgb(55, 155, 255)',
         lineTension: 0,
@@ -528,7 +528,6 @@ export default function LineChart() {
     legend: {
       display: false,
     },
-    transitions: 'reset',
     tooltips: {
       mode: 'index',
       intersect: false,
@@ -548,6 +547,7 @@ export default function LineChart() {
           },
           ticks: {
             autoSkip: true,
+            min: tickState,
           },
         },
       ],
@@ -558,6 +558,7 @@ export default function LineChart() {
           },
           ticks: {
             padding: 20,
+            min: yTickState,
           },
         },
       ],
@@ -567,7 +568,8 @@ export default function LineChart() {
   const showAll = () => {
     if (viewState !== 'showAll') {
       setViewState('showAll');
-      setDataState(dataCopy);
+      setTickState('2020-11-16');
+      setyTickState(0);
       setTimeState({
         unit: 'month',
         displayFormats: { month: 'MMM YYYY' },
@@ -578,7 +580,8 @@ export default function LineChart() {
   const showMonth = () => {
     if (viewState !== 'showMonth') {
       setViewState('showMonth');
-      setDataState(dataCopy.slice(-28));
+      setTickState('2021-02-15');
+      setyTickState(4000);
       setTimeState({
         unit: 'week',
         displayFormats: { week: 'MMM DD' },
@@ -589,7 +592,8 @@ export default function LineChart() {
   const showWeek = () => {
     if (viewState !== 'showWeek') {
       setViewState('showWeek');
-      setDataState(dataCopy.slice(-7));
+      setTickState('2021-03-07');
+      setyTickState(8000);
       setTimeState({
         unit: 'day',
         displayFormats: { day: 'MMM DD' },
