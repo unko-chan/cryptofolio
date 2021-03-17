@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
+import TradingWidget from '../TradingWidget';
+import Table from './Table';
+import './Market.scss';
 
-export default function Market() {
+const Market = () => {
+  const [symbol, setSymbol] = useState("BTC");
+
   return (
-    <div className="dashboard-container">
-      hello
+    <div className="market-container">
+      <TradingWidget symbol={symbol} className="trading-widget"/>
+      <Table symbol={symbol} className="table"/>
     </div>
   )
-}
+};
+
+export default Market;

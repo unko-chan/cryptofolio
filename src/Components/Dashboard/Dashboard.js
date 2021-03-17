@@ -6,7 +6,6 @@ import PerformanceLine from '../charts/PerformanceLine';
 import PerformanceBar from '../charts/PerformanceBar';
 import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 import LineChart from '../LineChart'
-import TradingWidget from '../TradingWidget';
 import Currency from './CurrentUserCurrency';
 
 import './dashboard.scss';

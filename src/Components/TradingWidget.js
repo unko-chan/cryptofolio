@@ -1,7 +1,7 @@
 import TradingViewWidget from 'react-tradingview-widget';
 
-export default function TradingWidget() {
-  const symbol = 'COINBASE:BTCUSD';
+export default function TradingWidget(props) {
+  const symbol = `COINBASE:${props.symbol}USD`
 
   return (
     <TradingViewWidget
