@@ -9,33 +9,29 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
-import { yellow } from '@material-ui/core/colors';
+import { yellow, green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
 
 function createData(number, name, price, change, marketCap, symbol, image) {
   return { number, name, price, change, marketCap, symbol, image };
 };
 
-// borrowed from stack overflow
+// modifed based on answer from stack overflow
 // https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript/36734774
-function convertCurrency (labelValue) {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e+9
+const convertCurrency = function(labelValue) {
+  const number = Math.abs(Number(labelValue));
+  return number >= 1.0e+12
+  ? (number / 1.0e+12).toFixed(2) + "T"
+  : number >= 1.0e+9
+  ? (number / 1.0e+9).toFixed(2) + "B"
+  : number >= 1.0e+6
+  ? (number / 1.0e+6).toFixed(2) + "M"
+  : number >= 1.0e+3
+  ? (number / 1.0e+3).toFixed(2) + "K"
+  : number;
+};
 
-  ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
-  // Six Zeroes for Millions 
-  : Math.abs(Number(labelValue)) >= 1.0e+6
-
-  ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
-  // Three Zeroes for Thousands
-  : Math.abs(Number(labelValue)) >= 1.0e+3
-
-  ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
-
-  : Math.abs(Number(labelValue));
-
-}
-
+// for initial testing
 // const rows = [
 //   createData(1, "Bitcoin", "70149.74", "-0.52", "1.3T", "BTC"),
 //   createData(2, "Ethereum", "2237.76", "-0.13", "257.3B", "ETH"),
@@ -93,11 +89,18 @@ const MarketTable = (props) => {
       <TableCell>
         <img src={row.image} width="40" height="40"/>
         <Typography variant="h6" color="inherit">
-        {row.name}
+          {row.name}
         </Typography>
       </TableCell>
-      <TableCell>{row.price}</TableCell>
-      <TableCell>{row.change}</TableCell>
+      <TableCell>${row.price}</TableCell>
+      <TableCell
+        style={ row.change >= 0 ?
+          { color: green[600] } :
+          { color: red[600] }
+        }
+      >
+        { row.change >= 0 ? "+" + row.change : row.change }
+      </TableCell>
       <TableCell>{row.marketCap}</TableCell>
       <TableCell>
         <Button variant="contained" color="primary">Trade</Button>
