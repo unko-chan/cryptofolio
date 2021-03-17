@@ -1,8 +1,8 @@
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import SideNav from './Components/nav/SideNav';
-import Dashboard from './Components/dashboard/Dashboard';
-import Market from './Components/market/Market';
+import SideNav from './components/nav/SideNav';
+import Dashboard from './components/dashboard/Dashboard';
+import Market from './components/market/Market';
 
 export default function App() {
   return (

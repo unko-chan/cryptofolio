@@ -16,13 +16,13 @@ function createData(number, name, price, change, marketCap, symbol) {
   return { number, name, price, change, marketCap, symbol };
 };
 
-const rows = [
-  createData(1, "Bitcoin", "70149.74", "-0.52", "1.3T", "BTC"),
-  createData(2, "Ethereum", "2237.76", "-0.13", "257.3B", "ETH"),
-  createData(3, "Uniswap", "36.47", "-2.79", "19.0B", "UNI"),
-  createData(4, "Litecoin", "249.28", "-1.68", "16.6B", "LTC"),
-  createData(5, "ChainLink", "34.5", "-0.08", "14.1B", "LINK")
-];
+// const rows = [
+//   createData(1, "Bitcoin", "70149.74", "-0.52", "1.3T", "BTC"),
+//   createData(2, "Ethereum", "2237.76", "-0.13", "257.3B", "ETH"),
+//   createData(3, "Uniswap", "36.47", "-2.79", "19.0B", "UNI"),
+//   createData(4, "Litecoin", "249.28", "-1.68", "16.6B", "LTC"),
+//   createData(5, "ChainLink", "34.5", "-0.08", "14.1B", "LINK")
+// ];
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -34,7 +34,21 @@ const useStyles = makeStyles(theme => ({
 
 const MarketTable = (props) => {
   const [watchList, setWatchList] = useState(["BTC", "ETH"]);
+  const [rows, setRows] = useState([]);
   const classes = useStyles();
+
+  const axios = require('axios');
+
+  useEffect(() => {
+    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
+    axios.get(url)
+      .then(res => {
+        setRows(res.data.map((currency, index) => {
+          const { name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol } = currency;
+          return createData(index, name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol);
+        }))
+      });
+  }, []);
 
   const removeSymbol = function(symbols, symbol) {
     return symbols.filter(s => s !== symbol);
