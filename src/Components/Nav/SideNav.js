@@ -11,14 +11,18 @@ import './nav.scss';
 
 const NavLink = ({ page }) => {
   const title = page.charAt(0).toUpperCase() + page.slice(1);
-  return <Link to={`/${page}`}>{title}</Link>;
+  return (
+    <Link to={`/${page}`} className="link-item">
+      {title}
+    </Link>
+  );
 };
 
 const SideNav = () => {
-    const { page } = useParams();
+  const { page } = useParams();
   return (
-    <nav>
-      <div className="side-nav">
+    <div className="side-nav">
+      <div className="link-list">
         <ul>
           <li>
             <NavLink page="dashboard" />
@@ -26,9 +30,13 @@ const SideNav = () => {
           <li>
             <NavLink page="market" />
           </li>
+          <li>
+            <NavLink page="exchange" />
+          </li>
         </ul>
       </div>
-    </nav>
+    </div>
+
     // <div className="side-nav">
     //   <h1 className="nav-title">Cryptofolio</h1>
 
