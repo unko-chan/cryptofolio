@@ -3,6 +3,7 @@ import SideNav from './components/nav/SideNav';
 import Dashboard from './components/dashboard/Dashboard'
 import TradingWidget from './components/TradingWidget';
 import ArticleList from './components/news/ArticleList'
+import CurrencyDetails from './components/currency_details/CurrencyDetails'
 
 function App() {
   return (
@@ -11,7 +12,6 @@ function App() {
       <SideNav />
       </div>
       <section className="main-container">
-        <ArticleList />
          
       </section>
     </section>

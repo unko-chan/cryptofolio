@@ -1,14 +1,19 @@
 import React from "react";
-import { Paper } from '@material-ui/core'
+import { Paper, Box } from '@material-ui/core'
+
 
 export default function ArticleListItem(props) {
 
   return (
-    <Paper elevation={3} className="article-container">
+    <Box component={Paper} elevation={3}>
       <div className="article-name">{props.name}</div>
-    <div className="article-author">{props.author}</div>
+    <div className="article-author">Written by: {props.author}</div><br/>
     <div className="article-description">{props.description}</div>
-      <a href='{props.url}'>{props.url}</a>
-      </Paper>
+     
+      <a href='#' onClick={(e) => {
+      e.preventDefault();
+      window.location.href=props.url;
+      }}>Click for full story</a>
+      </Box>
   );
 }
