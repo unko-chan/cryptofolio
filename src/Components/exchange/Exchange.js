@@ -3,6 +3,8 @@ import './exchange.scss';
 import PieExample from '../charts/PieExample';
 import BasicTable from './BasicTable'
 import RebalanceSettings from './RebalanceSettings';
+import RebalanceToggle from './RebalanceToggle';
+
 
 
 export default function Exchange() {
@@ -17,8 +19,10 @@ export default function Exchange() {
         <button>Buy</button>
         <button>Sell</button>
       </div>
-
-      <h1>Portfolio Rebalance</h1>
+      <div className="rebalance-header">
+        <h1>Portfolio Rebalance</h1>
+        <RebalanceToggle />
+      </div>
       <div className="rebalance-view">
         <div className="allocation-chart">
           <PieExample />

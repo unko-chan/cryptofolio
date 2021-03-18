@@ -23,6 +23,13 @@
   }
 }
 
+.rebalance-header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
 .allocation-table {
   margin-left: -6em;
 }
