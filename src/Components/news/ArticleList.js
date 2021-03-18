@@ -1,5 +1,4 @@
 import { react, useEffect, useState } from 'react';
-
 import data from '../../data/accounts.json';
 import { getBalances } from '../../helpers/pieChartHelper.js';
 import { fullCurrencyName } from '../../helpers/transactionHelper';
@@ -36,7 +35,7 @@ const ArticleList = (props) => {
   }
 let newArticles = []
 
-  
+  //indexOf returns -1 if index does not exist
   const articleData = articles.map((article) => {
    if (newArticles.indexOf(article[0]) === -1) {
      newArticles.push(article[0])

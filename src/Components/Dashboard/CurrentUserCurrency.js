@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,7 +10,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
 import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
-import variable from '../currency_details/CurrencyDetails'
+
+
+
+
+
 
 const useStyles = makeStyles({
   table: {
@@ -35,7 +40,7 @@ const CurrentCurrency = (props) => {
         {Object.keys(getBalances(data)).map((key, index) => (
           <TableRow key={index}>
           <TableCell component="th" scope="row">
-            <a href="#">{key}</a>
+          <Link to={`${key}`}>{key}</Link>
           </TableCell>
           <TableCell align="right" >{balances[key]}</TableCell>
           <TableCell align="right">{Math.round(owningRatios[index] * 100)}%</TableCell>
