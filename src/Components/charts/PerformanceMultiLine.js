@@ -250,7 +250,8 @@ const tertiaryPrice = secondaryPrice
   .slice()
   .reverse()
   .map((x) => x * 1.5);
-export default function PerformanceMultiLine() {
+
+export default function PerformanceMultiLine(props) {
   const data = {
     //x axis data
     labels: days,
@@ -300,12 +301,13 @@ export default function PerformanceMultiLine() {
       xAxes: [
         {
           type: 'time',
-          time: {
-            unit: 'month',
-            displayFormats: { month: 'MMM' },
-          },
+          time: props.timeState,
+          ticks: {
+            autoSkip: true,
+            min: props.xTickState
+          }
         },
-      ],
+      ]
     },
   };
 

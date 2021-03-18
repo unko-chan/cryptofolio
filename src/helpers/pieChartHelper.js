@@ -22,6 +22,7 @@ const getBalances = function(accounts) {
   return balances;
 };
 
+// currencyData here should be balances
 const getCurrencies = function(currencyData) {
   let currencies = [];
 

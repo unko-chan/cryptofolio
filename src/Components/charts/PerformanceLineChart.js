@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
-import DateButton from './DateButton';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const chartData = [
   {
@@ -488,26 +484,7 @@ const chartData = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(1),
-  },
-  buttonGroup: {
-    marginBottom: theme.spacing(3) 
-  }
-}));
-
-export default function LineChart() {
-  const classes = useStyles();
-  const [viewState, setViewState] = useState('showAll');
-  const [tickState, setTickState] = useState('2020-11-16');
-  const [yTickState, setyTickState] = useState(0);
-  const [timeState, setTimeState] = useState({
-    unit: 'month',
-    displayFormats: { month: 'MMM YYYY' },
-  });
-
-  
+export default function LineChart(props) {
   const data = {
     datasets: [
       {
@@ -524,7 +501,7 @@ export default function LineChart() {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     legend: {
       display: false,
     },
@@ -540,14 +517,14 @@ export default function LineChart() {
       xAxes: [
         {
           type: 'time',
-          time: timeState,
+          time: props.timeState,
           gridLines: {
             offsetGridLines: false,
             color: 'rgba(0, 0, 0, .21)',
           },
           ticks: {
             autoSkip: true,
-            min: tickState,
+            min: props.xTickState,
           },
         },
       ],
@@ -558,58 +535,12 @@ export default function LineChart() {
           },
           ticks: {
             padding: 20,
-            min: yTickState,
+            min: props.YTickState,
           },
         },
       ],
     },
   };
 
-  const showAll = () => {
-    if (viewState !== 'showAll') {
-      setViewState('showAll');
-      setTickState('2020-11-16');
-      setyTickState(0);
-      setTimeState({
-        unit: 'month',
-        displayFormats: { month: 'MMM YYYY' },
-      });
-    }
-  };
-
-  const showMonth = () => {
-    if (viewState !== 'showMonth') {
-      setViewState('showMonth');
-      setTickState('2021-02-15');
-      setyTickState(4000);
-      setTimeState({
-        unit: 'week',
-        displayFormats: { week: 'MMM DD' },
-      });
-    }
-  };
-
-  const showWeek = () => {
-    if (viewState !== 'showWeek') {
-      setViewState('showWeek');
-      setTickState('2021-03-07');
-      setyTickState(8000);
-      setTimeState({
-        unit: 'day',
-        displayFormats: { day: 'MMM DD' },
-      });
-    }
-  };
-
-  return (
-    <Paper className={classes.paper}>
-      <ButtonGroup size="small" aria-label="small outlined button group" className={classes.buttonGroup}>
-        <Button onClick={showAll}>All</Button>
-        <Button onClick={showMonth}>Month</Button>
-        <Button onClick={showWeek}>Week</Button>
-      </ButtonGroup>
-
-      <Line data={data} options={options} />
-    </Paper>
-  );
+  return <Line data={data} options={options} />;
 }
