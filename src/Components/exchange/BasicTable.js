@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import Paper from '@material-ui/core/Paper';
+import { FormatColorResetRounded } from '@material-ui/icons';
 
 /*
 tooltip onClick -> Allocation = textfield (have current values in input field)
@@ -25,14 +26,14 @@ update table with new values
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 350,
+    minWidth: 450,
   },
   title: {
     flex: '1 1 100%',
   },
 });
 
-export default function BasicTable() {
+export default function BasicTable(props) {
   const classes = useStyles();
 
   const onEdit = () => {
@@ -45,31 +46,39 @@ export default function BasicTable() {
       sum += parseInt(editRows[val]);
     }
     if (sum === 100) {
-      setRows(editRows);
-      setEditMode(false);
-      console.log('rows', rows)
+      setConfirmMode(true);
     } else if (sum === 0) {
-      onCancel()
+      onCancel();
     }
     console.log(sum);
     console.log('editRows', editRows);
+  };
+
+  const confirmSave = () => {
+    setRowsCopy(editRows);
+    setRows(rowsCopy);
+    setEditMode(false);
+    setConfirmMode(false);
   };
 
   const onCancel = () => {
     setEditMode(false);
   };
 
-  const onDelete = (props) => {
-    console.log(props)
-  }
+  const onDelete = (currency) => {
+    console.log(currency);
+  };
 
   const [editMode, setEditMode] = useState(false);
-  const [editRows, setEditRows] = useState();
+  const [confirmMode, setConfirmMode] = useState(false);
+
   const [rows, setRows] = useState({
     Bitcoin: '65',
     Ethereum: '25',
     Litecoin: '10',
   });
+  const [rowsCopy, setRowsCopy] = useState({ ...rows });
+  const [editRows, setEditRows] = useState({ ...rowsCopy });
 
   return (
     <Paper>
@@ -88,7 +97,7 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.entries(rows).map(([currency, allocation]) => (
+            {Object.entries(rowsCopy).map(([currency, allocation]) => (
               <TableRow key={currency}>
                 <TableCell component="th" scope="row">
                   {currency}
@@ -104,7 +113,6 @@ export default function BasicTable() {
                         defaultValue={allocation}
                         onChange={(e) => {
                           setEditRows({
-                            ...rows,
                             ...editRows,
                             [currency]: e.target.value,
                           });
@@ -114,7 +122,7 @@ export default function BasicTable() {
                         }}
                       />
                       <IconButton>
-                        <ClearIcon onClick={() => {onDelete(currency)}} />
+                        <ClearIcon onClick={() => onDelete(currency)} />
                       </IconButton>
                     </>
                   ) : (
@@ -124,18 +132,31 @@ export default function BasicTable() {
               </TableRow>
             ))}
 
-            {editMode && (
-              <>
-                <TableCell component="th" scope="row">
-                  <Button color="error" onClick={onCancel}>
-                    Cancel
-                  </Button>
-                </TableCell>
-                <TableCell align="right">
-                  <Button onClick={onSave}>Save</Button>
-                </TableCell>
-              </>
-            )}
+            {editMode &&
+              (confirmMode ? (
+                <>
+                  <TableCell>
+                    <Typography>Confirm save?</Typography>
+                  </TableCell>
+                  <TableCell align="right" component="th" scope="row">
+                    <Button color="error" onClick={() => setConfirmMode(false)}>
+                      Cancel
+                    </Button>
+                    <Button onClick={confirmSave}>Save</Button>
+                  </TableCell>
+                </>
+              ) : (
+                <>
+                  <TableCell component="th" scope="row">
+                    <Button color="error" onClick={onCancel}>
+                      Cancel
+                    </Button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button onClick={onSave}>Save</Button>
+                  </TableCell>
+                </>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

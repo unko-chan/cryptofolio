@@ -2,6 +2,8 @@ import React from 'react';
 import './exchange.scss';
 import PieExample from '../charts/PieExample';
 import BasicTable from './BasicTable'
+import RebalanceSettings from './RebalanceSettings';
+
 
 export default function Exchange() {
   return (
@@ -21,8 +23,11 @@ export default function Exchange() {
         <div className="allocation-chart">
           <PieExample />
         </div>
-        <div>
+        <div className="allocation-table">
           <BasicTable />
+        </div>
+        <div>
+          <RebalanceSettings />
         </div>
       </div>
     </section>

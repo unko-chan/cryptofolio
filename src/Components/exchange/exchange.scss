@@ -14,11 +14,17 @@
 .rebalance-view {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 
   .allocation-chart {
-    width: 35vw;
+    position: relative;
+    width: 50vh;
     margin-left: -10%;
   }
+}
+
+.allocation-table {
+  margin-left: -6em;
 }
 
 .allocation-field {
