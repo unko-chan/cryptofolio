@@ -1,3 +1,4 @@
+const cryptocurrencies = require('cryptocurrencies');
 const transactions = [
   {
      "type" : "send",
@@ -183,17 +184,7 @@ const calculatePercentGrowth = function(period, transactions) {
 };
 
 const fullCurrencyName = (currencyName) => {
-   if (currencyName === 'BTC') {
-     return 'Bitcoin';
-   } else if (currencyName === 'ETH') {
-     return 'Ethereum';
-   } else if (currencyName === 'NU'){ 
-      return 'NuCypher'
-   } else if (currencyName === 'LTC'){
-      return 'Litecoin'
-   } else {
-     return currencyName;
-   }
+  return cryptocurrencies[currencyName]
  };
 
 // console.log("year", getPeriodDays("year"));

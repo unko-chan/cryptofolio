@@ -1,5 +1,4 @@
-import { ArtTrackOutlined } from '@material-ui/icons';
-import { react, useEffect, useLayoutEffect, useState } from 'react';
+import { react, useEffect, useState } from 'react';
 
 import data from '../../data/accounts.json';
 import { getBalances } from '../../helpers/pieChartHelper.js';
@@ -19,42 +18,41 @@ const userCurrenciesFullNames = []
 Object.keys(userCurrencies).map(key => {
   userCurrenciesFullNames.push(fullCurrencyName(key))
   })
-
+console.log(fullCurrencyName("BTC"));
 const ArticleList = (props) => {
   const [articles, setArticles] = useState([]);
   
   useEffect(() => {
     getArticles()
-    console.log()
   }, [])
 
   const getArticles = () => {
   userCurrenciesFullNames.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q='${currency}'&from=${date}&language=en&pageSize=2&apiKey=${process.env.REACT_APP_NEWS2}`)
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS2}`)
     .then(results => setArticles(prevState =>
-      [...prevState, results.data.articles]
-    ))
+          [...prevState, [results.data.articles[0].title, results.data.articles[0].author, results.data.articles[0].description, results.data.articles[0].url]]))
     .catch(err => console.log(err))
     })
   }
+let newArticles = []
 
   
   const articleData = articles.map((article) => {
-    if (article.length > 0) {
-      return (
-        <ArticleListItem
-          name={article[0].title}
-          author={article[0].author}
-          description={article[0].description}
-          url={article[0].url} 
-        />
-      ) 
-    }
+   if (newArticles.indexOf(article[0]) === -1) {
+     newArticles.push(article[0])
+     return (
+       <ArticleListItem
+         name={article[0]}
+         author={article[2]}
+         description={article[1]}
+         url={article[3]}   
+       />
+     )
+   } 
   })
-
   return (
       <section className='article-container'>
-        <div className='currency-title'>News stories for you:</div>
+        <h2>News Articles</h2>
         <div className="article-container">
         {articleData}
         </div>
