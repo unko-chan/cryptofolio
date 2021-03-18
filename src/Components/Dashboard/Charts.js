@@ -87,8 +87,8 @@ const Charts = () => {
       </Grid>
 
       { chart === 'lineChart' ? <PerformanceLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
-        : chart === 'barChart' ? <PerformanceBar />
-        : <PerformanceMultiLine />
+        : chart === 'barChart' ? <PerformanceBar viewState={viewState}/>
+        : <PerformanceMultiLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/>
       }
     </Paper>
   );
