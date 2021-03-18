@@ -315,22 +315,88 @@ const findCurrencyPercentGrowth = function(currency, period) {
    return currencyPercentGrowth;
 };
 
-// const bitCoinTransactions = findCurrencyTransactions(transactions, "BTC");
-// console.log(bitCoinTransactions);
+// to find the portofolio holding over the user's entire history
+// need to find their first transaction date
+// then tally up til now
+
+Date.prototype.addDays = function(days) {
+   const date = new Date(this.valueOf());
+   date.setDate(date.getDate() + days);
+   return date;
+}
+
+const getDates = function(startDate, stopDate) {
+   let dateArray = [];
+   let currentDate = startDate;
+   while (currentDate <= stopDate) {
+      dateArray.push(new Date(currentDate));
+      currentDate = currentDate.addDays(1);
+   }
+   return dateArray;
+};
+
+// const populatePortfolioDates = function(transactions) {
+//    let startDate = new Date(sortTransactions(transactions)[0].created_at);
+//    return getDates(startDate, Date.now());
+// };
+
+// starting from the earliests
+const sortTransactions = function(transactions) {
+   return transactions.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+};
+
+const findAllTransactionDates = function(transactions) {
+   return transactions.map(transaction => new Date(transaction.created_at));
+};
+
+const findDailyChanges = function(transactions, date) {
+   return transactions
+      .filter(transaction => transaction.created_at === date)
+      .reduce((accum, transaction) => accum + Number(transaction.native_amount.amount), 0);
+};
+
+const findPortofolioHistory = function(transactions) {
+   const sortedTransactions = sortTransactions(transactions);
+   const startDate = new Date(sortedTransactions[0].created_at);
+   const allDates = getDates(startDate, Date.now());
+
+   const allTransactionDates = findAllTransactionDates(transactions);
+
+   let balance = 0;
+   let history = {};
+
+   for (const date of allDates) {
+      if (allTransactionDates.includes(new Date(date))) {
+         console.log('this is working!');
+         const dailyChanges = findDailyChanges(transactions, date);         
+         balance += dailyChanges;
+      }
+      history[date] = balance;
+   }
+
+   return history;
+};
 
 // const bitCoinOneMonthGrowth = findCurrencyPercentGrowth("BTC", "month");
 // console.log(bitCoinOneMonthGrowth);
 
-// const ETHTransactions = findCurrencyTransactions(transactions, "ETH");
-// console.log(ETHTransactions);
-
 // const ETHOneMonthGrowth = findCurrencyPercentGrowth("ETH", "week");
 // console.log(ETHOneMonthGrowth);
 
-export {
-   findTransactions, 
-   findTransactionAmount, 
-   calculateDollarGrowth, 
-   calculatePercentGrowth,
-   findCurrencyPercentGrowth
-};
+// console.log(findPortofolioHistory(transactions));
+
+console.log(findAllTransactionDates(transactions));
+const allDates = getDates(new Date("2015-03-11T20:13:35.000Z"), Date.now());
+console.log(allDates);
+console.log(Date.now());
+console.log(allDates.find(Date.now()));
+
+// console.log(findDailyChanges(transactions, '2021-03-11T13:13:35-07:00'));
+
+// export {
+//    findTransactions, 
+//    findTransactionAmount, 
+//    calculateDollarGrowth, 
+//    calculatePercentGrowth,
+//    findCurrencyPercentGrowth
+// };

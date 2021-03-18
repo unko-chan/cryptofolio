@@ -49,7 +49,7 @@ const convertViewState = function(viewState) {
   }
 };
 
-export default function (props) {
+export default function(props) {
   // const classes = useStyles();
 
   const period = convertViewState(props.viewState);
