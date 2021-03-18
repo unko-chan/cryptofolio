@@ -1,3 +1,4 @@
+const cryptocurrencies = require('cryptocurrencies');
 const transactions = [
    {
       "type" : "send",
@@ -395,6 +396,13 @@ const findPortofolioHistory = function(transactions) {
 
 // const bitCoinOneMonthGrowth = findCurrencyPercentGrowth("BTC", "month");
 // console.log(bitCoinOneMonthGrowth);
+const fullCurrencyName = (currencyName) => {
+  return cryptocurrencies[currencyName]
+ };
+
+// console.log("year", getPeriodDays("year"));
+// console.log("month", getPeriodDays("month"));
+// console.log(checkTransaction(transaction, "month"));
 
 // const ETHOneMonthGrowth = findCurrencyPercentGrowth("ETH", "week");
 // console.log(ETHOneMonthGrowth);
@@ -412,10 +420,4 @@ console.log(findPortofolioHistory(transactions));
 
 // console.log(findDailyChanges(transactions, '2021-03-11T13:13:35-07:00'));
 
-// export {
-//    findTransactions, 
-//    findTransactionAmount, 
-//    calculateDollarGrowth, 
-//    calculatePercentGrowth,
-//    findCurrencyPercentGrowth
-// };
+export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth, fullCurrencyName };

@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
 import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
+import variable from '../currency_details/CurrencyDetails'
 
 const useStyles = makeStyles({
   table: {
@@ -19,8 +20,6 @@ const useStyles = makeStyles({
 const CurrentCurrency = (props) => {
   const classes = useStyles();
   const balances = getBalances(data);
-  console.log(getBalances(data))
-  console.log(data)
 
   return (
     <TableContainer component={Paper}>
@@ -36,7 +35,7 @@ const CurrentCurrency = (props) => {
         {Object.keys(getBalances(data)).map((key, index) => (
           <TableRow key={index}>
           <TableCell component="th" scope="row">
-            {key}
+            <a href="#">{key}</a>
           </TableCell>
           <TableCell align="right" >{balances[key]}</TableCell>
           <TableCell align="right">{Math.round(owningRatios[index] * 100)}%</TableCell>

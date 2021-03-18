@@ -4,11 +4,15 @@ body {
 
 .App-container {
   font-size: calc(10px + 1.25vmin);
+  padding-right: 1em;
 }
 
 .main-container {
-  margin-left: 15%;
+  margin-left: 16.5%;
+}
+
+.page-header {
   display: flex;
-  justify-content: center;
-  border: black 1px solid;
+  width: 100%;
+  border-bottom: 1px lightgrey solid;
 }

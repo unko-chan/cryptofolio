@@ -33,6 +33,9 @@ const SideNav = () => {
           <li>
             <NavLink page="exchange" />
           </li>
+          <li>
+            <NavLink page="news" />
+          </li>
         </ul>
       </div>
     </div>

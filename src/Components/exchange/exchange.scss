@@ -1,0 +1,39 @@
+.trade-select {
+  margin-top: 2em;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px lightgrey solid;
+
+  button {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    // border: none;
+    // background: none;
+  }
+}
+.rebalance-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  .allocation-chart {
+    position: relative;
+    width: 50vh;
+    margin-left: -10%;
+  }
+}
+
+.rebalance-header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.allocation-table {
+  margin-left: -6em;
+}
+
+.allocation-field {
+  width: 3em;
+}

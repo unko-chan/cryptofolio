@@ -14,13 +14,12 @@
 }
 
 .link-list {
-  ul {
-    li {
-      list-style-type: none;
-      margin-bottom: 1em;
-    }
+  ul > * {
+    list-style-type: none;
+    margin-bottom: 1em;
   }
 }
+
 .link-item {
   text-decoration: none;
   color: white;
