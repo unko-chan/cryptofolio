@@ -12,6 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
+import ClearIcon from '@material-ui/icons/Clear';
 import Paper from '@material-ui/core/Paper';
 
 /*
@@ -47,6 +48,8 @@ export default function BasicTable() {
       setRows(editRows);
       setEditMode(false);
       console.log('rows', rows)
+    } else if (sum === 0) {
+      onCancel()
     }
     console.log(sum);
     console.log('editRows', editRows);
@@ -55,6 +58,10 @@ export default function BasicTable() {
   const onCancel = () => {
     setEditMode(false);
   };
+
+  const onDelete = (props) => {
+    console.log(props)
+  }
 
   const [editMode, setEditMode] = useState(false);
   const [editRows, setEditRows] = useState();
@@ -88,22 +95,28 @@ export default function BasicTable() {
                 </TableCell>
                 <TableCell align="right">
                   {editMode ? (
-                    <TextField
-                      id="allocation"
-                      label="Percent"
-                      type="number"
-                      defaultValue={allocation}
-                      onChange={(e) => {
-                        setEditRows({
-                          ...rows,
-                          ...editRows,
-                          [currency]: e.target.value,
-                        });
-                      }}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
+                    <>
+                      <TextField
+                        className="allocation-field"
+                        id="allocation"
+                        label="Percent"
+                        type="number"
+                        defaultValue={allocation}
+                        onChange={(e) => {
+                          setEditRows({
+                            ...rows,
+                            ...editRows,
+                            [currency]: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                      <IconButton>
+                        <ClearIcon onClick={() => {onDelete(currency)}} />
+                      </IconButton>
+                    </>
                   ) : (
                     allocation + '%'
                   )}
