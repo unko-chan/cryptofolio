@@ -13,11 +13,13 @@ let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getD
 const userCurrencies = getBalances(data);
 
 const userCurrenciesFullNames = []
+let newArticles = []
 
 Object.keys(userCurrencies).map(key => {
   userCurrenciesFullNames.push(fullCurrencyName(key))
   })
-console.log(fullCurrencyName("BTC"));
+
+
 const ArticleList = (props) => {
   const [articles, setArticles] = useState([]);
   
@@ -33,7 +35,6 @@ const ArticleList = (props) => {
     .catch(err => console.log(err))
     })
   }
-let newArticles = []
 
   //indexOf returns -1 if index does not exist
   const articleData = articles.map((article) => {

@@ -10,9 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
 import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
-
-
-
+import CurrencyDetails from '../currency_details/CurrencyDetails';
 
 
 
@@ -39,9 +37,9 @@ const CurrentCurrency = (props) => {
         <TableBody>
         {Object.keys(getBalances(data)).map((key, index) => (
           <TableRow key={index}>
-          <TableCell component="th" scope="row">
-          <Link to={`${key}`}>{key}</Link>
-          </TableCell>
+            <TableCell component="th" scope="row">
+              <Link to={`dashboard/${key}`}>{key}</Link>
+            </TableCell>
           <TableCell align="right" >{balances[key]}</TableCell>
           <TableCell align="right">{Math.round(owningRatios[index] * 100)}%</TableCell>
           </TableRow>

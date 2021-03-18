@@ -1,5 +1,5 @@
 import './App.scss';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SideNav from './components/nav/SideNav';
 import Dashboard from './components/dashboard/Dashboard';
 import Market from './components/market/Market';
@@ -17,7 +17,7 @@ export default function App() {
           <Route exact path="/market" component={Market} />
           <Route exact path="/exchange" component={Exchange} />
           <Route exact path="/news" component={ArticleList} />
-          <Route path="/:currency" component={CurrencyDetails} />
+          <Route path="/dashboard/:currency" component={CurrencyDetails} />
         </section>
       </section>
     </Router>
