@@ -345,33 +345,49 @@ const sortTransactions = function(transactions) {
    return transactions.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 };
 
-const findAllTransactionDates = function(transactions) {
-   return transactions.map(transaction => new Date(transaction.created_at));
-};
+// const findAllTransactionDates = function(transactions) {
+//    return transactions.map(transaction => new Date(transaction.created_at));
+// };
 
-const findDailyChanges = function(transactions, date) {
-   return transactions
-      .filter(transaction => transaction.created_at === date)
-      .reduce((accum, transaction) => accum + Number(transaction.native_amount.amount), 0);
-};
+// const findDailyChanges = function(transactions, date) {
+//    return transactions
+//       .filter(transaction => transaction.created_at === date)
+//       .reduce((accum, transaction) => accum + Number(transaction.native_amount.amount), 0);
+// };
 
 const findPortofolioHistory = function(transactions) {
    const sortedTransactions = sortTransactions(transactions);
    const startDate = new Date(sortedTransactions[0].created_at);
    const allDates = getDates(startDate, Date.now());
 
-   const allTransactionDates = findAllTransactionDates(transactions);
+   // const allTransactionDates = findAllTransactionDates(transactions);
 
    let balance = 0;
    let history = {};
 
-   for (const date of allDates) {
-      if (allTransactionDates.includes(new Date(date))) {
-         console.log('this is working!');
-         const dailyChanges = findDailyChanges(transactions, date);         
-         balance += dailyChanges;
-      }
+   // for (const date of allDates) {
+   //    if (allTransactionDates.includes(new Date(date))) {
+   //       console.log('this is working!');
+   //       const dailyChanges = findDailyChanges(transactions, date);         
+   //       balance += dailyChanges;
+   //    }
+   //    history[date] = balance;
+   // }
+
+   for (const transaction of sortedTransactions) {
+      const date = new Date(transaction.created_at);
+      balance += Number(transaction.native_amount.amount);
       history[date] = balance;
+   };
+   
+   let tempBalance = sortedTransactions[0].native_amount.amount;
+   for (const date of allDates) {
+      if (!history[date]) {
+         console.log('this');
+         history[date] = tempBalance;
+      } else {
+         tempBalance = history[date];
+      }
    }
 
    return history;
@@ -383,13 +399,16 @@ const findPortofolioHistory = function(transactions) {
 // const ETHOneMonthGrowth = findCurrencyPercentGrowth("ETH", "week");
 // console.log(ETHOneMonthGrowth);
 
-// console.log(findPortofolioHistory(transactions));
+console.log(findPortofolioHistory(transactions));
+// console.log("2021-03-15T08:10:13Z".slice(0,10));
 
-console.log(findAllTransactionDates(transactions));
-const allDates = getDates(new Date("2015-03-11T20:13:35.000Z"), Date.now());
-console.log(allDates);
-console.log(Date.now());
-console.log(allDates.find(Date.now()));
+// console.log(getDates(new Date("2021-03-15T08:10:13Z".slice(0,10)), Date.now()));
+
+// console.log(findAllTransactionDates(transactions));
+// const allDates = getDates(new Date("2015-03-11T20:13:35.000Z"), Date.now());
+// console.log(allDates);
+// console.log(Date.now());
+// console.log(allDates.find(Date.now()));
 
 // console.log(findDailyChanges(transactions, '2021-03-11T13:13:35-07:00'));
 
