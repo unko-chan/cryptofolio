@@ -13,13 +13,13 @@ const data = {
 };
 
 const options = {
+  responsive: true,
   cutoutPercentage: 65,
   legend: {
     display: false,
   },
 };
 
-export default function PieExample(){
-return <Doughnut data={data} options={options}/>;
+export default function PieExample() {
+  return <Doughnut data={data} options={options} />;
 }
-

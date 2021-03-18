@@ -54,8 +54,8 @@ export default function TokenPieChart() {
   };
 
   const options = {
-    cutoutPercentage: 65
-  }
+    cutoutPercentage: 70
+  };
 
   return (
     <Paper className={classes.paper} >

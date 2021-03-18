@@ -1,7 +1,6 @@
 import React from 'react';
 import './exchange.scss';
-import PieExample from '../charts/PieExample';
-import BasicTable from './BasicTable'
+import RebalanceView from './rebalance/RebalanceView';
 
 export default function Exchange() {
   return (
@@ -15,16 +14,7 @@ export default function Exchange() {
         <button>Buy</button>
         <button>Sell</button>
       </div>
-
-      <h1>Portfolio Rebalance</h1>
-      <div className="rebalance-view">
-        <div className="allocation-chart">
-          <PieExample />
-        </div>
-        <div>
-          <BasicTable />
-        </div>
-      </div>
+      <RebalanceView />
     </section>
   );
 }
