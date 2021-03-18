@@ -28,7 +28,7 @@ const ArticleList = (props) => {
 
   const getArticles = () => {
   userCurrenciesFullNames.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS2}`)
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS}`)
     .then(results => setArticles(prevState =>
           [...prevState, [results.data.articles[0].title, results.data.articles[0].author, results.data.articles[0].description, results.data.articles[0].url]]))
     .catch(err => console.log(err))
