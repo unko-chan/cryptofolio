@@ -107,7 +107,7 @@ const Charts = () => {
         </Grid>
       </Grid>
 
-      { chart === 'lineChart' ? <PerformanceLine convertedBalances={convertedBalances} viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
+      { chart === 'lineChart' ? <PerformanceLine balances={convertedBalances} viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
         : chart === 'barChart' ? <PerformanceBar viewState={viewState}/>
         : <PerformanceMultiLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/>
       }

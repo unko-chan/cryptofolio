@@ -19,7 +19,7 @@ const convertToLine = function(history) {
 };
 
 export default function LineChart(props) {
-  const chartData = convertToLine(props.convertedBalances);
+  const chartData = convertToLine(props.balances);
 
   const data = {
     datasets: [
