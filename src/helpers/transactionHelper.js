@@ -420,4 +420,4 @@ console.log(findPortofolioHistory(transactions));
 
 // console.log(findDailyChanges(transactions, '2021-03-11T13:13:35-07:00'));
 
-export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth, fullCurrencyName };
+export { findTransactions, findTransactionAmount, calculateDollarGrowth, calculatePercentGrowth, fullCurrencyName, findCurrencyPercentGrowth };
