@@ -35,8 +35,8 @@ const getBarColor = function (performance) {
   return color;
 };
 
-const balances = getBalances(accounts);
-const currencies = getCurrencies(balances);
+// const balances = getBalances(accounts);
+// const currencies = getCurrencies(balances);
 
 const convertViewState = function(viewState) {
   switch (viewState) {
@@ -53,7 +53,9 @@ export default function(props) {
   // const classes = useStyles();
 
   const period = convertViewState(props.viewState);
-  
+  const currencies = props.currencies;
+
+  // should we use findCurrencyPercentGrowth (only based on user's transaction history)
   const performance = currencies.map(currency => findCurrencyPercentGrowth(currency, period));
 
   const barColors = getBarColor(performance);

@@ -18,7 +18,7 @@ import {
 } from '../../data/CurrencyPricings';
 const balances = require('../../walletData/btcData.json');
 
-const allCurrencies = ['BTC', 'ETH', 'LTC'];
+// const allCurrencies = ['BTC', 'ETH', 'LTC'];
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,9 +43,10 @@ const Charts = () => {
   const [chart, setChart] = useState('lineChart');
   const [totalBalance, setTotalBalance] = useState({});
   const [currencyBalances, setCurrencyBalances] = useState([]);
+  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(allCurrencies);
+    const promises = findAllCurrencyOwnings(currencies);
     promises.then(res => setCurrencyBalances(res));
     sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
   }, []);
@@ -137,7 +138,11 @@ const Charts = () => {
           timeState={timeState}
         />
       ) : chart === 'barChart' ? (
-        <PerformanceBar viewState={viewState} />
+        <PerformanceBar 
+          viewState={viewState}
+          currencies={currencies}
+          currencyBalances={currencyBalances}
+        />
       ) : (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}
