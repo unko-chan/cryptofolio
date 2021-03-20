@@ -87,21 +87,19 @@ const getCurrencyBalance = function (currency) {
 const allCurrencies = ['BTC', 'ETH', 'LTC'];
 
 const findAllCurrencyOwnings = function (currencies) {
-  const promises = currencies.map((currency) => {
+  return Promise.all(currencies.map((currency) => {
     //historical pricing of currency
-    return getCurrencyPricingData(currency).then((prices) => {
-      //get wallet crypto balance
-      const balances = getCurrencyBalance(currency);
-      const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
+      return getCurrencyPricingData(currency).then((prices) => {
+        //get wallet crypto balance
+        const balances = getCurrencyBalance(currency);
+        const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
 
-      return convertedCurrencyOwnings;
-    });
-  });
-
-  return Promise.all(promises)
+        return convertedCurrencyOwnings;
+      });
+    }))
     .then((res) => res)
     .catch((e) => {
-      console.log(e);
+        console.log(e);
     });
 };
 
@@ -110,7 +108,10 @@ const findAllCurrencyOwnings = function (currencies) {
 
 const sumAllOwnings = function (data) {
   return findAllCurrencyOwnings(data).then((currencyValues) => {
-    let maxLengthIndex = 0;
+
+    console.log('currencyValues', currencyValues);
+
+    let maxLengthIndex;
     let maxLength = 0;
 
     for (const [index, values] of currencyValues.entries()) {
@@ -120,20 +121,24 @@ const sumAllOwnings = function (data) {
       }
     }
 
+    console.log('maxLengthIndex is', maxLengthIndex);
+
     const summedOwnings = { ...currencyValues[maxLengthIndex] };
 
     for (const [index, values] of currencyValues.entries()) {
       if (index !== maxLengthIndex) {
+        console.log('index is ', index);
         for (const [date, amount] of Object.entries(values)) {
           summedOwnings[date] += amount;
         }
       }
     }
+    console.log(summedOwnings);
     return summedOwnings;
   });
 };
 
-// sumAllOwnings(allCurrencies);
+sumAllOwnings(allCurrencies);
 
 // [
 //   {
@@ -184,9 +189,9 @@ const findMinPeriodBalance = function (currencyOwnings, days) {
 // console.log(ownings);
 // console.log(findMinPeriodBalance(ownings, 7));
 
-export {
-  getCurrencyPricingData,
-  convertCurrencyOwnings,
-  findMinPeriodBalance,
-  sumAllOwnings,
-};
+// export {
+//   getCurrencyPricingData,
+//   convertCurrencyOwnings,
+//   findMinPeriodBalance,
+//   sumAllOwnings,
+// };
