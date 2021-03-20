@@ -5,7 +5,7 @@ import { getCurrencyPricingData, convertCurrencyOwnings } from '../../data/Curre
 import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 const balances = require('../../walletData/btcData.json');
 
-const convertToLine = function(history) {
+export function convertToLine(history) {
   let chartData = [];
 
   for (const date in history) {
@@ -40,7 +40,7 @@ export default function LineChart(props) {
     maintainAspectRatio: true,
     legend: {
       display: false,
-    },
+    }, 
     tooltips: {
       mode: 'index',
       intersect: false,
