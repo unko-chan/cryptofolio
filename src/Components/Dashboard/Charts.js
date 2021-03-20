@@ -9,16 +9,23 @@ import PerformanceLine from '../charts/PerformanceLineChart';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
-import { getCurrencyPricingData, convertCurrencyOwnings, findMinPeriodBalance } from '../../data/CurrencyPricings';
+import {
+  getCurrencyPricingData,
+  convertCurrencyOwnings,
+  findMinPeriodBalance,
+  sumAllOwnings,
+} from '../../data/CurrencyPricings';
 const balances = require('../../walletData/btcData.json');
+
+const allCurrencies = ['BTC', 'ETH', 'LTC'];
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(5),
   },
   buttonGroup: {
-    marginBottom: theme.spacing(3)
-  }
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 const Charts = () => {
@@ -33,15 +40,13 @@ const Charts = () => {
 
   const classes = useStyles();
   const [chart, setChart] = useState('lineChart');
-  const [prices, setPrices] = useState({});
+  const [totalBalance, setTotalBalance] = useState({});
 
   useEffect(() => {
-    getCurrencyPricingData("BTC")
-    .then(prices => setPrices(prices));
+    sumAllOwnings(allCurrencies).then((prices) => setTotalBalance(prices));
   }, []);
 
-  const convertedBalances = convertCurrencyOwnings(prices, balances);
-
+  // const convertedBalances = convertCurrencyOwnings(prices, balances);
   // const setChartDate = function(days) {
   //   const today = new Date();
   //   return today.setDate(today.getDate() - days);
@@ -59,7 +64,8 @@ const Charts = () => {
     }
   };
 
-  const yMonthlyTickMin = Math.ceil(findMinPeriodBalance(convertedBalances, 30) * 0.95 / 100) * 100;
+  const yMonthlyTickMin =
+    Math.ceil((findMinPeriodBalance(totalBalance, 30) * 0.95) / 100) * 100;
 
   const showMonth = () => {
     if (viewState !== 'showMonth') {
@@ -73,7 +79,8 @@ const Charts = () => {
     }
   };
 
-  const yWeeklyTickMin = Math.ceil(findMinPeriodBalance(convertedBalances, 7) * 0.95 / 100) * 100;
+  const yWeeklyTickMin =
+    Math.ceil((findMinPeriodBalance(totalBalance, 7) * 0.95) / 100) * 100;
 
   const showWeek = () => {
     if (viewState !== 'showWeek') {
@@ -91,15 +98,25 @@ const Charts = () => {
     <Paper className={classes.paper}>
       <Grid container>
         <Grid item xs={9}>
-          <ButtonGroup size="small" aria-label="small outlined button group" className={classes.buttonGroup}>
+          <ButtonGroup
+            size="small"
+            aria-label="small outlined button group"
+            className={classes.buttonGroup}
+          >
             <Button onClick={() => setChart('lineChart')}>Line</Button>
             <Button onClick={() => setChart('barChart')}>Bar</Button>
-            <Button onClick={() => setChart('multiLineChart')}>Multiline</Button>
+            <Button onClick={() => setChart('multiLineChart')}>
+              Multiline
+            </Button>
           </ButtonGroup>
         </Grid>
 
         <Grid item xs={3}>
-          <ButtonGroup size="small" aria-label="small outlined button group" className={classes.buttonGroup}>
+          <ButtonGroup
+            size="small"
+            aria-label="small outlined button group"
+            className={classes.buttonGroup}
+          >
             <Button onClick={showAll}>All</Button>
             <Button onClick={showMonth}>Month</Button>
             <Button onClick={showWeek}>Week</Button>
@@ -107,10 +124,24 @@ const Charts = () => {
         </Grid>
       </Grid>
 
-      { chart === 'lineChart' ? <PerformanceLine balances={convertedBalances} viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
-        : chart === 'barChart' ? <PerformanceBar viewState={viewState}/>
-        : <PerformanceMultiLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/>
-      }
+      {chart === 'lineChart' ? (
+        <PerformanceLine
+          balances={totalBalance}
+          viewState={viewState}
+          xTickState={xTickState}
+          yTickState={yTickState}
+          timeState={timeState}
+        />
+      ) : chart === 'barChart' ? (
+        <PerformanceBar viewState={viewState} />
+      ) : (
+        <PerformanceMultiLine
+          viewState={viewState}
+          xTickState={xTickState}
+          yTickState={yTickState}
+          timeState={timeState}
+        />
+      )}
     </Paper>
   );
 };
