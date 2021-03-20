@@ -105,11 +105,13 @@ const findAllCurrencyOwnings = function (currencies) {
     });
 };
 
+// findAllCurrencyOwnings(allCurrencies).then(res => console.log(res[0]));
+
 // console.log(getCurrencyBalance('ETH'));
 // findAllCurrencyOwnings(allCurrencies);
-
-const sumAllOwnings = function (data) {
-  return findAllCurrencyOwnings(data).then((currencyValues) => {
+// take in promises of convertedCurrencyOwnings
+const sumAllOwnings = function (promises) {
+  return promises.then((currencyValues) => {
     let maxLengthIndex = 0;
     let maxLength = 0;
 
@@ -188,5 +190,6 @@ export {
   getCurrencyPricingData,
   convertCurrencyOwnings,
   findMinPeriodBalance,
+  findAllCurrencyOwnings,
   sumAllOwnings,
 };

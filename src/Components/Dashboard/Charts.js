@@ -13,6 +13,7 @@ import {
   getCurrencyPricingData,
   convertCurrencyOwnings,
   findMinPeriodBalance,
+  findAllCurrencyOwnings,
   sumAllOwnings,
 } from '../../data/CurrencyPricings';
 const balances = require('../../walletData/btcData.json');
@@ -41,9 +42,12 @@ const Charts = () => {
   const classes = useStyles();
   const [chart, setChart] = useState('lineChart');
   const [totalBalance, setTotalBalance] = useState({});
+  const [currencyBalances, setCurrencyBalances] = useState([]);
 
   useEffect(() => {
-    sumAllOwnings(allCurrencies).then((prices) => setTotalBalance(prices));
+    const promises = findAllCurrencyOwnings(allCurrencies);
+    promises.then(res => setCurrencyBalances(res));
+    sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
   }, []);
 
   // const convertedBalances = convertCurrencyOwnings(prices, balances);
@@ -136,6 +140,7 @@ const Charts = () => {
         <PerformanceBar viewState={viewState} />
       ) : (
         <PerformanceMultiLine
+          currencyBalances={currencyBalances}
           viewState={viewState}
           xTickState={xTickState}
           yTickState={yTickState}

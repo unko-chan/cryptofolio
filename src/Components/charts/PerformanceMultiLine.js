@@ -1,4 +1,5 @@
 import { Line } from 'react-chartjs-2';
+import { convertToLine } from './PerformanceLineChart';
 
 const days = [
   '2020-11-16',
@@ -254,12 +255,12 @@ const tertiaryPrice = secondaryPrice
 export default function PerformanceMultiLine(props) {
   const data = {
     //x axis data
-    labels: days,
+    // labels: props.timeState,
     datasets: [
       {
         label: 'Value 1',
         //y axis data
-        data: price,
+        data: convertToLine(props.currencyBalances[0]),
         fill: false,
         borderColor: 'rgb(55, 155, 255)',
         //sets chart line straight
@@ -270,7 +271,7 @@ export default function PerformanceMultiLine(props) {
       {
         label: 'Value 2',
         //y axis data
-        data: secondaryPrice,
+        data: convertToLine(props.currencyBalances[1]),
         fill: false,
         borderColor: 'rgb(255, 100, 100)',
         //sets chart line straight
@@ -281,7 +282,7 @@ export default function PerformanceMultiLine(props) {
       {
         label: 'Value 3',
         //y axis data
-        data: tertiaryPrice,
+        data: convertToLine(props.currencyBalances[2]),
         fill: false,
         borderColor: 'rgb(105, 100, 100)',
         //sets chart line straight
