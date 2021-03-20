@@ -10,14 +10,19 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
 import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
+
+import variable from '../currency_details/CurrencyDetails'
+import Typography from '@material-ui/core/Typography';
+
 import CurrencyDetails from '../currency_details/CurrencyDetails';
-
-
 
 const useStyles = makeStyles({
   table: {
     minWidth: 450,
   },
+  typography: {
+    fontWeight: 300,
+  }
 });
 
 const CurrentCurrency = (props) => {
@@ -29,14 +34,31 @@ const CurrentCurrency = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Currency</TableCell>
-            <TableCell align="right">Balance</TableCell>
-            <TableCell align="right">Wallet&nbsp;Allocation</TableCell>
+            <TableCell>
+              <Typography className={classes.typography}>
+                Currency
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography className={classes.typography}>
+                Balance
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography className={classes.typography}>
+                Wallet&nbsp;Allocation
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
         {Object.keys(getBalances(data)).map((key, index) => (
           <TableRow key={index}>
+          <TableCell component="th" scope="row">
+            <a href="#">{key}</a>
+          </TableCell>
+          <TableCell align="right" >{balances[key].toFixed(2)}</TableCell>
+          <TableCell align="right">{Math.round(owningRatios[index] * 100).toFixed(2)}%</TableCell>
             <TableCell component="th" scope="row">
               <Link to={`dashboard/${key}`}>{key}</Link>
             </TableCell>
