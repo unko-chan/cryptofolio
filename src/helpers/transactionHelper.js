@@ -397,8 +397,12 @@ const findPortofolioHistory = function(transactions) {
 // const bitCoinOneMonthGrowth = findCurrencyPercentGrowth("BTC", "month");
 // console.log(bitCoinOneMonthGrowth);
 const fullCurrencyName = (currencyName) => {
-  return cryptocurrencies[currencyName]
- };
+   if (cryptocurrencies[currencyName]) {
+      return cryptocurrencies[currencyName]
+   } else {
+      return currencyName;
+   }
+};
 
 // console.log("year", getPeriodDays("year"));
 // console.log("month", getPeriodDays("month"));
@@ -407,7 +411,7 @@ const fullCurrencyName = (currencyName) => {
 // const ETHOneMonthGrowth = findCurrencyPercentGrowth("ETH", "week");
 // console.log(ETHOneMonthGrowth);
 
-console.log(findPortofolioHistory(transactions));
+// console.log(findPortofolioHistory(transactions));
 // console.log("2021-03-15T08:10:13Z".slice(0,10));
 
 // console.log(getDates(new Date("2021-03-15T08:10:13Z".slice(0,10)), Date.now()));

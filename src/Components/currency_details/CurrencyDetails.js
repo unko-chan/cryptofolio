@@ -1,48 +1,47 @@
 import {react, useState, useEffect } from 'react';
 import ArticleListItem from '../news/ArticleListItem'
-import './currencydetails.scss'
 import { fullCurrencyName } from '../../helpers/transactionHelper';
+import { useParams, useHistory } from 'react-router-dom';
+import './currencydetails.scss'
 
 const axios = require('axios');
-const today = new Date()
-const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
 
 const CurrencyDetails = (props) => {
+  const [articles, setArticles] = useState([]);
 
-    const [articles, setArticles] = useState([]);
-    
-    useEffect(() => {
-      getArticles()
-    }, [])
+  useEffect(() => {
+    articleRequest(fullCurrencyName(currency))
+  }, [])
+
+  const articleRequest = (cryptoName) => {
+    axios.get(`https://newsapi.org/v2/everything?q=${cryptoName}&pageSize=2&apiKey=${process.env.REACT_APP_NEWS}`)
+      .then(results => results.data.articles)
+      .then(results => setArticles(prevState =>
+        [...prevState, results[0].title, results[0].author, results[0].description, results[0].url]))
+  }
+
+  const {currency} = useParams();
+  const { back } = useHistory();
   
-    const getArticles = () => {
+  const articleData = 
     
-      axios.get(`https://newsapi.org/v2/everything?q="bitcoin"&from=${date}&language=en&pageSize=2&apiKey=${process.env.REACT_APP_NEWS}`)
-        .then(response => setArticles(response.data.articles))
-        .catch(err => console.log(err));
-    
-    }
-  
-    
-    const articleData = articles.map((article) => {
-      return (
         <ArticleListItem
-         name={article.title}
-         author={article.author}
-         description={article.description}
-         url={article.url} 
+          name={articles[0]}
+          author={articles[2]}
+          description={articles[1]}
+          url={articles[3]}   
         />
-      )
-    })
-  
+      
+   
+
     return (
-      <section className="currency-breakdown">
-        <div className="news-container">{articleData}</div>
-        <div className="information-container"></div>
-      </section>
+      <main>
+      <h2>Wallet Currancy Details {fullCurrencyName(currency)} </h2>
+    <section className="news-article">{articleData}</section>
+    </main>
         )
 }
-export let variable;
 export default CurrencyDetails;
 
 
