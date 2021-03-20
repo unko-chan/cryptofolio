@@ -3,10 +3,6 @@ import { Doughnut } from 'react-chartjs-2';
 
 const options = {
   responsive: true,
-  cutoutPercentage: 65,
-  legend: {
-    display: false,
-  },
 };
 
 export default function PieExample({ values }) {
@@ -14,7 +10,7 @@ export default function PieExample({ values }) {
   console.log(values)
 
   const data = {
-    labels: ['Red', 'Blue', 'Yellow'],
+    labels: ['BTC', 'ETH', 'LTC'],
     datasets: [
       {
         data: values,
