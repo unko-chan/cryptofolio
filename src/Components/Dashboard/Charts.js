@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -7,6 +7,10 @@ import PerformanceBar from '../charts/PerformanceBar';
 import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 import PerformanceLine from '../charts/PerformanceLineChart';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment';
+
+import { getCurrencyPricingData, convertCurrencyOwnings, findMinPeriodBalance } from '../../data/CurrencyPricings';
+const balances = require('../../walletData/btcData.json');
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,15 +29,28 @@ const Charts = () => {
     unit: 'month',
     displayFormats: { month: 'MMM YYYY' },
   });
+  // '2019-09-22'
 
   const classes = useStyles();
-
   const [chart, setChart] = useState('lineChart');
+  const [prices, setPrices] = useState({});
+
+  useEffect(() => {
+    getCurrencyPricingData("BTC")
+    .then(prices => setPrices(prices));
+  }, []);
+
+  const convertedBalances = convertCurrencyOwnings(prices, balances);
+
+  // const setChartDate = function(days) {
+  //   const today = new Date();
+  //   return today.setDate(today.getDate() - days);
+  // };
 
   const showAll = () => {
     if (viewState !== 'showAll') {
       setViewState('showAll');
-      setxTickState('2020-11-16');
+      setxTickState();
       setyTickState(0);
       setTimeState({
         unit: 'month',
@@ -42,11 +59,13 @@ const Charts = () => {
     }
   };
 
+  const yMonthlyTickMin = Math.ceil(findMinPeriodBalance(convertedBalances, 30) * 0.95 / 100) * 100;
+
   const showMonth = () => {
     if (viewState !== 'showMonth') {
       setViewState('showMonth');
-      setxTickState('2021-02-15');
-      setyTickState(4000);
+      setxTickState(moment().subtract(30, 'days'));
+      setyTickState(yMonthlyTickMin);
       setTimeState({
         unit: 'week',
         displayFormats: { week: 'MMM DD' },
@@ -54,11 +73,13 @@ const Charts = () => {
     }
   };
 
+  const yWeeklyTickMin = Math.ceil(findMinPeriodBalance(convertedBalances, 7) * 0.95 / 100) * 100;
+
   const showWeek = () => {
     if (viewState !== 'showWeek') {
       setViewState('showWeek');
-      setxTickState('2021-03-07');
-      setyTickState(8000);
+      setxTickState(moment().subtract(7, 'days'));
+      setyTickState(yWeeklyTickMin);
       setTimeState({
         unit: 'day',
         displayFormats: { day: 'MMM DD' },
@@ -86,7 +107,7 @@ const Charts = () => {
         </Grid>
       </Grid>
 
-      { chart === 'lineChart' ? <PerformanceLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
+      { chart === 'lineChart' ? <PerformanceLine balances={convertedBalances} viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/> 
         : chart === 'barChart' ? <PerformanceBar viewState={viewState}/>
         : <PerformanceMultiLine viewState={viewState} xTickState={xTickState} yTickState={yTickState} timeState={timeState}/>
       }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,13 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const changeString = (stringToChange) => {
-  if (stringToChange === 'send') {
-    return 'Sent';
-  } else if (stringToChange === 'buy') {
-    return "Bought";
-  }
-};
+
+
+
 
 const fullDateConverter = (date) => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -40,33 +36,49 @@ const fullDateConverter = (date) => {
 
 const Transaction = () => {
   const classes = useStyles();
+  const [transactionList, setTransactionList] = useState([]);
 
-  const formatHeading = function(transactions, transaction) {
-    return changeString(transactions[transaction].type) + " " + fullCurrencyName(transactions[transaction].amount.currency);
+  const getTransactions = async () => {
+    const data = await fetch('http://localhost:5000/transactions', {
+      headers: {"Content-Type": "application/json"}
+    }).then( async (response) => {
+     const transaction = await response.json();
+     setTransactionList(transaction);
+    })
+    return data;
+  }
+
+  const formatHeading = function(transaction) {
+    return transaction.transaction_type + " " + fullCurrencyName(transaction.currency_symbol);
   };
 
-  const formatDescription = function(transactions, transaction) {
-    return transactions[transaction].amount.amount + " " +
-      transactions[transaction].amount.currency + " on " +
-      fullDateConverter(transactions[transaction].updated_at.split('T')[0]);
+  const formatDescription = function(transaction) {
+    return transaction.amount + " " +
+      transaction.currency_symbol + " on " +
+      fullDateConverter(transaction.date_occured);
   };
 
-  const listItems = Object.keys(transactions).map((transaction, index) => (
-    <div>
-      <ListItem key={index}>
-        <ListItemAvatar>
-          <Avatar>
-            <CheckIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={formatHeading(transactions, transaction)}
-          secondary={formatDescription(transactions, transaction)}
-        />
-      </ListItem>
-      <Divider component="li" />
-    </div>
-  ));
+  useEffect(() => {
+   getTransactions();
+  }, [])
+  
+ const transactions = transactionList.map((transaction, index) => 
+ (
+  <div>
+  <ListItem key={index}>
+    <ListItemAvatar>
+      <Avatar>
+        <CheckIcon />
+      </Avatar>
+    </ListItemAvatar>
+    <ListItemText
+      primary={formatHeading(transaction)}
+      secondary={formatDescription(transaction)}
+    />
+  </ListItem>
+  <Divider component="li" />
+</div>
+))
 
   return (
     <List className={classes.root}>
@@ -74,7 +86,7 @@ const Transaction = () => {
         Recent Transactions
       </Typography>
       <Divider component="li" />
-      { listItems }
+      { transactions.splice(5) }
     </List>
   )
 };

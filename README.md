@@ -1,10 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+For whatever reason, you have an additional window run node db/index.js. It will not work correctly if you are in the db folder and attempt to run it, you MUST be in the root folder and run it as node db/index.js.
 
 ### `yarn start`
 
