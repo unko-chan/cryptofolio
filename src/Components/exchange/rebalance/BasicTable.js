@@ -34,6 +34,12 @@ const useStyles = makeStyles({
 });
 
 export default function BasicTable(props) {
+  const { rows, setRows } = props;
+
+  const [editMode, setEditMode] = useState(false);
+  const [confirmMode, setConfirmMode] = useState(false);
+
+  const [editRows, setEditRows] = useState({ ...rows });
   const classes = useStyles();
 
   const onEdit = () => {
@@ -55,8 +61,7 @@ export default function BasicTable(props) {
   };
 
   const confirmSave = () => {
-    setRowsCopy(editRows);
-    setRows(rowsCopy);
+    setRows(editRows);
     setEditMode(false);
     setConfirmMode(false);
   };
@@ -68,17 +73,6 @@ export default function BasicTable(props) {
   const onDelete = (currency) => {
     console.log(currency);
   };
-
-  const [editMode, setEditMode] = useState(false);
-  const [confirmMode, setConfirmMode] = useState(false);
-
-  const [rows, setRows] = useState({
-    Bitcoin: '65',
-    Ethereum: '25',
-    Litecoin: '10',
-  });
-  const [rowsCopy, setRowsCopy] = useState({ ...rows });
-  const [editRows, setEditRows] = useState({ ...rowsCopy });
 
   return (
     <Paper>
@@ -97,7 +91,7 @@ export default function BasicTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.entries(rowsCopy).map(([currency, allocation]) => (
+            {Object.entries(rows).map(([currency, allocation]) => (
               <TableRow key={currency}>
                 <TableCell component="th" scope="row">
                   {currency}
