@@ -6,9 +6,9 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-
 app.get('/users', async (req, res) => {
   try {
+    console.log('users');
     const allUsers = await pool.query("SELECT * FROM users")
     res.json(allUsers.rows)
   } catch (error) {
@@ -20,24 +20,31 @@ app.get('/users/:id', async (req, res) => {
   try {
     const  { id }  = req.params;
     const username = req.body.username;
-    const user = await pool.query("SELECT * FROM users WHERE username = $1", [username])
-
-    res.json(user.rows[0])
+    const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    res.json(user.rows[0]);
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
   }
 });
 
 app.get('/transactions', async (req, res) => {
-  console.log('does this run')
+  console.log('hit transactions');
   try {
-    const userTransaction = await pool.query('SELECT * FROM transactions WHERE user_id = 1')
-
-    res.json(userTransaction.rows)
+    const userTransactions = await pool.query('SELECT * FROM transactions WHERE user_id = 1');
+    res.json(userTransactions.rows);
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
   }
+});
 
+app.get('/users/:id/balances', async(req, res) => {
+  try {
+    const { id } = req.params;
+    const currencyBalances = await pool.query('SELECT * FROM currency_balance WHERE user_id = $1', [id]);
+    res.json(currencyBalances.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 app.get('user/:id/rebalance_settings', async (req, res) => {
@@ -48,6 +55,10 @@ app.post('user/:id/rebalance_settings', async (req, res) => {
   
 });
 
-app.listen(5000, () => { 
-  console.log("Server listening on port 5000")
-})
+app.get('/', function(req, res) {
+  res.send('hello oh');
+});
+
+app.listen(5432, () => { 
+  console.log("Server listening on port 5432");
+});

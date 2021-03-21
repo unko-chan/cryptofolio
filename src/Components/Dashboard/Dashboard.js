@@ -5,10 +5,18 @@ import Wallet from './Wallet';
 import Charts from './Charts';
 import Currency from './CurrentUserCurrency';
 
+import { 
+  getUserTransactions, 
+  getCurrencies
+} from '../../helpers/transactionHelper.js';
+
 import './dashboard.scss';
 
 const Dashboard = () => {
   const [user, setUser] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
+  const [currencyPrices, setCurrencyPrices] = useState([]);
 
   const getUsers = async () => {
     const data = await fetch("http://localhost:5000/users", {
@@ -17,14 +25,21 @@ const Dashboard = () => {
       const users = await response.json()
       return users;
     })
-     setUser(data[0].username)
-  }
+    setUser(data[0].username)
+  };
 
+  const allCurrencies = ["BTC", "ETH", "LTC"];
 
+  // only run requests when the page loads
   useEffect(() => {
     getUsers();
 
-  }, [])
+    setCurrencies(allCurrencies);
+
+    getUserTransactions(1)
+    .then(transactions => setTransactions(transactions));
+  }, []);
+  
   return (
     <div className="dashboard-container">
       <div className="page-header">
@@ -38,13 +53,13 @@ const Dashboard = () => {
         </div>
 
         <div className="wallet-container">
-          <Wallet />
+          <Wallet transactions={transactions}/>
         </div>
       </section>
 
       <section className="middle-section">
         <div className="chart-container">
-          <Charts />
+          <Charts transactions={transactions}/>
         </div>
       </section>
 

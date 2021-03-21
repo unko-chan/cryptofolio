@@ -15,10 +15,7 @@ import {
   findMinPeriodBalance,
   findAllCurrencyOwnings,
   sumAllOwnings,
-} from '../../data/CurrencyPricings';
-const balances = require('../../walletData/btcData.json');
-
-// const allCurrencies = ['BTC', 'ETH', 'LTC'];
+} from '../../helpers/CurrencyPricings';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Charts = () => {
+const Charts = (props) => {
   const [viewState, setViewState] = useState('showAll');
   const [xTickState, setxTickState] = useState('2020-11-16');
   const [yTickState, setyTickState] = useState(0);
@@ -138,11 +135,7 @@ const Charts = () => {
           timeState={timeState}
         />
       ) : chart === 'barChart' ? (
-        <PerformanceBar 
-          viewState={viewState}
-          currencies={currencies}
-          currencyBalances={currencyBalances}
-        />
+        <PerformanceBar viewState={viewState} transactions={props.transactions}/>
       ) : (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}
