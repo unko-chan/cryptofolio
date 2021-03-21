@@ -51,7 +51,7 @@ const getCurrencyPrices = function(currencies) {
 };
 
 const mapTransactionsWithNativeAmount = function(userTransactions, currencies, currencyPrices) {
-   // return Promise.all([userTransactionPromises, currencyPromises, currencyPricePromises])
+   // return Promise.all([userTransactions, currencies, currencyPrices])
    //    .then(res => {
    //       const [userTransactions, currencies, currencyPrices] = res;
          
@@ -60,22 +60,23 @@ const mapTransactionsWithNativeAmount = function(userTransactions, currencies, c
       const index = currencies.indexOf(transaction.currency_symbol);
       const date = transaction.date_occured.slice(0, 10);
       
-      // console.log(index, date);
+      console.log('inputs', userTransactions, currencies, currencyPrices);
+      console.log('index and date', index, date);
       
       transaction.native_amount = currencyPrices[index][date] * transaction.amount;
       // console.log(transaction);
       return transaction;
    });
-      // });
+   // });
 };
 
-const currencyPromises = getCurrencies(1);
-const currencyPricePromises = getCurrencyPrices(currencyPromises);
+// const currencyPromises = getCurrencies(1);
+// const currencyPricePromises = getCurrencyPrices(currencyPromises);
 // currencyPricePromises.then(res => console.log(res));
 
-const userTransactionPromises = getUserTransactions(1);
+// const userTransactionPromises = getUserTransactions(1);
 // userTransactionPromises.then(res => console.log(res));
-mapTransactionsWithNativeAmount(userTransactionPromises, currencyPromises, currencyPricePromises).then(res => console.log(res));
+// mapTransactionsWithNativeAmount(userTransactionPromises, currencyPromises, currencyPricePromises).then(res => console.log(res));
 
 // mapTransactionsWithNativeAmount(1).then(transactions => {
 //    console.log(transactions => calculatePercentGrowth("month", transactions));

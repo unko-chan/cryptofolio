@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 
 import Typography from '@material-ui/core/Typography';
@@ -12,6 +12,13 @@ import { calculateDollarGrowth, calculatePercentGrowth } from '../../helpers/tra
 import { Breadcrumbs } from '@material-ui/core';
 
 // import transactions from '../../data/transactions.json';
+
+import { 
+  getUserTransactions, 
+  getCurrencies,
+  getCurrencyPrices,
+  mapTransactionsWithNativeAmount
+} from '../../helpers/transactionHelper.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,27 +43,22 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 export default function WalletCard(props) {
   const classes = useStyles();
   const [period, setPeriod] = useState("month");
-  const transactions = props.transactions;
+  // const [transactions, setTransactions] = useState([]);
+  const [dollarGrowth, setDollarGrowth] = useState(0);
+  const [percentGrowth, setPercentGrowth] = useState(0);
 
-  // find monthly growth amount and percentage
-  const monthlyDollarGrowth = calculateDollarGrowth("month", transactions);
-  const monthlyPercentGrowth = calculatePercentGrowth("month", transactions);
-  
-  // find yearly growth amount and percentage
-  const yearlyDollarGrowth = calculateDollarGrowth("year", transactions);
-  const yearlyPercentGrowth = calculatePercentGrowth("year", transactions);
-  
-  // find weekly growth amount and percentage
-  const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
-  const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
-  
-  // daily
-  const dailyDollarGrowth = calculateDollarGrowth("day", transactions);
-  const dailyPercentGrowth = calculatePercentGrowth("day", transactions);
+  // let transactions = props.transactions;
+
+  // const allCurrencies = ["BTC", "ETH", "LTC", "DOGE", "NEO"];
+
+  useEffect(() => {
+    // find monthly growth amount and percentage
+    setDollarGrowth(calculateDollarGrowth(period, props.transactions));
+    setPercentGrowth(calculatePercentGrowth(period, props.transactions));
+  }, [props.transactions]);
 
   return (
     <Card>
@@ -111,11 +113,7 @@ export default function WalletCard(props) {
                 : "Daily"
               } Growth ($)
             </Typography>
-            ${ period === "month" ? monthlyDollarGrowth 
-              : period === "year" ? yearlyDollarGrowth
-              : period === "week" ? weeklyDollarGrowth
-              : dailyDollarGrowth
-            }
+            ${ dollarGrowth }
           </Paper>
         </Grid>
 
@@ -128,11 +126,7 @@ export default function WalletCard(props) {
                 : "Daily"
               } Growth (%)
             </Typography>
-            { period === "month" ? monthlyPercentGrowth 
-              : period === "year" ? yearlyPercentGrowth
-              : period === "week" ? weeklyPercentGrowth
-              : dailyPercentGrowth
-            }%
+            { percentGrowth }%
           </Paper>
         </Grid>
       </Grid>

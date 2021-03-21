@@ -86,14 +86,34 @@ const getCurrencyBalance = function (currency) {
 
 const allCurrencies = ['BTC', 'ETH', 'LTC'];
 
-const findAllCurrencyOwnings = function (currencyPricePromises) {
-  return Promise.all(currencyPricePromises.then(prices => {
-    //get wallet crypto balance
-    const balances = getCurrencyBalance(currency);
-    const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
+// what is currencyPricePromises
+// const findAllCurrencyOwnings = function (currencies, prices) {
+//   return currencies.map((currency, index) => {
+//     //historical pricing of currency
+//     //get wallet crypto balance
+//     const balances = getCurrencyBalance(currency);
+//     const convertedCurrencyOwnings = convertCurrencyOwnings(prices[index], balances);
+//     return convertedCurrencyOwnings;
+//   });
+// };
 
-    return convertedCurrencyOwnings;
-  }));
+const findAllCurrencyOwnings = function (currencies) {
+  const promises = currencies.map((currency) => {
+    //historical pricing of currency
+    return getCurrencyPricingData(currency).then((prices) => {
+      //get wallet crypto balance
+      const balances = getCurrencyBalance(currency);
+      const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
+
+      return convertedCurrencyOwnings;
+    });
+  });
+
+  return Promise.all(promises)
+    .then((res) => res)
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 // findAllCurrencyOwnings(allCurrencies).then(res => console.log(res[0]));

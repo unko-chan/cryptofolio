@@ -46,10 +46,10 @@ const Charts = (props) => {
   const [currencyBalances, setCurrencyBalances] = useState([]);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(props.currencyPricePromises);
+    const promises = findAllCurrencyOwnings(allCurrencies); 
     promises.then(res => setCurrencyBalances(res));
     sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
-  }, []); 
+  }, []);
 
   // const convertedBalances = convertCurrencyOwnings(prices, balances);
   // const setChartDate = function(days) {

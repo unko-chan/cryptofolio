@@ -17,6 +17,8 @@ import './dashboard.scss';
 const Dashboard = () => {
   const [user, setUser] = useState("");
   const [transactions, setTransactions] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
+  const [currencyPrices, setCurrencyPrices] = useState([]);
 
   const getUsers = async () => {
     const data = await fetch("http://localhost:5000/users", {
@@ -28,21 +30,27 @@ const Dashboard = () => {
     setUser(data[0].username)
   };
 
+  // const allCurrencies = ["BTC", "ETH", "LTC", "DOGE", "NEO"];
+
   // only run requests when the page loads
   useEffect(() => {
     getUsers();
 
-    getCurrencies(1)
-      .then(currencies => setCurrencies(currencies));
-
-    getCurrencyPrices(currencies)
-      .then(prices => setCurrencyPrices(prices));
-    
     getUserTransactions(1)
-      .then(transactions => setTransactions(transactions));
-
-    // mapTransactionsWithNativeAmount(transactions, currencies, prices)
-    //   .then(transactions => setTransactions(transactions));
+    .then(transactions => {
+      setTransactions(transactions);
+      return getCurrencies(1); // async
+    })
+    .then(currencies => {
+      setCurrencies(currencies);
+      return getCurrencyPrices(currencies); // async
+    })
+    .then(prices => {
+      setCurrencyPrices(prices);
+      console.log('some prices', prices);
+      setTransactions(mapTransactionsWithNativeAmount(transactions, currencies, currencyPrices));
+      console.log('transactions are', transactions);
+    })
   }, []);
   
   return (
@@ -62,11 +70,11 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className="middle-section">
+      {/* <section className="middle-section">
         <div className="chart-container">
-          <Charts currencies={currencies} currencyPrices={currencyPrices} transactions={transactions}/>
+          <Charts />
         </div>
-      </section>
+      </section> */}
 
       <section className="bottom-section">
         <div className="currency-container">
