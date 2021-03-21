@@ -9,8 +9,9 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOut
 
 import { totalOwnings } from '../../helpers/pieChartHelper';
 import { calculateDollarGrowth, calculatePercentGrowth } from '../../helpers/transactionHelper'
-import transactions from '../../data/transactions.json';
 import { Breadcrumbs } from '@material-ui/core';
+
+// import transactions from '../../data/transactions.json';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,25 +36,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// find monthly growth amount and percentage
-const monthlyDollarGrowth = calculateDollarGrowth("month", transactions);
-const monthlyPercentGrowth = calculatePercentGrowth("month", transactions);
 
-// find yearly growth amount and percentage
-const yearlyDollarGrowth = calculateDollarGrowth("year", transactions);
-const yearlyPercentGrowth = calculatePercentGrowth("year", transactions);
-
-// find weekly growth amount and percentage
-const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
-const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
-
-// daily
-const dailyDollarGrowth = calculateDollarGrowth("day", transactions);
-const dailyPercentGrowth = calculatePercentGrowth("day", transactions);
-
-export default function WalletCard() {
+export default function WalletCard(props) {
   const classes = useStyles();
   const [period, setPeriod] = useState("month");
+  const transactions = props.transactions;
+
+  // find monthly growth amount and percentage
+  const monthlyDollarGrowth = calculateDollarGrowth("month", transactions);
+  const monthlyPercentGrowth = calculatePercentGrowth("month", transactions);
+  
+  // find yearly growth amount and percentage
+  const yearlyDollarGrowth = calculateDollarGrowth("year", transactions);
+  const yearlyPercentGrowth = calculatePercentGrowth("year", transactions);
+  
+  // find weekly growth amount and percentage
+  const weeklyDollarGrowth = calculateDollarGrowth("week", transactions);
+  const weeklyPercentGrowth = calculatePercentGrowth("week", transactions);
+  
+  // daily
+  const dailyDollarGrowth = calculateDollarGrowth("day", transactions);
+  const dailyPercentGrowth = calculatePercentGrowth("day", transactions);
 
   return (
     <Card>

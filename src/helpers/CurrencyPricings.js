@@ -8,7 +8,7 @@ const ethData = require('../walletData/ethData.json');
 
 const axios = require('axios');
 
-const getCurrencyPricingData = function (currency) {
+const getCurrencyPricingData = function(currency) {
   const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=${process.env.REACT_ALPHA_VANTAGE_KEY}`;
   return axios.get(url).then((res) => {
     const data = res.data['Time Series (Digital Currency Daily)'];
@@ -86,23 +86,14 @@ const getCurrencyBalance = function (currency) {
 
 const allCurrencies = ['BTC', 'ETH', 'LTC'];
 
-const findAllCurrencyOwnings = function (currencies) {
-  const promises = currencies.map((currency) => {
-    //historical pricing of currency
-    return getCurrencyPricingData(currency).then((prices) => {
-      //get wallet crypto balance
-      const balances = getCurrencyBalance(currency);
-      const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
+const findAllCurrencyOwnings = function (currencyPricePromises) {
+  return Promise.all(currencyPricePromises.then(prices => {
+    //get wallet crypto balance
+    const balances = getCurrencyBalance(currency);
+    const convertedCurrencyOwnings = convertCurrencyOwnings(prices, balances);
 
-      return convertedCurrencyOwnings;
-    });
-  });
-
-  return Promise.all(promises)
-    .then((res) => res)
-    .catch((e) => {
-      console.log(e);
-    });
+    return convertedCurrencyOwnings;
+  }));
 };
 
 // findAllCurrencyOwnings(allCurrencies).then(res => console.log(res[0]));
@@ -110,8 +101,9 @@ const findAllCurrencyOwnings = function (currencies) {
 // console.log(getCurrencyBalance('ETH'));
 // findAllCurrencyOwnings(allCurrencies);
 // take in promises of convertedCurrencyOwnings
-const sumAllOwnings = function (promises) {
-  return promises.then((currencyValues) => {
+
+const sumAllOwnings = function (owningPromises) {
+  return owningPromises.then((currencyValues) => {
     let maxLengthIndex = 0;
     let maxLength = 0;
 

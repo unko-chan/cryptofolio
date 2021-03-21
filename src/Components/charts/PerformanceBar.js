@@ -15,6 +15,8 @@ import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
+// transactions need to be stubbed out
+import transactions from '../../data/transactions.json'; 
 // const performance = ['4', '6', '-3', '-6', '8'];
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +56,7 @@ export default function(props) {
 
   const period = convertViewState(props.viewState);
   
-  const performance = currencies.map(currency => findCurrencyPercentGrowth(currency, period));
+  const performance = currencies.map(currency => findCurrencyPercentGrowth(transactions, currency, period));
 
   const barColors = getBarColor(performance);
 

@@ -21,12 +21,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     padding: theme.spacing(2)
   }
-}))
-
-
-
-
-
+}));
 
 const fullDateConverter = (date) => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

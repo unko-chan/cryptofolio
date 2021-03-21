@@ -12,8 +12,6 @@ import data from '../../data/accounts.json';
 import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
 import CurrencyDetails from '../currency_details/CurrencyDetails';
 
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 450,

@@ -32,9 +32,6 @@ const CurrencyDetails = (props) => {
           description={articles[1]}
           url={articles[3]}   
         />
-      
-   
-
     return (
       <main>
       <h2>Wallet Currancy Details {fullCurrencyName(currency)} </h2>

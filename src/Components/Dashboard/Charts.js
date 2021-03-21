@@ -15,7 +15,8 @@ import {
   findMinPeriodBalance,
   findAllCurrencyOwnings,
   sumAllOwnings,
-} from '../../data/CurrencyPricings';
+} from '../../helpers/CurrencyPricings';
+
 const balances = require('../../walletData/btcData.json');
 
 const allCurrencies = ['BTC', 'ETH', 'LTC'];
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Charts = () => {
+const Charts = (props) => {
   const [viewState, setViewState] = useState('showAll');
   const [xTickState, setxTickState] = useState('2020-11-16');
   const [yTickState, setyTickState] = useState(0);
@@ -45,10 +46,10 @@ const Charts = () => {
   const [currencyBalances, setCurrencyBalances] = useState([]);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(allCurrencies);
+    const promises = findAllCurrencyOwnings(props.currencyPricePromises);
     promises.then(res => setCurrencyBalances(res));
     sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
-  }, []);
+  }, []); 
 
   // const convertedBalances = convertCurrencyOwnings(prices, balances);
   // const setChartDate = function(days) {

@@ -37,7 +37,6 @@ CREATE TABLE transactions (
   transaction_fee FLOAT,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   currency_symbol VARCHAR(5)
-
 );
 
 insert into users (id, first_name, username, total_ownings, email) values 
@@ -74,4 +73,4 @@ INSERT INTO transactions (id, date_occured, transaction_type, amount, transactio
 ( 7, '2021-02-25', 'Bought', 100, 5, 1, 'DOGE'),
 ( 8, '2021-02-14', 'Bought', 3, 5, 1, 'NEO'),
 ( 9, '2021-02-08', 'Sent', 0.00600000, 5, 1, 'ETH'),
-( 10, '2021-02-02', 'Sent', 2, 5, 1, 'BTC');
+( 10, '2021-02-02', 'Sent', 0.002, 5, 1, 'BTC');

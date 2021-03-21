@@ -1,266 +1,85 @@
 const cryptocurrencies = require('cryptocurrencies');
-const transactions = [
-   {
-      "type" : "send",
-      "details" : {
-         "subtitle" : "From Kevin Liang",
-         "health" : "positive",
-         "header" : "Received 0.00066265 BTC ($49.97)",
-         "title" : "Received Bitcoin"
-      },
-      "off_chain_status" : "completed",
-      "resource_path" : "/v2/accounts/063d32b5-3ea0-58fd-a3d6-e40bfefeee1c/transactions/f52fec7c-62a4-5d8e-ae48-6984f1d4cf57",
-      "description" : null,
-      "amount" : {
-         "currency" : "BTC",
-         "amount" : "0.00066265"
-      },
-      "network" : {
-         "status_description" : null,
-         "status" : "off_blockchain"
-      },
-      "updated_at" : "2021-03-15T08:10:13Z",
-      "id" : "f52fec7c-62a4-5d8e-ae48-6984f1d4cf57",
-      "created_at" : "2021-03-15T08:10:13Z",
-      "from" : {
-         "id" : "c708062e-d621-51a6-86bf-6d451526b254",
-         "currency" : "BTC",
-         "resource" : "user",
-         "resource_path" : "/v2/users/c708062e-d621-51a6-86bf-6d451526b254"
-      },
-      "instant_exchange" : false,
-      "status" : "completed",
-      "resource" : "transaction",
-      "native_amount" : {
-         "currency" : "CAD",
-         "amount" : "49.97"
-      }
-   },
-   {
-      "updated_at" : "2021-03-12T21:13:18Z",
-      "id" : "4c6d2668-7acb-52fb-b227-8164ad4335e5",
-      "created_at" : "2021-03-12T21:13:04Z",
-      "instant_exchange" : false,
-      "status" : "completed",
-      "resource" : "transaction",
-      "native_amount" : {
-         "amount" : "2.00",
-         "currency" : "CAD"
-      },
-      "buy" : {
-         "resource_path" : "/v2/accounts/063d32b5-3ea0-58fd-a3d6-e40bfefeee1c/buys/b092ff0b-6729-5080-87ba-32d7a8039811",
-         "resource" : "buy",
-         "id" : "b092ff0b-6729-5080-87ba-32d7a8039811"
-      },
-      "type" : "buy",
-      "details" : {
-         "header" : "Bought 0.00001425 BTC ($2.00)",
-         "title" : "Bought Bitcoin",
-         "subtitle" : "Using 4506********1976",
-         "health" : "positive",
-         "payment_method_name" : "4506********1976"
-      },
-      "resource_path" : "/v2/accounts/063d32b5-3ea0-58fd-a3d6-e40bfefeee1c/transactions/4c6d2668-7acb-52fb-b227-8164ad4335e5",
-      "amount" : {
-         "amount" : "0.00001425",
-         "currency" : "BTC"
-      },
-      "description" : null
-   },
-   {
-       "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "type": "send",
-       "status": "completed",
-       "amount": {
-          "amount": "0.0012",
-          "currency": "BTC"
-       },
-       "native_amount": {
-          "amount": "10.90",
-          "currency": "CAD"
-       },
-       "description": null,
-       "created_at": "2020-12-11T13:13:35-07:00",
-       "updated_at": "2020-12-11T15:55:43-07:00",
-       "resource": "transaction",
-       "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "network": {
-          "status": "off_blockchain",
-          "name": "bitcoin"
-       },
-       "to": {
-          "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-          "resource": "user",
-          "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-       },
-       "details": {
-          "title": "Send bitcoin",
-          "subtitle": "to User 2"
-       }
-   },
-   {
-       "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "type": "send",
-       "status": "completed",
-       "amount": {
-          "amount": "0.00500000",
-          "currency": "BTC"
-       },
-       "native_amount": {
-          "amount": "25.65",
-          "currency": "CAD"
-       },
-       "description": null,
-       "created_at": "2015-03-11T13:13:35-07:00",
-       "updated_at": "2015-03-11T15:55:43-07:00",
-       "resource": "transaction",
-       "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "network": {
-          "status": "off_blockchain",
-          "name": "bitcoin"
-       },
-       "to": {
-          "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-          "resource": "user",
-          "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-       },
-       "details": {
-          "title": "Send bitcoin",
-          "subtitle": "to User 2"
-       }
-    },
-    {
-       "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "type": "send",
-       "status": "completed",
-       "amount": {
-          "amount": "0.00100000",
-          "currency": "ETH"
-       },
-       "native_amount": {
-          "amount": "10.65",
-          "currency": "CAD"
-       },
-       "description": null,
-       "created_at": "2015-03-11T13:13:35-07:00",
-       "updated_at": "2015-03-11T15:55:43-07:00",
-       "resource": "transaction",
-       "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-       "network": {
-          "status": "off_blockchain",
-          "name": "ethereum"
-       },
-       "to": {
-          "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-          "resource": "user",
-          "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-       },
-       "details": {
-          "title": "Send bitcoin",
-          "subtitle": "to User 2"
-       }
-    },
-    {
-      "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "type": "send",
-      "status": "completed",
-      "amount": {
-         "amount": "0.00400000",
-         "currency": "ETH"
-      },
-      "native_amount": {
-         "amount": "30.65",
-         "currency": "CAD"
-      },
-      "description": null,
-      "created_at": "2021-03-11T13:13:35-07:00",
-      "updated_at": "2021-03-11T15:55:43-07:00",
-      "resource": "transaction",
-      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "network": {
-         "status": "off_blockchain",
-         "name": "ethereum"
-      },
-      "to": {
-         "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-         "resource": "user",
-         "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-      },
-      "details": {
-         "title": "Send bitcoin",
-         "subtitle": "to User 2"
-      }
-   },
-   {
-      "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "type": "send",
-      "status": "completed",
-      "amount": {
-         "amount": "0.00300000",
-         "currency": "ETH"
-      },
-      "native_amount": {
-         "amount": "20.65",
-         "currency": "CAD"
-      },
-      "description": null,
-      "created_at": "2020-05-11T13:13:35-07:00",
-      "updated_at": "2020-05-11T15:55:43-07:00",
-      "resource": "transaction",
-      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "network": {
-         "status": "off_blockchain",
-         "name": "ethereum"
-      },
-      "to": {
-         "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-         "resource": "user",
-         "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-      },
-      "details": {
-         "title": "Send bitcoin",
-         "subtitle": "to User 2"
-      }
-   },
-   {
-      "id": "57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "type": "send",
-      "status": "completed",
-      "amount": {
-         "amount": "0.00300000",
-         "currency": "ETH"
-      },
-      "native_amount": {
-         "amount": "10.65",
-         "currency": "CAD"
-      },
-      "description": null,
-      "created_at": "2021-03-10T13:13:35-07:00",
-      "updated_at": "2021-03-10T15:55:43-07:00",
-      "resource": "transaction",
-      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/transactions/57ffb4ae-0c59-5430-bcd3-3f98f797a66c",
-      "network": {
-         "status": "off_blockchain",
-         "name": "ethereum"
-      },
-      "to": {
-         "id": "a6b4c2df-a62c-5d68-822a-dd4e2102e703",
-         "resource": "user",
-         "resource_path": "/v2/users/a6b4c2df-a62c-5d68-822a-dd4e2102e703"
-      },
-      "details": {
-         "title": "Send bitcoin",
-         "subtitle": "to User 2"
-      }
-   }
-];
-
-const transaction = {
-  "created_at": "2021-03-12T21:13:04Z"
-};
+const axios = require('axios');
+// import { getCurrencyPricingData } from './CurrencyPricings';
+// const { getCurrencyPricingData } = require('./CurrencyPricings');
 
 // period input must be specified as strings
 // "year", "month", "week"
+
+const getUserTransactions = function(user_id) {
+   return axios.get('http://localhost:5432/transactions')
+      .then(transactions => transactions.data.filter(transaction => transaction.user_id === user_id));
+};
+
+const getCurrencyPricingData = function(currency) {
+   const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=${process.env.REACT_ALPHA_VANTAGE_KEY}`;
+   return axios.get(url).then((res) => {
+     const data = res.data['Time Series (Digital Currency Daily)'];
+ 
+     let prices = {};
+ 
+     for (const date in data) {
+       prices[date] = data[date]['4a. close (CAD)'];
+     }
+ 
+     return prices;
+   });
+ };
+
+// to find the native amont of each currency:
+// 1) iterate through each of the currencies 
+// 2) use the date_occurred and currency_symbol to find the pricing of that currency
+// - use getCurrencyPricingData
+// 3) create a new key for each iterated object; native amount with currency and amount
+
+const getCurrencies = function(user_id) {
+   return getUserTransactions(user_id)
+      .then(userTransactions => {
+         let currencies = [];
+         for (const transaction of userTransactions) {
+            if (!currencies.includes(transaction.currency_symbol)) {
+               currencies.push(transaction.currency_symbol);
+            }
+         }
+         return currencies;
+      });
+};
+
+// input currencies output promises
+const getCurrencyPrices = function(currencies) {
+   return Promise.all(currencies.map(currency => getCurrencyPricingData(currency)));
+};
+
+const mapTransactionsWithNativeAmount = function(userTransactions, currencies, currencyPrices) {
+   // return Promise.all([userTransactionPromises, currencyPromises, currencyPricePromises])
+   //    .then(res => {
+   //       const [userTransactions, currencies, currencyPrices] = res;
+         
+   // for each transaction. add the native amount
+   return userTransactions.map(transaction => {
+      const index = currencies.indexOf(transaction.currency_symbol);
+      const date = transaction.date_occured.slice(0, 10);
+      
+      // console.log(index, date);
+      
+      transaction.native_amount = currencyPrices[index][date] * transaction.amount;
+      // console.log(transaction);
+      return transaction;
+   });
+      // });
+};
+
+const currencyPromises = getCurrencies(1);
+const currencyPricePromises = getCurrencyPrices(currencyPromises);
+// currencyPricePromises.then(res => console.log(res));
+
+const userTransactionPromises = getUserTransactions(1);
+// userTransactionPromises.then(res => console.log(res));
+mapTransactionsWithNativeAmount(userTransactionPromises, currencyPromises, currencyPricePromises).then(res => console.log(res));
+
+// mapTransactionsWithNativeAmount(1).then(transactions => {
+//    console.log(transactions => calculatePercentGrowth("month", transactions));
+// });
 
 // assume that the transactions include all currencies
 const findTransactions = function(transactions, period) {
@@ -268,7 +87,7 @@ const findTransactions = function(transactions, period) {
 };
 
 const checkTransaction = function(transaction, period) {
-  const date = new Date(transaction.created_at);
+  const date = new Date(transaction.date_occured);
   const periodDays = getPeriodDays(period);
   date.setDate(date.getDate() + periodDays);
   return date > Date.now();
@@ -288,17 +107,29 @@ const getPeriodDays = function(period) {
   }
 };
 
-const findTransactionAmount = function(transactions) {
-  return transactions.reduce((accum, cur) => accum + Number(cur.native_amount.amount), 0);
+const findTransactionAmount = function(transaction) {
+   switch(transaction.transaction_type) {
+      case "Sent":
+         return transaction.native_amount * -1;
+      case "Bought":
+         return transaction.native_amount;
+   }
+};
+
+const findTransactionSum = function(transactions) {
+  return transactions.reduce((accum, transaction) => {
+     console.log(transaction);
+     return accum + findTransactionAmount(transaction);
+  }, 0);
 };
 
 const calculateDollarGrowth = function(period, transactions) {
   const periodTransactions = findTransactions(transactions, period);
-  return findTransactionAmount(periodTransactions).toFixed(2);
+  return findTransactionSum(periodTransactions).toFixed(2);
 };
 
 const calculatePercentGrowth = function(period, transactions) {
-  const transactionTotal = findTransactionAmount(transactions);
+  const transactionTotal = findTransactionSum(transactions);
   const periodTotal = calculateDollarGrowth(period, transactions);
   const previousPeriodTotal = transactionTotal - periodTotal;
   if (previousPeriodTotal === 0) return "🚀";
@@ -307,10 +138,10 @@ const calculatePercentGrowth = function(period, transactions) {
 };
 
 const findCurrencyTransactions = function(transactions, currency) {
-   return transactions.filter(transaction => transaction.amount.currency === currency);
+   return transactions.filter(transaction => transaction.currency_symbol === currency);
 };
 
-const findCurrencyPercentGrowth = function(currency, period) {
+const findCurrencyPercentGrowth = function(transactions, currency, period) {
    const currencyTransactions = findCurrencyTransactions(transactions, currency);
    const currencyPercentGrowth = calculatePercentGrowth(period, currencyTransactions);
    return currencyPercentGrowth;
@@ -337,28 +168,28 @@ const getDates = function(startDate, stopDate) {
 };
 
 // const populatePortfolioDates = function(transactions) {
-//    let startDate = new Date(sortTransactions(transactions)[0].created_at);
+//    let startDate = new Date(sortTransactions(transactions)[0].date_occured);
 //    return getDates(startDate, Date.now());
 // };
 
 // starting from the earliests
 const sortTransactions = function(transactions) {
-   return transactions.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+   return transactions.sort((a, b) => new Date(a.date_occured) - new Date(b.date_occured));
 };
 
 // const findAllTransactionDates = function(transactions) {
-//    return transactions.map(transaction => new Date(transaction.created_at));
+//    return transactions.map(transaction => new Date(transaction.date_occured));
 // };
 
 // const findDailyChanges = function(transactions, date) {
 //    return transactions
-//       .filter(transaction => transaction.created_at === date)
+//       .filter(transaction => transaction.date_occured === date)
 //       .reduce((accum, transaction) => accum + Number(transaction.native_amount.amount), 0);
 // };
 
 const findPortofolioHistory = function(transactions) {
    const sortedTransactions = sortTransactions(transactions);
-   const startDate = new Date(sortedTransactions[0].created_at);
+   const startDate = new Date(sortedTransactions[0].date_occured);
    const allDates = getDates(startDate, Date.now());
 
    // const allTransactionDates = findAllTransactionDates(transactions);
@@ -376,12 +207,12 @@ const findPortofolioHistory = function(transactions) {
    // }
 
    for (const transaction of sortedTransactions) {
-      const date = new Date(transaction.created_at);
-      balance += Number(transaction.native_amount.amount);
+      const date = new Date(transaction.date_occured);
+      balance += Number(transaction.native_amount);
       history[date] = balance;
    };
    
-   let tempBalance = sortedTransactions[0].native_amount.amount;
+   let tempBalance = sortedTransactions[0].native_amount;
    for (const date of allDates) {
       if (!history[date]) {
          console.log('this');
@@ -431,4 +262,8 @@ export {
   calculatePercentGrowth,
   fullCurrencyName,
   findCurrencyPercentGrowth,
+  getUserTransactions,
+  getCurrencies,
+  getCurrencyPrices,
+  mapTransactionsWithNativeAmount
 };
