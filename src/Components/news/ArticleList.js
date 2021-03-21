@@ -37,11 +37,11 @@ const ArticleList = (props) => {
     })
   }
 
-  //indexOf returns -1 if index does not exist
+
   const articleData = articles.map((article, index) => {
-    if (newArticles.indexOf(article[0]) === -1 && !article[0].includes("TROJAN")) {
-     newArticles.push(article[0])
-     console.log(article[0])
+    console.log(newArticles.includes(article[0]))
+    if (newArticles.includes(article[0]) === false  && !article[0].includes("TROJAN")) {
+   
 
      return (
       <ArticleListItem
@@ -52,7 +52,8 @@ const ArticleList = (props) => {
         url={article[3]}   
        />
      )
-   } 
+   }
+   newArticles.push(article[0]) 
   });
 
   return (
