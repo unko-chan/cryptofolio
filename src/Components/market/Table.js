@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
 import { yellow, green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
+import TradingWidget from './TradingWidget'
 
 function createData(number, name, price, change, marketCap, symbol, image) {
   return { number, name, price, change, marketCap, symbol, image };
@@ -50,8 +51,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MarketTable = (props) => {
-  const [watchList, setWatchList] = useState(["BTC", "ETH"]);
+  const [watchList, setWatchList] = useState(["BTC"]);
   const [rows, setRows] = useState([]);
+  const [symbolName, setSymbolName] = useState("")
   const classes = useStyles();
 
   const axios = require('axios');
@@ -76,7 +78,7 @@ const MarketTable = (props) => {
     setWatchList((prevState) => {
       return prevState.includes(symbol) ?
         removeSymbol(prevState, symbol) :
-        [...prevState, symbol]
+        [symbol]
     });
   };
 
@@ -126,7 +128,8 @@ const MarketTable = (props) => {
       <TableCell>
         <StarIcon 
           fontSize="large"
-          onClick={() => handleClick(row.symbol)}
+          onClick={(e) => {handleClick(row.symbol);
+          setSymbolName(row.symbol)}}
           style= {
             watchList.includes(row.symbol) ? { color: yellow[600] } : { color: 'grey' }
           }
@@ -137,6 +140,8 @@ const MarketTable = (props) => {
   ));
 
   return (
+    <section>      
+      <div><TradingWidget symbol={symbolName} className="trading-widget"/></div>
     <TableContainer component={Paper} className={classes.table}>
       <Table aria-label="simple table">
         <TableHead>
@@ -155,7 +160,7 @@ const MarketTable = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </section>
   )
 };
-
 export default MarketTable;
