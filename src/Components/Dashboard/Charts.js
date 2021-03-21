@@ -17,10 +17,6 @@ import {
   sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
 
-const balances = require('../../walletData/btcData.json');
-
-const allCurrencies = ['BTC', 'ETH', 'LTC'];
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(5),
@@ -46,7 +42,7 @@ const Charts = (props) => {
   const [currencyBalances, setCurrencyBalances] = useState([]);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(allCurrencies); 
+    const promises = findAllCurrencyOwnings(['BTC', 'ETH', 'LTC']);
     promises.then(res => setCurrencyBalances(res));
     sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
   }, []);

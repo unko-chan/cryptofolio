@@ -37,6 +37,16 @@ app.get('/transactions', async (req, res) => {
   }
 });
 
+app.get('/users/:id/balances', async(req, res) => {
+  try {
+    const { id } = req.params;
+    const currencyBalances = await pool.query('SELECT * FROM currency_balance WHERE user_id = $1', [id]);
+    res.json(currencyBalances.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 app.get('user/:id/rebalance_settings', async (req, res) => {
   
 });
