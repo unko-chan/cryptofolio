@@ -7,9 +7,7 @@ import Currency from './CurrentUserCurrency';
 
 import { 
   getUserTransactions, 
-  getCurrencies,
-  getCurrencyPrices,
-  mapTransactionsWithNativeAmount
+  getCurrencies
 } from '../../helpers/transactionHelper.js';
 
 import './dashboard.scss';
@@ -30,27 +28,16 @@ const Dashboard = () => {
     setUser(data[0].username)
   };
 
-  // const allCurrencies = ["BTC", "ETH", "LTC", "DOGE", "NEO"];
+  const allCurrencies = ["BTC", "ETH", "LTC"];
 
   // only run requests when the page loads
   useEffect(() => {
     getUsers();
 
+    setCurrencies(allCurrencies);
+
     getUserTransactions(1)
-    .then(transactions => {
-      setTransactions(transactions);
-      return getCurrencies(1); // async
-    })
-    .then(currencies => {
-      setCurrencies(currencies);
-      return getCurrencyPrices(currencies); // async
-    })
-    .then(prices => {
-      setCurrencyPrices(prices);
-      console.log('some prices', prices);
-      setTransactions(mapTransactionsWithNativeAmount(transactions, currencies, currencyPrices));
-      console.log('transactions are', transactions);
-    })
+    .then(transactions => setTransactions(transactions));
   }, []);
   
   return (
@@ -70,11 +57,11 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* <section className="middle-section">
+      <section className="middle-section">
         <div className="chart-container">
           <Charts />
         </div>
-      </section> */}
+      </section>
 
       <section className="bottom-section">
         <div className="currency-container">

@@ -109,12 +109,20 @@ const findAllCurrencyOwnings = function (currencies) {
     });
   });
 
-  return Promise.all(promises)
-    .then((res) => res)
-    .catch((e) => {
-      console.log(e);
-    });
+  return Promise.all(promises);
 };
+
+// const findAllCurrencyOwnings = function (currencies, prices) {
+//   return currencies.map((currency, index) => {
+//     const balances = getCurrencyBalance(currency);
+    
+//     console.log('calling allcurownings', currencies, prices);
+    
+//     const convertedCurrencyOwnings = convertCurrencyOwnings(prices[index], balances);
+
+//     return convertedCurrencyOwnings;
+//   });
+// };
 
 // findAllCurrencyOwnings(allCurrencies).then(res => console.log(res[0]));
 

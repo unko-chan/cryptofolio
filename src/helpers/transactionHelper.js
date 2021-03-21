@@ -32,43 +32,40 @@ const getCurrencyPricingData = function(currency) {
 // - use getCurrencyPricingData
 // 3) create a new key for each iterated object; native amount with currency and amount
 
-const getCurrencies = function(user_id) {
-   return getUserTransactions(user_id)
-      .then(userTransactions => {
-         let currencies = [];
-         for (const transaction of userTransactions) {
-            if (!currencies.includes(transaction.currency_symbol)) {
-               currencies.push(transaction.currency_symbol);
-            }
-         }
-         return currencies;
-      });
+const getCurrencies = function(userTransactions) {
+   // return getUserTransactions(user_id)
+   //    .then(userTransactions => {
+   let currencies = [];
+   for (const transaction of userTransactions) {
+      if (!currencies.includes(transaction.currency_symbol)) {
+         currencies.push(transaction.currency_symbol);
+      }
+   }
+   return currencies;
+      // });
 };
 
 // input currencies output promises
-const getCurrencyPrices = function(currencies) {
-   return Promise.all(currencies.map(currency => getCurrencyPricingData(currency)));
-};
+// const getCurrencyPrices = function(currencies) {
+//    return Promise.all(currencies.map(currency => getCurrencyPricingData(currency)));
+// };
 
-const mapTransactionsWithNativeAmount = function(userTransactions, currencies, currencyPrices) {
-   // return Promise.all([userTransactions, currencies, currencyPrices])
-   //    .then(res => {
-   //       const [userTransactions, currencies, currencyPrices] = res;
+// const mapTransactionsWithNativeAmount = function(userTransactions, currencies, currencyPrices) {
+//    // return Promise.all([userTransactions, currencies, currencyPrices])
+//    //    .then(res => {
+//    //       const [userTransactions, currencies, currencyPrices] = res;
          
-   // for each transaction. add the native amount
-   return userTransactions.map(transaction => {
-      const index = currencies.indexOf(transaction.currency_symbol);
-      const date = transaction.date_occured.slice(0, 10);
+//    // for each transaction. add the native amount
+//    return userTransactions.map(transaction => {
+//       const index = currencies.indexOf(transaction.currency_symbol);
+//       const date = transaction.date_occured.slice(0, 10);
       
-      console.log('inputs', userTransactions, currencies, currencyPrices);
-      console.log('index and date', index, date);
-      
-      transaction.native_amount = currencyPrices[index][date] * transaction.amount;
-      // console.log(transaction);
-      return transaction;
-   });
-   // });
-};
+//       transaction.native_amount = currencyPrices[index][date] * transaction.amount;
+//       // console.log(transaction);
+//       return transaction;
+//    });
+//    // });
+// };
 
 // const currencyPromises = getCurrencies(1);
 // const currencyPricePromises = getCurrencyPrices(currencyPromises);
@@ -78,9 +75,6 @@ const mapTransactionsWithNativeAmount = function(userTransactions, currencies, c
 // userTransactionPromises.then(res => console.log(res));
 // mapTransactionsWithNativeAmount(userTransactionPromises, currencyPromises, currencyPricePromises).then(res => console.log(res));
 
-// mapTransactionsWithNativeAmount(1).then(transactions => {
-//    console.log(transactions => calculatePercentGrowth("month", transactions));
-// });
 
 // assume that the transactions include all currencies
 const findTransactions = function(transactions, period) {
@@ -119,7 +113,7 @@ const findTransactionAmount = function(transaction) {
 
 const findTransactionSum = function(transactions) {
   return transactions.reduce((accum, transaction) => {
-     console.log(transaction);
+   //   console.log(transaction);
      return accum + findTransactionAmount(transaction);
   }, 0);
 };
@@ -132,8 +126,12 @@ const calculateDollarGrowth = function(period, transactions) {
 const calculatePercentGrowth = function(period, transactions) {
   const transactionTotal = findTransactionSum(transactions);
   const periodTotal = calculateDollarGrowth(period, transactions);
+
   const previousPeriodTotal = transactionTotal - periodTotal;
-  if (previousPeriodTotal === 0) return "🚀";
+  if (previousPeriodTotal < 1) return "🚀";
+
+  console.log(previousPeriodTotal);
+
   const periodIncrease = (periodTotal / previousPeriodTotal * 100).toFixed(2);
   return periodIncrease;
 };
@@ -265,6 +263,6 @@ export {
   findCurrencyPercentGrowth,
   getUserTransactions,
   getCurrencies,
-  getCurrencyPrices,
-  mapTransactionsWithNativeAmount
+//   getCurrencyPrices,
+//   mapTransactionsWithNativeAmount
 };

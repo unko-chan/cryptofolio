@@ -58,7 +58,7 @@ export default function WalletCard(props) {
     // find monthly growth amount and percentage
     setDollarGrowth(calculateDollarGrowth(period, props.transactions));
     setPercentGrowth(calculatePercentGrowth(period, props.transactions));
-  }, [props.transactions]);
+  }, [props.transactions, period]);
 
   return (
     <Card>
