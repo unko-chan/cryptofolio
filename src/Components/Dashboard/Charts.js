@@ -40,9 +40,10 @@ const Charts = (props) => {
   const [chart, setChart] = useState('lineChart');
   const [totalBalance, setTotalBalance] = useState({});
   const [currencyBalances, setCurrencyBalances] = useState([]);
+  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(['BTC', 'ETH', 'LTC']);
+    const promises = findAllCurrencyOwnings(currencies);
     promises.then(res => setCurrencyBalances(res));
     sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
   }, []);

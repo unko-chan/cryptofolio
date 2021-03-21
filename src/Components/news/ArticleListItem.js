@@ -3,7 +3,6 @@ import { Paper, Box } from '@material-ui/core'
 
 
 export default function ArticleListItem(props) {
-
   return (
     <Box component={Paper} elevation={3}>
       <div className="article-name">{props.name}</div>

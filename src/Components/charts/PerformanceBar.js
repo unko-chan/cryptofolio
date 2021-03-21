@@ -57,7 +57,7 @@ export default function(props) {
   // const classes = useStyles();
 
   const period = convertViewState(props.viewState);
-  
+
   const performance = currencies.map(currency_symbol => findCurrencyPercentGrowth(props.transactions, currency_symbol, period));
 
   console.log('this is performance',performance);

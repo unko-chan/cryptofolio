@@ -13,7 +13,7 @@ let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getD
 const userCurrencies = getBalances(data);
 
 const userCurrenciesFullNames = []
-let newArticles = []
+const newArticles = []
 
 Object.keys(userCurrencies).map(key => {
   userCurrenciesFullNames.push(fullCurrencyName(key))
@@ -29,27 +29,33 @@ const ArticleList = (props) => {
 
   const getArticles = () => {
   userCurrenciesFullNames.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS}`)
-    .then(results => setArticles(prevState =>
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS3}`)
+    .then(results => 
+      setArticles(prevState =>
           [...prevState, [results.data.articles[0].title, results.data.articles[0].author, results.data.articles[0].description, results.data.articles[0].url]]))
     .catch(err => console.log(err))
     })
   }
 
-  //indexOf returns -1 if index does not exist
-  const articleData = articles.map((article) => {
-   if (newArticles.indexOf(article[0]) === -1) {
-     newArticles.push(article[0])
+
+  const articleData = articles.map((article, index) => {
+    console.log(newArticles.includes(article[0]))
+    if (newArticles.includes(article[0]) === false  && !article[0].includes("TROJAN")) {
+   
+
      return (
-       <ArticleListItem
-         name={article[0]}
-         author={article[2]}
-         description={article[1]}
-         url={article[3]}   
+      <ArticleListItem
+        key={index}
+        name={article[0]}
+        author={article[1]}
+        description={article[2]}
+        url={article[3]}   
        />
      )
-   } 
-  })
+   }
+   newArticles.push(article[0]) 
+  });
+
   return (
       <section className='article-container'>
         <h2>News Articles</h2>
