@@ -38,7 +38,9 @@ const getBarColor = function (performance) {
 };
 
 const balances = getBalances(accounts);
-const currencies = getCurrencies(balances);
+// const currencies = getCurrencies(balances);
+
+const currencies = ['BTC', 'ETH', 'LTC'];
 
 const convertViewState = function(viewState) {
   switch (viewState) {
@@ -56,7 +58,9 @@ export default function(props) {
 
   const period = convertViewState(props.viewState);
   
-  const performance = currencies.map(currency => findCurrencyPercentGrowth(transactions, currency, period));
+  const performance = currencies.map(currency_symbol => findCurrencyPercentGrowth(props.transactions, currency_symbol, period));
+
+  console.log('this is performance',performance);
 
   const barColors = getBarColor(performance);
 

@@ -59,7 +59,7 @@ const Dashboard = () => {
 
       <section className="middle-section">
         <div className="chart-container">
-          <Charts />
+          <Charts transactions={transactions}/>
         </div>
       </section>
 

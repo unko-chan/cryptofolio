@@ -138,7 +138,7 @@ const Charts = (props) => {
           timeState={timeState}
         />
       ) : chart === 'barChart' ? (
-        <PerformanceBar viewState={viewState} />
+        <PerformanceBar viewState={viewState} transactions={props.transactions}/>
       ) : (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}

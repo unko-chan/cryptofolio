@@ -141,8 +141,16 @@ const findCurrencyTransactions = function(transactions, currency) {
 };
 
 const findCurrencyPercentGrowth = function(transactions, currency, period) {
+   console.log('here are all the transactions', transactions);
+
    const currencyTransactions = findCurrencyTransactions(transactions, currency);
+
+   console.log('these are the currency transactions',currencyTransactions);
+
    const currencyPercentGrowth = calculatePercentGrowth(period, currencyTransactions);
+
+   console.log('this is the percent growth', currencyPercentGrowth);
+
    return currencyPercentGrowth;
 };
 
