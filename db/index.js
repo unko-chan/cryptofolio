@@ -59,6 +59,6 @@ app.get('/', function(req, res) {
   res.send('hello oh');
 });
 
-app.listen(5432, () => { 
+app.listen(5432, () => {
   console.log("Server listening on port 5432");
 });
