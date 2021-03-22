@@ -19,7 +19,6 @@ app.get('/users', async (req, res) => {
 app.get('/users/:id', async (req, res) => {
   try {
     const  { id }  = req.params;
-    const username = req.body.username;
     const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
     res.json(user.rows[0]);
   } catch (error) {
@@ -46,6 +45,15 @@ app.get('/users/:id/balances', async(req, res) => {
     console.error(error.message);
   }
 });
+
+app.get('/users/1/wallet', async (req, res) => {
+  try {
+   const walletCurrnecy = await pool.query('SELECT DISTINCT currency_symbol FROM currency_balance WHERE user_id = 1')
+   res.json(walletCurrnecy.rows)
+  } catch (error) {
+    console.error(error.message);
+  }
+})
 
 app.get('user/:id/rebalance_settings', async (req, res) => {
   
