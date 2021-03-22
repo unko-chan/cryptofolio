@@ -94,7 +94,7 @@ export default function WalletCard(props) {
             {/* assuming that we know march 22nd is the last day */}
             {
               totalBalance ?
-              "$" + totalBalance["2021-03-22"] :
+              "$" + Number(totalBalance["2021-03-22"]).toFixed(2) :
               "unknown"
             }
           </Paper>
