@@ -16,10 +16,13 @@ let newArticles = []
 
 
 
+Object.keys(userCurrencies).map((key) => {
+  userCurrenciesFullNames.push(fullCurrencyName(key));
+});
 
 const ArticleList = (props) => {
   const [articles, setArticles] = useState([]);
-  
+
   useEffect(() => {
     newArticles = [];
     getWallet();

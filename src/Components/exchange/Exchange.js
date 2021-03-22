@@ -4,9 +4,9 @@ import RebalanceView from './rebalance/RebalanceView';
 
 export default function Exchange() {
   return (
-    <section>
+    <>
       <div className="page-header">
-        <h1> Exchange </h1>
+        <h1>Rebalance</h1>
       </div>
 
       <div className="trade-select">
@@ -15,6 +15,6 @@ export default function Exchange() {
         <button>Sell</button>
       </div>
       <RebalanceView />
-    </section>
+    </>
   );
 }

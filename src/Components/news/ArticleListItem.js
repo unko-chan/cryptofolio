@@ -14,7 +14,7 @@ export default function ArticleListItem(props) {
     <div className="article-author">Written by: {formatAuthor(props.author)}</div><br/>
     <div className="article-description">{props.description}</div>
      
-      <a alignSelf="right" href='#' onClick={(e) => {
+      <a href='#' onClick={(e) => {
       e.preventDefault();
       window.open(props.url);
       }}>Click for full story</a>
