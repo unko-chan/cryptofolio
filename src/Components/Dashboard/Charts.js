@@ -10,12 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
 import {
-  getCurrencyPricingData,
-  convertCurrencyOwnings,
   findMinPeriodBalance,
   findAllCurrencyOwnings,
   sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
+import { currencyColors } from '../../helpers/pieChartHelper';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +40,8 @@ const Charts = (props) => {
   const [totalBalance, setTotalBalance] = useState({});
   const [currencyBalances, setCurrencyBalances] = useState([]);
   const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
+
+  const { transactions } = props;
 
   useEffect(() => {
     findAllCurrencyOwnings(currencies)
@@ -139,8 +140,8 @@ const Charts = (props) => {
           yTickState={yTickState}
           timeState={timeState}
         />
-      ) : chart === 'barChart' && props.transactions ? (
-        <PerformanceBar viewState={viewState} transactions={props.transactions}/>
+      ) : chart === 'barChart' && transactions ? (
+        <PerformanceBar viewState={viewState} transactions={transactions}/>
       ) : chart === 'multiLineChart' && currencyBalances ? (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}

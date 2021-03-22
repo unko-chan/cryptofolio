@@ -11,12 +11,12 @@ import {
 } from '../../helpers/transactionHelper.js';
 
 import './dashboard.scss';
+import { currencyColors } from '../../helpers/pieChartHelper';
 
 const Dashboard = () => {
   const [user, setUser] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [currencies, setCurrencies] = useState([]);
-  const [currencyPrices, setCurrencyPrices] = useState([]);
 
   const getUsers = async () => {
     const data = await fetch("http://localhost:5000/users", {
@@ -38,6 +38,7 @@ const Dashboard = () => {
 
     getUserTransactions(1)
     .then(transactions => setTransactions(transactions));
+
   }, []);
   
   return (
@@ -52,15 +53,22 @@ const Dashboard = () => {
           <Doughnut />
         </div>
 
-        <div className="wallet-container">
-          <Wallet transactions={transactions}/>
-        </div>
+        { transactions ? 
+          <div className="wallet-container">
+            <Wallet transactions={transactions} />
+          </div> :
+          <div>Loading!</div>
+        }
       </section>
 
       <section className="middle-section">
-        <div className="chart-container">
-          <Charts transactions={transactions}/>
-        </div>
+        {
+          transactions ?
+          <div className="chart-container">
+            <Charts transactions={transactions}/>
+          </div> :
+          <div> Loading! </div>
+        }
       </section>
 
       <section className="bottom-section">

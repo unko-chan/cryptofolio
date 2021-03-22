@@ -7,18 +7,12 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 
-import { totalOwnings } from '../../helpers/pieChartHelper';
-import { calculateDollarGrowth, calculatePercentGrowth } from '../../helpers/transactionHelper'
+import {
+  calculateDollarGrowth, 
+  calculatePercentGrowth
+} from '../../helpers/transactionHelper';
+
 import { Breadcrumbs } from '@material-ui/core';
-
-// import transactions from '../../data/transactions.json';
-
-import { 
-  getUserTransactions, 
-  getCurrencies,
-  getCurrencyPrices,
-  mapTransactionsWithNativeAmount
-} from '../../helpers/transactionHelper.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,13 +40,8 @@ const useStyles = makeStyles((theme) => ({
 export default function WalletCard(props) {
   const classes = useStyles();
   const [period, setPeriod] = useState("month");
-  // const [transactions, setTransactions] = useState([]);
   const [dollarGrowth, setDollarGrowth] = useState(0);
   const [percentGrowth, setPercentGrowth] = useState(0);
-
-  // let transactions = props.transactions;
-
-  // const allCurrencies = ["BTC", "ETH", "LTC", "DOGE", "NEO"];
 
   useEffect(() => {
     // find monthly growth amount and percentage
@@ -100,7 +89,7 @@ export default function WalletCard(props) {
             <Typography>
               Current Total ($)
             </Typography>
-            ${totalOwnings}
+            $26394
           </Paper>
         </Grid>
 
