@@ -11,25 +11,25 @@ import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
 import { yellow, green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
-import TradingWidget from './TradingWidget'
+import TradingWidget from './TradingWidget';
 
 function createData(number, name, price, change, marketCap, symbol, image) {
   return { number, name, price, change, marketCap, symbol, image };
-};
+}
 
 // modifed based on answer from stack overflow
 // https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript/36734774
-const convertCurrency = function(labelValue) {
+const convertCurrency = function (labelValue) {
   const number = Math.abs(Number(labelValue));
-  return number >= 1.0e+12
-  ? (number / 1.0e+12).toFixed(1) + "T"
-  : number >= 1.0e+9
-  ? (number / 1.0e+9).toFixed(1) + "B"
-  : number >= 1.0e+6
-  ? (number / 1.0e+6).toFixed(1) + "M"
-  : number >= 1.0e+3
-  ? (number / 1.0e+3).toFixed(1) + "K"
-  : number;
+  return number >= 1.0e12
+    ? (number / 1.0e12).toFixed(1) + 'T'
+    : number >= 1.0e9
+    ? (number / 1.0e9).toFixed(1) + 'B'
+    : number >= 1.0e6
+    ? (number / 1.0e6).toFixed(1) + 'M'
+    : number >= 1.0e3
+    ? (number / 1.0e3).toFixed(1) + 'K'
+    : number;
 };
 
 // for initial testing
@@ -41,61 +41,79 @@ const convertCurrency = function(labelValue) {
 //   createData(5, "ChainLink", "34.5", "-0.08", "14.1B", "LINK")
 // ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   table: {
     fontFamily: 'Arial',
     margin: '1%',
     width: '98%',
-    marginTop: '3em'
-  }
-}))
+    marginTop: '3em',
+  },
+}));
 
 const MarketTable = (props) => {
-  const [watchList, setWatchList] = useState(["BTC"]);
+  const [watchList, setWatchList] = useState(['BTC']);
   const [rows, setRows] = useState([]);
-  const [symbolName, setSymbolName] = useState("")
+  const [symbolName, setSymbolName] = useState('');
   const classes = useStyles();
 
   const axios = require('axios');
 
   useEffect(() => {
     // using CoinGecko's API endpoints
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
-    axios.get(url)
-      .then(res => {
-        setRows(res.data.map((currency, index) => {
-          const { name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol, image } = currency;
-          return createData(index, name, current_price.toFixed(2), price_change_percentage_1h_in_currency.toFixed(2), convertCurrency(market_cap), symbol, image);
-        }))
-      });
+    const url =
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
+    axios.get(url).then((res) => {
+      setRows(
+        res.data.map((currency, index) => {
+          const {
+            name,
+            current_price,
+            price_change_percentage_1h_in_currency,
+            market_cap,
+            symbol,
+            image,
+          } = currency;
+          return createData(
+            index,
+            name,
+            current_price.toFixed(2),
+            price_change_percentage_1h_in_currency.toFixed(2),
+            convertCurrency(market_cap),
+            symbol,
+            image
+          );
+        })
+      );
+    });
   }, []);
 
-  const removeSymbol = function(symbols, symbol) {
-    return symbols.filter(s => s !== symbol);
+  const removeSymbol = function (symbols, symbol) {
+    return symbols.filter((s) => s !== symbol);
   };
-  
+
   const handleClick = (symbol) => {
     setWatchList((prevState) => {
-      return prevState.includes(symbol) ?
-        removeSymbol(prevState, symbol) :
-        [symbol]
+      return prevState.includes(symbol)
+        ? removeSymbol(prevState, symbol)
+        : [symbol];
     });
   };
 
-  const tableRows = rows.map(row => (
+  const tableRows = rows.map((row) => (
     <TableRow key={row.name}>
-
       <TableCell>
-        <Typography variant="h6" color="inherit" >
+        <Typography variant="h6" color="inherit">
           {row.number}
         </Typography>
       </TableCell>
 
       <TableCell>
-        <img src={row.image} width="40" height="40"/>
-        <Typography variant="h6" color="inherit">
-          {row.name}
-        </Typography>
+        <div className="name-list">
+          <img src={row.image} width="40" height="40" />
+          <Typography variant="h6" color="inherit">
+            {row.name}
+          </Typography>
+        </div>
       </TableCell>
 
       <TableCell>
@@ -105,13 +123,10 @@ const MarketTable = (props) => {
       </TableCell>
 
       <TableCell
-        style={ row.change >= 0 ?
-          { color: green[600] } :
-          { color: red[600] }
-        }
+        style={row.change >= 0 ? { color: green[600] } : { color: red[600] }}
       >
         <Typography variant="h6" color="inherit">
-          { row.change >= 0 ? "+" + row.change : row.change }%
+          {row.change >= 0 ? '+' + row.change : row.change}%
         </Typography>
       </TableCell>
 
@@ -122,45 +137,50 @@ const MarketTable = (props) => {
       </TableCell>
 
       <TableCell>
-        <Button variant="contained" color="primary">Trade</Button>
+        <Button variant="contained" color="primary">
+          Trade
+        </Button>
       </TableCell>
 
       <TableCell>
-        <StarIcon 
+        <StarIcon
           fontSize="large"
-          onClick={(e) => {handleClick(row.symbol);
-          setSymbolName(row.symbol)}}
-          style= {
-            watchList.includes(row.symbol) ? { color: yellow[600] } : { color: 'grey' }
+          onClick={(e) => {
+            handleClick(row.symbol);
+            setSymbolName(row.symbol);
+          }}
+          style={
+            watchList.includes(row.symbol)
+              ? { color: yellow[600] }
+              : { color: 'grey' }
           }
         />
       </TableCell>
-
     </TableRow>
   ));
 
   return (
-    <section>      
-      <div><TradingWidget symbol={symbolName} className="trading-widget"/></div>
-    <TableContainer component={Paper} className={classes.table}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell> # </TableCell>
-            <TableCell> Name </TableCell>
-            <TableCell> Price </TableCell>
-            <TableCell> Change </TableCell>
-            <TableCell> Market Cap </TableCell>
-            <TableCell> Trade </TableCell>
-            <TableCell> Watch </TableCell> 
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tableRows}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <section>
+      <div>
+        <TradingWidget symbol={symbolName} className="trading-widget" />
+      </div>
+      <TableContainer component={Paper} className={classes.table}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell> # </TableCell>
+              <TableCell> Name </TableCell>
+              <TableCell> Price </TableCell>
+              <TableCell> Change </TableCell>
+              <TableCell> Market Cap </TableCell>
+              <TableCell> Trade </TableCell>
+              <TableCell> Watch </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{tableRows}</TableBody>
+        </Table>
+      </TableContainer>
     </section>
-  )
+  );
 };
 export default MarketTable;

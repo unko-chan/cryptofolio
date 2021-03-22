@@ -9,7 +9,7 @@ const ethData = require('../walletData/ethData.json');
 const axios = require('axios');
 
 const getCurrencyPricingData = function(currency) {
-  const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=${process.env.REACT_ALPHA_VANTAGE_KEY}`;
+  const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=undefined`;
   return axios.get(url).then((res) => {
     const data = res.data['Time Series (Digital Currency Daily)'];
 

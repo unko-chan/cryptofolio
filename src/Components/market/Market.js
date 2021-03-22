@@ -7,12 +7,12 @@ const Market = () => {
 
 
   return (
-    <div className="market-container">
+    <>
       <div className="page-header">
         <h1> Market </h1>
       </div>
       <Table className="table" />
-    </div>
+    </>
   );
 };
 

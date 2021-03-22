@@ -1,42 +1,65 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
+import React, { useState } from 'react';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TrendingUpIcon from '@material-ui/icons/TrendingUpOutlined';
-import ImportContactsOutlinedIcon from '@material-ui/icons/ImportContactsOutlined';
-import AttachMoneyOutlinedIcon from '@material-ui/icons/AttachMoneyOutlined';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
-import logo from './C_icon_without_white.png';
+import DataUsageIcon from '@material-ui/icons/DataUsage';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import './nav.scss';
-
-const NavLink = ({ page }) => {
-  const title = page.charAt(0).toUpperCase() + page.slice(1);
-  return (
-    <Link to={`/${page}`} className="link-item">
-      {title}
-    </Link>
-  );
-};
+import { PagesSharp } from '@material-ui/icons';
 
 const SideNav = () => {
-  const { page } = useParams();
+  let { page } = useParams();
+
+  const NavLink = ({ page }) => {
+    const title = page.charAt(0).toUpperCase() + page.slice(1);
+    return (
+      <Link to={`/${page}`} className="list-item">
+        {title}
+      </Link>
+    );
+  };
+
+  const currentPage = useHistory().location.pathname.toLowerCase().slice(1);
+  console.log(currentPage);
+
   return (
     <div className="side-nav">
-      <div className="link-list">
-        <ul>
-          <li>
-            <NavLink page="dashboard" />
-          </li>
-          <li>
-            <NavLink page="market" />
-          </li>
-          <li>
-            <NavLink page="exchange" />
-          </li>
-          <li>
-            <NavLink page="news" />
-          </li>
-        </ul>
+      <div className="nav-body">
+        <div className="nav-header">
+          <span className="header-bold">Crypto</span>folio
+        </div>
+        <List>
+          <div className="link-list">
+            <ListItem className={currentPage === 'dashboard' ? 'active' : ''}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <NavLink page="dashboard" />
+            </ListItem>
+            <ListItem className={currentPage === 'market' ? 'active' : ''}>
+              <ListItemIcon>
+                <TrendingUpIcon />
+              </ListItemIcon>
+              <NavLink page="market" />
+            </ListItem>
+            <ListItem className={currentPage === 'rebalance' ? 'active' : ''}>
+              <ListItemIcon>
+                <DataUsageIcon />
+              </ListItemIcon>
+              <NavLink page="rebalance" />
+            </ListItem>
+            <ListItem className={currentPage === 'news' ? 'active' : ''}>
+              <ListItemIcon>
+                <NotificationsIcon />
+              </ListItemIcon>
+              <NavLink page="news" />
+            </ListItem>
+          </div>
+        </List>
       </div>
     </div>
 
