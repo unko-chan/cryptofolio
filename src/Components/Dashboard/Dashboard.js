@@ -10,13 +10,22 @@ import {
   getCurrencies
 } from '../../helpers/transactionHelper.js';
 
+import {
+  findMinPeriodBalance,
+  findAllCurrencyOwnings,
+  sumAllOwnings,
+} from '../../helpers/CurrencyPricings';
+
 import './dashboard.scss';
+import { currencyColors } from '../../helpers/pieChartHelper';
 
 const Dashboard = () => {
   const [user, setUser] = useState("");
   const [transactions, setTransactions] = useState([]);
-  const [currencies, setCurrencies] = useState([]);
-  const [currencyPrices, setCurrencyPrices] = useState([]);
+
+  const [totalBalance, setTotalBalance] = useState({});
+  const [currencyBalances, setCurrencyBalances] = useState([]);
+  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   const getUsers = async () => {
     const data = await fetch("http://localhost:5000/users", {
@@ -28,16 +37,22 @@ const Dashboard = () => {
     setUser(data[0].username)
   };
 
-  const allCurrencies = ["BTC", "ETH", "LTC"];
-
   // only run requests when the page loads
   useEffect(() => {
-    getUsers();
-
-    setCurrencies(allCurrencies);
+    // getUsers();
 
     getUserTransactions(1)
     .then(transactions => setTransactions(transactions));
+
+    findAllCurrencyOwnings(currencies)
+    .then(res => {
+      setCurrencyBalances(res);
+      return sumAllOwnings(res);
+    })
+    .then(res => {
+      setTotalBalance(res);
+    })
+
   }, []);
   
   return (
@@ -47,29 +62,55 @@ const Dashboard = () => {
         <div></div>
       </div>
       <section className="top-section">
-        {/* https://www.chartjs.org/docs/latest/general/responsive.html */}
         <div className="doughnut-container">
-          <Doughnut />
+          <Doughnut 
+            totalBalance={totalBalance}
+            currencyBalances={currencyBalances}
+          />
         </div>
 
         <div className="wallet-container">
-          <Wallet transactions={transactions}/>
+          {
+            transactions && totalBalance ?
+            <div className="chart-container">
+              <Wallet
+                transactions={transactions}
+                totalBalance={totalBalance}
+              />
+            </div> :
+            <div> Loading! </div>
+          }
         </div>
+
       </section>
 
       <section className="middle-section">
-        <div className="chart-container">
-          <Charts transactions={transactions}/>
-        </div>
+        {
+          transactions && totalBalance && currencyBalances ?
+          <div className="chart-container">
+            <Charts 
+              transactions={transactions} 
+              totalBalance={totalBalance}
+              currencyBalances={currencyBalances}
+            />
+          </div> :
+          <div> Loading! </div>
+        }
       </section>
 
       <section className="bottom-section">
         <div className="currency-container">
-          <Currency />
+          <Currency 
+            currencies={currencies}
+            totalBalance={totalBalance}
+            currencyBalances={currencyBalances}
+          />
         </div>
 
         <div className="transactions">
-          <Transaction />
+          <Transaction 
+            transactions={transactions}
+          />
         </div>
       </section>
     </div>

@@ -7,18 +7,12 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 
-import { totalOwnings } from '../../helpers/pieChartHelper';
-import { calculateDollarGrowth, calculatePercentGrowth } from '../../helpers/transactionHelper'
+import {
+  calculateDollarGrowth, 
+  calculatePercentGrowth
+} from '../../helpers/transactionHelper';
+
 import { Breadcrumbs } from '@material-ui/core';
-
-// import transactions from '../../data/transactions.json';
-
-import { 
-  getUserTransactions, 
-  getCurrencies,
-  getCurrencyPrices,
-  mapTransactionsWithNativeAmount
-} from '../../helpers/transactionHelper.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,19 +40,16 @@ const useStyles = makeStyles((theme) => ({
 export default function WalletCard(props) {
   const classes = useStyles();
   const [period, setPeriod] = useState("month");
-  // const [transactions, setTransactions] = useState([]);
   const [dollarGrowth, setDollarGrowth] = useState(0);
   const [percentGrowth, setPercentGrowth] = useState(0);
 
-  // let transactions = props.transactions;
-
-  // const allCurrencies = ["BTC", "ETH", "LTC", "DOGE", "NEO"];
+  const { transactions, totalBalance } = props;
 
   useEffect(() => {
     // find monthly growth amount and percentage
-    setDollarGrowth(calculateDollarGrowth(period, props.transactions));
-    setPercentGrowth(calculatePercentGrowth(period, props.transactions));
-  }, [props.transactions, period]);
+    setDollarGrowth(calculateDollarGrowth(period, transactions));
+    setPercentGrowth(calculatePercentGrowth(period, transactions));
+  }, [transactions, period]);
 
   return (
     <Card>
@@ -100,7 +91,12 @@ export default function WalletCard(props) {
             <Typography>
               Current Total ($)
             </Typography>
-            ${totalOwnings}
+            {/* assuming that we know march 22nd is the last day */}
+            {
+              totalBalance ?
+              "$" + Number(totalBalance["2021-03-22"]).toFixed(2) :
+              "unknown"
+            }
           </Paper>
         </Grid>
 

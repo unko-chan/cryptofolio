@@ -29,19 +29,21 @@ const fullDateConverter = (date) => {
   return` ${months[monthNumber - 1]} ${date.slice(8, 10)}, ${date.slice(0, 4)}`;
 };
 
-const Transaction = () => {
+const Transaction = (props) => {
   const classes = useStyles();
-  const [transactionList, setTransactionList] = useState([]);
+  // const [transactionList, setTransactionList] = useState([]);
 
-  const getTransactions = async () => {
-    const data = await fetch('http://localhost:5000/transactions', {
-      headers: {"Content-Type": "application/json"}
-    }).then( async (response) => {
-     const transaction = await response.json();
-     setTransactionList(transaction);
-    })
-    return data;
-  }
+  // const getTransactions = async () => {
+  //   const data = await fetch('http://localhost:5000/transactions', {
+  //     headers: {"Content-Type": "application/json"}
+  //   }).then( async (response) => {
+  //    const transaction = await response.json();
+  //    setTransactionList(transaction);
+  //   })
+  //   return data;
+  // }
+
+  const { transactions } = props;
 
   const formatHeading = function(transaction) {
     return transaction.transaction_type + " " + fullCurrencyName(transaction.currency_symbol);
@@ -53,27 +55,22 @@ const Transaction = () => {
       fullDateConverter(transaction.date_occured);
   };
 
-  useEffect(() => {
-   getTransactions();
-  }, [])
-  
- const transactions = transactionList.map((transaction, index) => 
- (
-  <div>
-  <ListItem key={index}>
-    <ListItemAvatar>
-      <Avatar>
-        <CheckIcon />
-      </Avatar>
-    </ListItemAvatar>
-    <ListItemText
-      primary={formatHeading(transaction)}
-      secondary={formatDescription(transaction)}
-    />
-  </ListItem>
-  <Divider component="li" />
-</div>
-))
+  const transactionItems = transactions.map((transaction, index) => (
+    <div>
+      <ListItem key={index}>
+        <ListItemAvatar>
+          <Avatar>
+            <CheckIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={formatHeading(transaction)}
+          secondary={formatDescription(transaction)}
+        />
+      </ListItem>
+      <Divider component="li" />
+    </div>
+  ));
 
   return (
     <List className={classes.root}>
@@ -81,7 +78,7 @@ const Transaction = () => {
         Recent Transactions
       </Typography>
       <Divider component="li" />
-      { transactions.splice(5) }
+      { transactionItems.splice(5) }
     </List>
   )
 };
