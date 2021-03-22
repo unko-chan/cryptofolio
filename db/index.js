@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const pool = require('./db');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.get('/users', async (req, res) => {
   try {
@@ -54,31 +57,26 @@ app.get('/users/:id/balances', async (req, res) => {
   }
 });
 
-app.get('user/:id/rebalance_settings', async (req, res) => {});
-
-app.post('user/:id/rebalance_settings', async (req, res) => {});
-
-app.post('transactions', async (req, res) => {});
-
-app.post('user/:id/balances', async (req, res) => {});
+app.post('/users/:id/balances', async (req, res) => {
+  // console.log(req.body);
+  // res.json(req.body);
+  const { id } = req.params;
+  const { currency_symbol, date_occured, balance } = req.body;
+  try {
+    await pool.query (
+    `INSERT INTO currency_balance (user_id, currency_symbol, date_occured, balance) VALUES ($1, $2, $3, $4)
+     `, [id, currency_symbol, date_occured, balance]
+    )
+    res.send('successful');
+  } catch (error) {
+    console.log(error.message);
+  }
+});
 
 app.get('/', function (req, res) {
   res.send('hello oh');
 });
 
 app.listen(5432, () => {
-  console.log('Server listening on port 5432');
-});
-
-// 1, 'BTC', '2020-03-18', 0.00229664)
-app.post('user/:id/balances', async (req, res) => {
-  try {
-    pool.query(
-      'INSERT INTO currency_balance (user_id, currency_symbol, date_occured, balance) VALUES ($1, $2, $3, $4)',
-      [user_id, currency_symbol, date_occured, balance]
-    );
-    console.log('test');
-  } catch (error) {
-    console.error(error.message);
-  }
+  console.log("Server listening on port 5432");
 });

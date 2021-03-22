@@ -66,7 +66,7 @@ const CurrentCurrency = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-        {currencyBalances.map((currencyBalance, index) => (
+        {currencyBalances && currencyBalances.map((currencyBalance, index) => (
           <TableRow key={index}>
 
             {/* <TableCell component="th" scope="row">
@@ -77,7 +77,7 @@ const CurrentCurrency = (props) => {
               <Link to={`dashboard/${currencies[index]}`}>{currencies[index]}</Link>
             </TableCell>
 
-            <TableCell align="right" >{findMostRecentBalance(currencyBalance).toFixed(2)}</TableCell>
+            <TableCell align="right" >{currencyBalance && findMostRecentBalance(currencyBalance).toFixed(2) || "unknown"}</TableCell>
 
             <TableCell align="right">{(owningRatios[index] * 100).toFixed(2)}%</TableCell>
 
