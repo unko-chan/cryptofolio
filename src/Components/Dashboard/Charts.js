@@ -43,9 +43,14 @@ const Charts = (props) => {
   const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   useEffect(() => {
-    const promises = findAllCurrencyOwnings(currencies);
-    promises.then(res => setCurrencyBalances(res));
-    sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
+    findAllCurrencyOwnings(currencies)
+    .then(res => {
+      setCurrencyBalances(res);
+      return sumAllOwnings(res);
+    })
+    .then(res => {
+      setTotalBalance(res);
+    })
   }, []);
 
   // const convertedBalances = convertCurrencyOwnings(prices, balances);
@@ -126,7 +131,7 @@ const Charts = (props) => {
         </Grid>
       </Grid>
 
-      {chart === 'lineChart' ? (
+      {chart === 'lineChart' && totalBalance ? (
         <PerformanceLine
           balances={totalBalance}
           viewState={viewState}
@@ -134,16 +139,17 @@ const Charts = (props) => {
           yTickState={yTickState}
           timeState={timeState}
         />
-      ) : chart === 'barChart' ? (
+      ) : chart === 'barChart' && props.transactions ? (
         <PerformanceBar viewState={viewState} transactions={props.transactions}/>
-      ) : (
+      ) : chart === 'multiLineChart' && currencyBalances ? (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}
           viewState={viewState}
           xTickState={xTickState}
           yTickState={yTickState}
           timeState={timeState}
-        />
+        /> ) : (
+        <div> Loading </div>
       )}
     </Paper>
   );
