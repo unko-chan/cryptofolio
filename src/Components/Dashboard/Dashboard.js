@@ -37,13 +37,9 @@ const Dashboard = () => {
     setUser(data[0].username)
   };
 
-  const allCurrencies = ["BTC", "ETH", "LTC"];
-
   // only run requests when the page loads
   useEffect(() => {
     // getUsers();
-
-    setCurrencies(allCurrencies);
 
     getUserTransactions(1)
     .then(transactions => setTransactions(transactions));
@@ -67,7 +63,10 @@ const Dashboard = () => {
       </div>
       <section className="top-section">
         <div className="doughnut-container">
-          <Doughnut />
+          <Doughnut 
+            totalBalance={totalBalance}
+            currencyBalances={currencyBalances}
+          />
         </div>
 
         <div className="wallet-container">
@@ -101,7 +100,11 @@ const Dashboard = () => {
 
       <section className="bottom-section">
         <div className="currency-container">
-          <Currency />
+          <Currency 
+            currencies={currencies}
+            totalBalance={totalBalance}
+            currencyBalances={currencyBalances}
+          />
         </div>
 
         <div className="transactions">

@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
-import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
+// import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
 
 import variable from '../currency_details/CurrencyDetails'
 import Typography from '@material-ui/core/Typography';
@@ -27,7 +27,21 @@ const useStyles = makeStyles({
 
 const CurrentCurrency = (props) => {
   const classes = useStyles();
-  const balances = getBalances(data);
+
+  const { currencies, currencyBalances, totalBalance } = props;
+
+  const findMostRecentBalance = function(currencyBalance) {
+    const dates = Object.keys(currencyBalance);
+    const lastDate = dates[dates.length - 1];
+    console.log('log!', currencyBalance[lastDate]);
+    return currencyBalance[lastDate];
+  };
+
+  const totRecentBalance = findMostRecentBalance(totalBalance);
+
+  const owningRatios = currencyBalances.map(c => {
+    return findMostRecentBalance(c) / totRecentBalance;
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -52,18 +66,21 @@ const CurrentCurrency = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-        {Object.keys(getBalances(data)).map((key, index) => (
+        {currencyBalances.map((currencyBalance, index) => (
           <TableRow key={index}>
-          <TableCell component="th" scope="row">
-            <a href="#">{key}</a>
-          </TableCell>
-          <TableCell align="right" >{balances[key].toFixed(2)}</TableCell>
-          <TableCell align="right">{Math.round(owningRatios[index] * 100).toFixed(2)}%</TableCell>
+
+            {/* <TableCell component="th" scope="row">
+              <a href="#">{currencies[index]}</a>
+            </TableCell> */}
+
             <TableCell component="th" scope="row">
-              <Link to={`dashboard/${key}`}>{key}</Link>
+              <Link to={`dashboard/${currencies[index]}`}>{currencies[index]}</Link>
             </TableCell>
-          <TableCell align="right" >{balances[key]}</TableCell>
-          <TableCell align="right">{Math.round(owningRatios[index] * 100)}%</TableCell>
+
+            <TableCell align="right" >{findMostRecentBalance(currencyBalance).toFixed(2)}</TableCell>
+
+            <TableCell align="right">{(owningRatios[index] * 100).toFixed(2)}%</TableCell>
+
           </TableRow>
          ))}
         </TableBody>

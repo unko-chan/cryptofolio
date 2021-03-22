@@ -1,6 +1,6 @@
 import React from 'react';
 import { Doughnut, Chart } from 'react-chartjs-2';
-import { currencies, owningRatios, filteredColors, totalOwnings } from '../../helpers/pieChartHelper';
+import { currencyColors, filteredColors } from '../../helpers/pieChartHelper';
 // import './Doughnut.scss';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,8 +12,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TokenPieChart() {
+export default function TokenPieChart(props) {
   const classes = useStyles();
+
+  const { totalBalance, currencyBalances } = props;
+
+  // console.log(currencyBalances.map(c => Object.keys(c)));
 
   // format text inside a donut using canvas
   // https://stackoverflow.com/questions/42759306/add-text-inside-doughnut-chart-from-chart-js-2-in-react
@@ -40,8 +44,20 @@ export default function TokenPieChart() {
   //   }
   // });
 
+  const findMostRecentBalance = function(currencyBalance) {
+    const dates = Object.keys(currencyBalance);
+    const lastDate = dates[dates.length - 1];
+    return currencyBalance[lastDate];
+  };
+
+  const totRecentBalance = findMostRecentBalance(totalBalance);
+
+  const owningRatios = currencyBalances.map(c => {
+    return findMostRecentBalance(c) / totRecentBalance;
+  });
+
   const data = {
-    labels: currencies,
+    labels: ["BTC", "ETH", "LTC"],
     datasets: [
       {
         label: 'owning percentage',
