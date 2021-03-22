@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [currencyPrices, setCurrencyPrices] = useState([]);
 
   const getUsers = async () => {
-    const data = await fetch("http://localhost:5000/users", {
+    const data = await fetch("http://localhost:5432/users", {
       headers: { "Content-Type": "application/json"}
     }).then( async (response) => {
       const users = await response.json()

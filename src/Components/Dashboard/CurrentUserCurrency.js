@@ -55,15 +55,10 @@ const CurrentCurrency = (props) => {
         {Object.keys(getBalances(data)).map((key, index) => (
           <TableRow key={index}>
           <TableCell component="th" scope="row">
-            <a href="#">{key}</a>
+          <Link to={`dashboard/${key}`}>{key}</Link>
           </TableCell>
           <TableCell align="right" >{balances[key].toFixed(2)}</TableCell>
           <TableCell align="right">{Math.round(owningRatios[index] * 100).toFixed(2)}%</TableCell>
-            <TableCell component="th" scope="row">
-              <Link to={`dashboard/${key}`}>{key}</Link>
-            </TableCell>
-          <TableCell align="right" >{balances[key]}</TableCell>
-          <TableCell align="right">{Math.round(owningRatios[index] * 100)}%</TableCell>
           </TableRow>
          ))}
         </TableBody>

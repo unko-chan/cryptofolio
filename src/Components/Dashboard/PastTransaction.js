@@ -34,7 +34,7 @@ const Transaction = () => {
   const [transactionList, setTransactionList] = useState([]);
 
   const getTransactions = async () => {
-    const data = await fetch('http://localhost:5000/transactions', {
+    const data = await fetch('http://localhost:5432/transactions', {
       headers: {"Content-Type": "application/json"}
     }).then( async (response) => {
      const transaction = await response.json();
