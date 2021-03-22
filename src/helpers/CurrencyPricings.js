@@ -105,7 +105,6 @@ const allCurrencies = ['BTC', 'ETH', 'LTC'];
 //   });
 // };
 
-
 const findAllCurrencyOwnings = function (currencies) {
   const promises = currencies.map((currency) => {
     //historical pricing of currency
@@ -135,10 +134,7 @@ const formatBalances = function(balances) {
   }
 
   return formattedBalances;
-}
-
-findAllCurrencyOwnings(['BTC', 'ETH', 'LTC'])
-.then(res => console.log(res));
+};
 
 // const findAllCurrencyOwnings = function (currencies, prices) {
 //   return currencies.map((currency, index) => {
@@ -158,8 +154,8 @@ findAllCurrencyOwnings(['BTC', 'ETH', 'LTC'])
 // findAllCurrencyOwnings(allCurrencies);
 // take in promises of convertedCurrencyOwnings
 
-const sumAllOwnings = function (owningPromises) {
-  return owningPromises.then((currencyValues) => {
+const sumAllOwnings = function (currencyValues) {
+  // return owningPromises.then((currencyValues) => {
     let maxLengthIndex = 0;
     let maxLength = 0;
 
@@ -180,10 +176,11 @@ const sumAllOwnings = function (owningPromises) {
       }
     }
     return summedOwnings;
-  });
+  // });
 };
 
-// sumAllOwnings(allCurrencies);
+// const promises = findAllCurrencyOwnings(['BTC', 'ETH', 'LTC'])
+// sumAllOwnings(promises).then(res => console.log(res));
 
 // [
 //   {

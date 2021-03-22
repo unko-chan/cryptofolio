@@ -8,7 +8,7 @@ import './news.scss'
 const axios = require('axios');
 
 let today = new Date()
-let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() - 5;
 
 const userCurrencies = getBalances(data);
 
@@ -29,11 +29,11 @@ const ArticleList = (props) => {
 
   const getArticles = () => {
   userCurrenciesFullNames.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q=${currency}&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS3}`)
-    .then(results => console.log(currency, results.data.articles))
-    .then(results => 
-      setArticles(prevState =>
-          [...prevState, [results.data.articles[0].title, results.data.articles[0].author, results.data.articles[0].description, results.data.articles[0].url]]))
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=1&apiKey=${process.env.REACT_APP_NEWS2}`)
+    .then((results) => { 
+      if (results.data.articles.length > 0)
+        setArticles(prevState =>
+            [...prevState, [results.data.articles[0].title, results.data.articles[0].author, results.data.articles[0].description, results.data.articles[0].url]])})
     .catch(err => console.log(err))
     })
   }

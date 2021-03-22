@@ -10,12 +10,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
 import {
-  getCurrencyPricingData,
-  convertCurrencyOwnings,
   findMinPeriodBalance,
   findAllCurrencyOwnings,
   sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
+
+import { currencyColors } from '../../helpers/pieChartHelper';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,21 +38,22 @@ const Charts = (props) => {
 
   const classes = useStyles();
   const [chart, setChart] = useState('lineChart');
-  const [totalBalance, setTotalBalance] = useState({});
-  const [currencyBalances, setCurrencyBalances] = useState([]);
-  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
+  // const [totalBalance, setTotalBalance] = useState({});
+  // const [currencyBalances, setCurrencyBalances] = useState([]);
+  // const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
-  useEffect(() => {
-    const promises = findAllCurrencyOwnings(currencies);
-    promises.then(res => setCurrencyBalances(res));
-    sumAllOwnings(promises).then((prices) => setTotalBalance(prices));
-  }, []);
+  const { transactions, totalBalance, currencyBalances } = props;
 
-  // const convertedBalances = convertCurrencyOwnings(prices, balances);
-  // const setChartDate = function(days) {
-  //   const today = new Date();
-  //   return today.setDate(today.getDate() - days);
-  // };
+  // useEffect(() => {
+  //   findAllCurrencyOwnings(currencies)
+  //   .then(res => {
+  //     setCurrencyBalances(res);
+  //     return sumAllOwnings(res);
+  //   })
+  //   .then(res => {
+  //     setTotalBalance(res);
+  //   })
+  // }, []);
 
   const showAll = () => {
     if (viewState !== 'showAll') {
@@ -126,7 +127,7 @@ const Charts = (props) => {
         </Grid>
       </Grid>
 
-      {chart === 'lineChart' ? (
+      {chart === 'lineChart' && totalBalance ? (
         <PerformanceLine
           balances={totalBalance}
           viewState={viewState}
@@ -134,16 +135,17 @@ const Charts = (props) => {
           yTickState={yTickState}
           timeState={timeState}
         />
-      ) : chart === 'barChart' ? (
-        <PerformanceBar viewState={viewState} transactions={props.transactions}/>
-      ) : (
+      ) : chart === 'barChart' && transactions ? (
+        <PerformanceBar viewState={viewState} transactions={transactions}/>
+      ) : chart === 'multiLineChart' && currencyBalances ? (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}
           viewState={viewState}
           xTickState={xTickState}
           yTickState={yTickState}
           timeState={timeState}
-        />
+        /> ) : (
+        <div> Loading </div>
       )}
     </Paper>
   );
