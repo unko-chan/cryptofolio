@@ -10,13 +10,22 @@ import {
   getCurrencies
 } from '../../helpers/transactionHelper.js';
 
+import {
+  findMinPeriodBalance,
+  findAllCurrencyOwnings,
+  sumAllOwnings,
+} from '../../helpers/CurrencyPricings';
+
 import './dashboard.scss';
 import { currencyColors } from '../../helpers/pieChartHelper';
 
 const Dashboard = () => {
   const [user, setUser] = useState("");
   const [transactions, setTransactions] = useState([]);
-  const [currencies, setCurrencies] = useState([]);
+
+  const [totalBalance, setTotalBalance] = useState({});
+  const [currencyBalances, setCurrencyBalances] = useState([]);
+  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   const getUsers = async () => {
     const data = await fetch("http://localhost:5000/users", {
@@ -32,12 +41,21 @@ const Dashboard = () => {
 
   // only run requests when the page loads
   useEffect(() => {
-    getUsers();
+    // getUsers();
 
     setCurrencies(allCurrencies);
 
     getUserTransactions(1)
     .then(transactions => setTransactions(transactions));
+
+    findAllCurrencyOwnings(currencies)
+    .then(res => {
+      setCurrencyBalances(res);
+      return sumAllOwnings(res);
+    })
+    .then(res => {
+      setTotalBalance(res);
+    })
 
   }, []);
   
@@ -48,24 +66,34 @@ const Dashboard = () => {
         <div></div>
       </div>
       <section className="top-section">
-        {/* https://www.chartjs.org/docs/latest/general/responsive.html */}
         <div className="doughnut-container">
           <Doughnut />
         </div>
 
-        { transactions ? 
-          <div className="wallet-container">
-            <Wallet transactions={transactions} />
-          </div> :
-          <div>Loading!</div>
-        }
+        <div className="wallet-container">
+          {
+            transactions && totalBalance ?
+            <div className="chart-container">
+              <Wallet
+                transactions={transactions}
+                totalBalance={totalBalance}
+              />
+            </div> :
+            <div> Loading! </div>
+          }
+        </div>
+
       </section>
 
       <section className="middle-section">
         {
-          transactions ?
+          transactions && totalBalance && currencyBalances ?
           <div className="chart-container">
-            <Charts transactions={transactions}/>
+            <Charts 
+              transactions={transactions} 
+              totalBalance={totalBalance}
+              currencyBalances={currencyBalances}
+            />
           </div> :
           <div> Loading! </div>
         }

@@ -43,11 +43,13 @@ export default function WalletCard(props) {
   const [dollarGrowth, setDollarGrowth] = useState(0);
   const [percentGrowth, setPercentGrowth] = useState(0);
 
+  const { transactions, totalBalance } = props;
+
   useEffect(() => {
     // find monthly growth amount and percentage
-    setDollarGrowth(calculateDollarGrowth(period, props.transactions));
-    setPercentGrowth(calculatePercentGrowth(period, props.transactions));
-  }, [props.transactions, period]);
+    setDollarGrowth(calculateDollarGrowth(period, transactions));
+    setPercentGrowth(calculatePercentGrowth(period, transactions));
+  }, [transactions, period]);
 
   return (
     <Card>
@@ -89,7 +91,12 @@ export default function WalletCard(props) {
             <Typography>
               Current Total ($)
             </Typography>
-            $26394
+            {/* assuming that we know march 22nd is the last day */}
+            {
+              totalBalance ?
+              "$" + totalBalance["2021-03-22"] :
+              "unknown"
+            }
           </Paper>
         </Grid>
 

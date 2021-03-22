@@ -14,6 +14,7 @@ import {
   findAllCurrencyOwnings,
   sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
+
 import { currencyColors } from '../../helpers/pieChartHelper';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,28 +38,22 @@ const Charts = (props) => {
 
   const classes = useStyles();
   const [chart, setChart] = useState('lineChart');
-  const [totalBalance, setTotalBalance] = useState({});
-  const [currencyBalances, setCurrencyBalances] = useState([]);
-  const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
+  // const [totalBalance, setTotalBalance] = useState({});
+  // const [currencyBalances, setCurrencyBalances] = useState([]);
+  // const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
-  const { transactions } = props;
+  const { transactions, totalBalance, currencyBalances } = props;
 
-  useEffect(() => {
-    findAllCurrencyOwnings(currencies)
-    .then(res => {
-      setCurrencyBalances(res);
-      return sumAllOwnings(res);
-    })
-    .then(res => {
-      setTotalBalance(res);
-    })
-  }, []);
-
-  // const convertedBalances = convertCurrencyOwnings(prices, balances);
-  // const setChartDate = function(days) {
-  //   const today = new Date();
-  //   return today.setDate(today.getDate() - days);
-  // };
+  // useEffect(() => {
+  //   findAllCurrencyOwnings(currencies)
+  //   .then(res => {
+  //     setCurrencyBalances(res);
+  //     return sumAllOwnings(res);
+  //   })
+  //   .then(res => {
+  //     setTotalBalance(res);
+  //   })
+  // }, []);
 
   const showAll = () => {
     if (viewState !== 'showAll') {
