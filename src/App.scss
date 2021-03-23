@@ -1,18 +1,23 @@
 body {
-  background-color: rgba(235, 243, 255, 0.4);;
+  background-color: #ffffff;
 }
 
 .App-container {
-  font-size: calc(10px + 1.25vmin);
+  // font-size: calc(10px + 1.25vmin);
   padding-right: 1em;
 }
 
 .main-container {
-  margin-left: 16.5%;
+  margin-left: 17.5%;
 }
 
 .page-header {
   display: flex;
+  font-family: 'Raleway', sans-serif;
+  color: #6d6e70;
+  font-size: 1.8em;
   width: 100%;
+  margin-top: 1.4em;
+  padding-bottom: 0.8em;
   border-bottom: 1px lightgrey solid;
 }

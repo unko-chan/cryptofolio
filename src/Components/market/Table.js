@@ -20,21 +20,21 @@ import Collapse from '@material-ui/core/Collapse';
 
 function createData(number, name, price, change, marketCap, symbol, image) {
   return { number, name, price, change, marketCap, symbol, image };
-};
+}
 
 // modifed based on answer from stack overflow
 // https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript/36734774
-const convertCurrency = function(labelValue) {
+const convertCurrency = function (labelValue) {
   const number = Math.abs(Number(labelValue));
-  return number >= 1.0e+12
-  ? (number / 1.0e+12).toFixed(1) + "T"
-  : number >= 1.0e+9
-  ? (number / 1.0e+9).toFixed(1) + "B"
-  : number >= 1.0e+6
-  ? (number / 1.0e+6).toFixed(1) + "M"
-  : number >= 1.0e+3
-  ? (number / 1.0e+3).toFixed(1) + "K"
-  : number;
+  return number >= 1.0e12
+    ? (number / 1.0e12).toFixed(1) + 'T'
+    : number >= 1.0e9
+    ? (number / 1.0e9).toFixed(1) + 'B'
+    : number >= 1.0e6
+    ? (number / 1.0e6).toFixed(1) + 'M'
+    : number >= 1.0e3
+    ? (number / 1.0e3).toFixed(1) + 'K'
+    : number;
 };
 
 // for initial testing
@@ -46,7 +46,7 @@ const convertCurrency = function(labelValue) {
 //   createData(5, "ChainLink", "34.5", "-0.08", "14.1B", "LINK")
 // ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   table: {
     fontFamily: 'Arial',
     margin: '1%',
@@ -76,20 +76,37 @@ const MarketTable = (props) => {
 
   useEffect(() => {
     // using CoinGecko's API endpoints
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
-    axios.get(url)
-      .then(res => {
-        setRows(res.data.map((currency, index) => {
-          const { name, current_price, price_change_percentage_1h_in_currency, market_cap, symbol, image } = currency;
-          return createData(index, name, current_price.toFixed(2), price_change_percentage_1h_in_currency.toFixed(2), convertCurrency(market_cap), symbol, image);
-        }))
-      });
+    const url =
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=1h';
+    axios.get(url).then((res) => {
+      setRows(
+        res.data.map((currency, index) => {
+          const {
+            name,
+            current_price,
+            price_change_percentage_1h_in_currency,
+            market_cap,
+            symbol,
+            image,
+          } = currency;
+          return createData(
+            index,
+            name,
+            current_price.toFixed(2),
+            price_change_percentage_1h_in_currency.toFixed(2),
+            convertCurrency(market_cap),
+            symbol,
+            image
+          );
+        })
+      );
+    });
   }, []);
 
-  const removeSymbol = function(symbols, symbol) {
-    return symbols.filter(s => s !== symbol);
+  const removeSymbol = function (symbols, symbol) {
+    return symbols.filter((s) => s !== symbol);
   };
-  
+
   const handleClick = (symbol) => {
     // setWatchList((prevState) => {
     //   return prevState.includes(symbol) ?
@@ -212,6 +229,6 @@ const MarketTable = (props) => {
       </Table>
     </TableContainer>
     </section>
-  )
+  );
 };
 export default MarketTable;
