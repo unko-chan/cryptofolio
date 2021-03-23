@@ -1,6 +1,14 @@
-.top-section {
-  display: flex;
-  flex-direction: row;
+.wrapper1 {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto;
+  justify-items: stretch;
+}
+
+.wrapper2 {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  justify-items: stretch;
 }
 
 .header-text {
@@ -12,36 +20,27 @@
   font-weight: 600;
 }
 
-.top-section {
-  // border: 1px black solid;
-  height: 55vh;
-}
-
-.doughnut-container {
-  // margin-top: 5em;
-  // margin-left: -5em;
-  width: 30vw;
-  margin-left: 5em;
-  margin-bottom: 3em;
-}
-
-.transactions {
-  font-family: 'Raleway', sans-serif;
-  margin-top: 2em;
-  width: 100%;
-}
-
-.transactions-header {
-  font-family: 'Raleway', sans-serif;
+.chart-container {
+  padding: 2em;
 }
 
 .wallet-container {
   font-family: 'Raleway', sans-serif;
-  margin-top: 3em;
   display: flex;
   flex-direction: column;
-  padding: 3em;
-  height: 35vh;
+  padding: 2em;
+};
+
+.doughnut-container {
+  padding: 2em;
+};
+
+.currency-container {
+  padding: 2em;
+}
+
+.transactions-header {
+  font-family: 'Raleway', sans-serif;
 }
 
 .wallet-text {
@@ -64,20 +63,10 @@
   margin-left: 10em;
 }
 
-.currency-container {
-  width: 49vw;
-}
-
 .currency-item {
   font-family: 'Raleway', sans-serif;
   color: #6d6e70;
   text-decoration: none;
-}
-
-// define the container properties here
-.chart-container {
-  width: 70vw;
-  height: 35vh;
 }
 
 .chart-buttons {
@@ -86,17 +75,17 @@
 }
 
 @media only screen and (min-width: 1900px) {
-  .bottom-section {
-    display: flex;
-    flex-direction: row;
-  }
+  // .bottom-section {
+  //   display: flex;
+  //   flex-direction: row;
+  // }
 
-  .doughnut-container {
-    margin: 0;
-    width: 25vw;
-  }
+  // .doughnut-container {
+  //   margin: 0;
+  //   width: 25vw;
+  // }
 
-  .currency-container {
-    width: 40vw;
-  }
+  // .currency-container {
+  //   width: 40vw;
+  // }
 }
