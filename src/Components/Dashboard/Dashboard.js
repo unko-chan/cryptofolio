@@ -86,7 +86,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <div className="header-text">Allocation</div>
+      <div className="header-text-allocation">Allocation</div>
       <section className="bottom-section">
         <div className="doughnut-container">
           <Doughnut
@@ -95,18 +95,13 @@ const Dashboard = () => {
           />
         </div>
         <div className="currency-container">
-          <div className="header-text">Wallet</div>
-
+          <div className="header-text-wallet">Wallet</div>
           <Currency
             currencies={currencies}
             totalBalance={totalBalance}
             currencyBalances={currencyBalances}
           />
         </div>
-
-        {/* <div className="transactions">
-          <Transaction transactions={transactions} />
-        </div> */}
       </section>
     </>
   );
