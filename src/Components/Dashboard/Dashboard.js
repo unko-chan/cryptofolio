@@ -73,19 +73,20 @@ const Dashboard = () => {
         )}
 
         <div className="wallet-container">
+          <div className="header-text">Value</div>
           {transactions && totalBalance ? (
             <Wallet transactions={transactions} totalBalance={totalBalance} />
           ) : (
             <div> Loading! </div>
           )}
-
+          <div className="header-text">Recent Transactions</div>
           <div className="transactions">
             <Transaction transactions={transactions} />
           </div>
         </div>
       </section>
 
-      <div className="header-text">Your Portfolio</div>
+      <div className="header-text">Allocation</div>
       <section className="bottom-section">
         <div className="doughnut-container">
           <Doughnut
@@ -94,6 +95,8 @@ const Dashboard = () => {
           />
         </div>
         <div className="currency-container">
+          <div className="header-text">Wallet</div>
+
           <Currency
             currencies={currencies}
             totalBalance={totalBalance}

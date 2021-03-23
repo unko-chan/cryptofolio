@@ -99,29 +99,19 @@ const Charts = (props) => {
 
   return (
     <>
-        <div className='chart-buttons'>
-          <ButtonGroup
-            size="small"
-            aria-label="small outlined button group"
-            className={classes.buttonGroup}
-          >
-            <Button onClick={() => setChart('lineChart')}>Line</Button>
-            <Button onClick={() => setChart('barChart')}>Bar</Button>
-            <Button onClick={() => setChart('multiLineChart')}>
-              Multiline
-            </Button>
-          </ButtonGroup>
-
-          <ButtonGroup
-            size="small"
-            aria-label="small outlined button group"
-            className={classes.buttonGroup}
-          >
-            <Button onClick={showAll}>All</Button>
-            <Button onClick={showMonth}>Month</Button>
-            <Button onClick={showWeek}>Week</Button>
-          </ButtonGroup>
+      <div className="chart-buttons">
+        <div className="chart-type-buttons">
+          <Button onClick={() => setChart('lineChart')}>Line</Button>
+          <Button onClick={() => setChart('barChart')}>Bar</Button>
+          <Button onClick={() => setChart('multiLineChart')}>Multiline</Button>
         </div>
+
+        <div className="date-buttons">
+          <Button onClick={showAll}>All</Button>
+          <Button onClick={showMonth}>Month</Button>
+          <Button onClick={showWeek}>Week</Button>
+        </div>
+      </div>
 
       {chart === 'lineChart' && totalBalance ? (
         <PerformanceLine
@@ -132,7 +122,7 @@ const Charts = (props) => {
           timeState={timeState}
         />
       ) : chart === 'barChart' && transactions ? (
-        <PerformanceBar viewState={viewState} transactions={transactions}/>
+        <PerformanceBar viewState={viewState} transactions={transactions} />
       ) : chart === 'multiLineChart' && currencyBalances ? (
         <PerformanceMultiLine
           currencyBalances={currencyBalances}
@@ -140,7 +130,8 @@ const Charts = (props) => {
           xTickState={xTickState}
           yTickState={yTickState}
           timeState={timeState}
-        /> ) : (
+        />
+      ) : (
         <div> Loading </div>
       )}
     </>

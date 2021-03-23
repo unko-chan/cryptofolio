@@ -55,12 +55,10 @@ export default function WalletCard(props) {
   return (
     <Paper variant="outlined">
       <div className="wallet-buttons">
-        <ButtonGroup>
           <Button onClick={() => setPeriod('year')}>1y</Button>
           <Button onClick={() => setPeriod('month')}>1m</Button>
           <Button onClick={() => setPeriod('week')}>1w</Button>
           <Button onClick={() => setPeriod('day')}>1d</Button>
-        </ButtonGroup>
       </div>
       <div className="wallet-line">
         <div className="wallet-text">Portfolio Value</div>

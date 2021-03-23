@@ -46,7 +46,7 @@ const ArticleList = (props) => {
 
   const getArticles = (userCurrencies, x) => {
   userCurrencies.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=3&apiKey=${process.env.REACT_APP_NEWS3}`)
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=3&apiKey=${process.env.REACT_APP_NEWS4}`)
     .then((results) => {
       if (isMounted) {
         for( let x = 0; x < userCurrencies.length; x++) {

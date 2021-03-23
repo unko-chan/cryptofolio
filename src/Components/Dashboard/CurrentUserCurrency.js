@@ -18,12 +18,12 @@ import CurrencyDetails from '../currency_details/CurrencyDetails';
 
 const useStyles = makeStyles({
   table: {
+    minHeight: 250,
     minWidth: 450,
   },
   typography: {
-    fontFamily: "'Raleway', sans-serif",
     fontWeight: 500,
-  }
+  },
 });
 
 const CurrentCurrency = (props) => {
@@ -48,7 +48,7 @@ const CurrentCurrency = (props) => {
     <Paper variant="outlined">
       <TableContainer>
         <Table className={classes.table} aria-label="simple table">
-          <TableHead>
+          <TableHead className="wallet-header">
             <TableRow>
               <TableCell>
                 <Typography className={classes.typography}>Currency</Typography>

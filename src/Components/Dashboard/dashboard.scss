@@ -27,17 +27,32 @@
 
 .transactions {
   font-family: 'Raleway', sans-serif;
-  margin-top: 2em;
+  margin-top: 0em;
   width: 100%;
 }
 
+.MuiTableCell-head {
+  color: #4f4f4f !important;
+}
+
 .transactions-header {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 18px;
+  margin-bottom: 1em;
+}
+
+.recent-transactions {
+  padding-left: 15px;
+  padding-right: 15px;
+  .MuiAvatar-colorDefault {
+    color: #fafafa;
+    background-color: #35a2eb;
+  }
 }
 
 .wallet-container {
-  font-family: 'Raleway', sans-serif;
-  margin-top: 3em;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  margin-top: -3em;
   display: flex;
   flex-direction: column;
   padding: 3em;
@@ -46,8 +61,6 @@
 
 .wallet-text {
   color: #6d6e70;
-
-  font-weight: 500;
 }
 
 .wallet-line {
@@ -58,20 +71,21 @@
 }
 
 .wallet-number {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .wallet-buttons {
-  margin-left: 10em;
+  display: flex;
+  margin-left: 5em;
 }
 
 .currency-container {
-  margin-top: 1em;
+  margin-top: -6em;
   width: 37vw;
 }
 
 .currency-item {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #6d6e70;
   text-decoration: none;
 }
@@ -85,4 +99,12 @@
 .chart-buttons {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1em;
 }
+
+.MuiButton-root {
+  border-radius: 0 !important;
+  border-bottom: #35a2eb solid 2px !important;
+  margin-left: 0.5em !important;
+}
+

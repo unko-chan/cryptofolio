@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
 import { yellow, green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
-import TradingWidget from './TradingWidget'
+import TradingWidget from './TradingWidget';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import IconButton from '@material-ui/core/IconButton';
@@ -51,32 +51,32 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     margin: '1%',
     width: '98%',
-    marginTop: '3em'
+    marginTop: '0em',
   },
   text: {
     fontWeight: '300',
-    fontSize: 'medium'
+    fontSize: 'medium',
   },
   headerRow: {
     fontWeight: '600',
     fontSize: 'medium',
-    color: 'gray'
+    color: 'gray',
   },
   icon: {
-    padding: '1em'
+    padding: '1em',
   },
   iconText: {
     display: 'flex',
     alignItems: 'center',
-  }
-}))
+  },
+}));
 
 const MarketTable = (props) => {
   const classes = useStyles();
 
-  const [watchList, setWatchList] = useState(["BTC"]);
+  const [watchList, setWatchList] = useState(['BTC']);
   const [rows, setRows] = useState([]);
-  const [symbolName, setSymbolName] = useState("");
+  const [symbolName, setSymbolName] = useState('');
   const [open, setOpen] = useState(false);
 
   const axios = require('axios');
@@ -109,7 +109,7 @@ const MarketTable = (props) => {
       );
     });
   }, []);
-  
+
   const removeSymbol = function (symbols, symbol) {
     return symbols.filter((s) => s !== symbol);
   };
@@ -122,12 +122,10 @@ const MarketTable = (props) => {
     // });
     setSymbolName(symbol);
 
-    symbol === symbolName ?
-      setOpen(!open) :
-      setOpen(true);
+    symbol === symbolName ? setOpen(!open) : setOpen(true);
   };
 
-  const tableRows = rows.map(row => (
+  const tableRows = rows.map((row) => (
     <React.Fragment>
       <TableRow key={row.name}>
         <TableCell>
@@ -138,7 +136,12 @@ const MarketTable = (props) => {
 
         <TableCell>
           <Typography color="inherit" className={classes.iconText}>
-          <img src={row.image} width="40" height="40" className={classes.icon}/>
+            <img
+              src={row.image}
+              width="40"
+              height="40"
+              className={classes.icon}
+            />
             {row.name}
           </Typography>
         </TableCell>
@@ -150,13 +153,10 @@ const MarketTable = (props) => {
         </TableCell>
 
         <TableCell
-          style={ row.change >= 0 ?
-            { color: green[600] } :
-            { color: red[600] }
-          }
+          style={row.change >= 0 ? { color: green[600] } : { color: red[600] }}
         >
           <Typography color="inherit" className={classes.text}>
-            { row.change >= 0 ? "+" + row.change : row.change }%
+            {row.change >= 0 ? '+' + row.change : row.change}%
           </Typography>
         </TableCell>
 
@@ -166,75 +166,74 @@ const MarketTable = (props) => {
           </Typography>
         </TableCell>
 
-        <TableCell onClick = {() => handleClick(row.symbol)} >
-          <IconButton aria-label="expand row" size="small" >
-            {open && row.symbol === symbolName ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        <TableCell onClick={() => handleClick(row.symbol)}>
+          <IconButton aria-label="expand row" size="small">
+            {open && row.symbol === symbolName ? (
+              <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
+            )}
           </IconButton>
         </TableCell>
-
       </TableRow>
 
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open && row.symbol === symbolName} timeout="auto" unmountOnExit>
+          <Collapse
+            in={open && row.symbol === symbolName}
+            timeout="auto"
+            unmountOnExit
+          >
             <Box margin={1}>
-              <TradingWidget symbol={symbolName} className="trading-widget" autosize />
+              <TradingWidget
+                symbol={symbolName}
+                className="trading-widget"
+                autosize
+              />
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-
     </React.Fragment>
   ));
 
   return (
     <section>
-    <TableContainer component={Paper} className={classes.table}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
+      <Paper variant="outlined">
+        <TableContainer className={classes.table}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <Typography className={classes.headerRow}>#</Typography>
+                </TableCell>
 
-            <TableCell> 
-              <Typography className={classes.headerRow}>
-                #
-              </Typography>
-            </TableCell>
+                <TableCell>
+                  <Typography className={classes.headerRow}>Name</Typography>
+                </TableCell>
 
-            <TableCell> 
-              <Typography className={classes.headerRow}>
-                Name
-              </Typography>
-            </TableCell>
+                <TableCell>
+                  <Typography className={classes.headerRow}>Price</Typography>
+                </TableCell>
 
-            <TableCell> 
-              <Typography className={classes.headerRow}>
-                Price
-              </Typography>
-            </TableCell>
+                <TableCell>
+                  <Typography className={classes.headerRow}>Change (24h)</Typography>
+                </TableCell>
 
-            <TableCell> 
-              <Typography className={classes.headerRow}>
-                Change
-              </Typography>
-            </TableCell>
+                <TableCell>
+                  <Typography className={classes.headerRow}>
+                    Market Cap
+                  </Typography>
+                </TableCell>
 
-            <TableCell> 
-              <Typography className={classes.headerRow}>
-                Market Cap
-              </Typography>
-            </TableCell>
+                <TableCell> </TableCell>
+              </TableRow>
+            </TableHead>
 
-            <TableCell> </TableCell>
-
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {tableRows}
-        </TableBody>
-
-      </Table>
-    </TableContainer>
+            <TableBody>{tableRows}</TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </section>
   );
 };
