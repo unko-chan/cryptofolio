@@ -61,6 +61,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '600',
     fontSize: 'medium',
     color: 'gray'
+  },
+  icon: {
+    padding: '1em'
+  },
+  iconText: {
+    display: 'flex',
+    alignItems: 'center',
   }
 }))
 
@@ -130,8 +137,8 @@ const MarketTable = (props) => {
         </TableCell>
 
         <TableCell>
-          <Typography color="inherit" className={classes.text}>
-          <img src={row.image} width="40" height="40" />
+          <Typography color="inherit" className={classes.iconText}>
+          <img src={row.image} width="40" height="40" className={classes.icon}/>
             {row.name}
           </Typography>
         </TableCell>
@@ -231,4 +238,5 @@ const MarketTable = (props) => {
     </section>
   );
 };
+
 export default MarketTable;
