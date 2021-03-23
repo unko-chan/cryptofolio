@@ -57,31 +57,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="page-header">
-        Dashboard
-      </div>
+      <div className="page-header">Portfolio</div>
       <section className="top-section">
-        <div className="doughnut-container">
-          <Doughnut
-            totalBalance={totalBalance}
-            currencyBalances={currencyBalances}
-          />
-        </div>
-
-        <div className="wallet-container">
-          {transactions && totalBalance ? (
-            <div className="chart-container">
-              <Wallet transactions={transactions} totalBalance={totalBalance} />
-            </div>
-          ) : (
-            <div> Loading! </div>
-          )}
-        </div>
-      </section>
-
-      <section className="middle-section">
         {transactions && totalBalance && currencyBalances ? (
           <div className="chart-container">
+            <div className="header-text">Performance</div>
             <Charts
               transactions={transactions}
               totalBalance={totalBalance}
@@ -91,8 +71,21 @@ const Dashboard = () => {
         ) : (
           <div> Loading! </div>
         )}
+
+        <div className="wallet-container">
+          {transactions && totalBalance ? (
+            <Wallet transactions={transactions} totalBalance={totalBalance} />
+          ) : (
+            <div> Loading! </div>
+          )}
+          
+          <div className="transactions">
+          <Transaction transactions={transactions} />
+        </div>
+        </div>
       </section>
 
+      <div className="header-text">Your Portfolio</div>
       <section className="bottom-section">
         <div className="currency-container">
           <Currency
@@ -102,9 +95,16 @@ const Dashboard = () => {
           />
         </div>
 
-        <div className="transactions">
-          <Transaction transactions={transactions} />
+        <div className="doughnut-container">
+          <Doughnut
+            totalBalance={totalBalance}
+            currencyBalances={currencyBalances}
+          />
         </div>
+
+        {/* <div className="transactions">
+          <Transaction transactions={transactions} />
+        </div> */}
       </section>
     </>
   );

@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     minWidth: 450,
   },
   typography: {
-    fontWeight: 300,
+    fontFamily: "'Raleway', sans-serif",
+    fontWeight: 500,
   }
 });
 
@@ -44,48 +45,53 @@ const CurrentCurrency = (props) => {
   });
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              <Typography className={classes.typography}>
-                Currency
-              </Typography>
-            </TableCell>
-            <TableCell align="right">
-              <Typography className={classes.typography}>
-                Balance
-              </Typography>
-            </TableCell>
-            <TableCell align="right">
-              <Typography className={classes.typography}>
-                Wallet&nbsp;Allocation
-              </Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {currencyBalances && currencyBalances.map((currencyBalance, index) => (
-          <TableRow key={index}>
-
-            {/* <TableCell component="th" scope="row">
+    <Paper variant="outlined">
+      <TableContainer>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Typography className={classes.typography}>Currency</Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography className={classes.typography}>Balance</Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography className={classes.typography}>
+                  Wallet&nbsp;Allocation
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currencyBalances &&
+              currencyBalances.map((currencyBalance, index) => (
+                <TableRow key={index}>
+                  {/* <TableCell component="th" scope="row">
               <a href="#">{currencies[index]}</a>
             </TableCell> */}
 
-            <TableCell component="th" scope="row">
-              <Link to={`dashboard/${currencies[index]}`}>{currencies[index]}</Link>
-            </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Link to={`dashboard/${currencies[index]}`} className='currency-item'>
+                      {currencies[index]}
+                    </Link>
+                  </TableCell>
 
-            <TableCell align="right" >{currencyBalance && findMostRecentBalance(currencyBalance).toFixed(2) || "unknown"}</TableCell>
+                  <TableCell align="right">
+                    {(currencyBalance &&
+                      findMostRecentBalance(currencyBalance).toFixed(2)) ||
+                      'unknown'}
+                  </TableCell>
 
-            <TableCell align="right">{(owningRatios[index] * 100).toFixed(2)}%</TableCell>
-
-          </TableRow>
-         ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <TableCell align="right">
+                    {(owningRatios[index] * 100).toFixed(2)}%
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 }
 

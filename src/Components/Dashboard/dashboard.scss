@@ -1,29 +1,88 @@
 .top-section,
 .middle-section,
 .bottom-section {
-  margin: 2em;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+}
+
+.header-text {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  color: #4f4f4f;
+  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
+.top-section {
+  // border: 1px black solid;
+  height: 50vh;
 }
 
 .doughnut-container {
-  width: 40vw;
+  // margin-top: 5em;
+  margin-right: -1.5em;
+  width: 25vw;
+}
+
+.transactions {
+  font-family: 'Raleway', sans-serif;
+  margin-top: 2em;
+  width: 100%;
+}
+
+.transactions-header {
+  font-family: 'Raleway', sans-serif;
 }
 
 .wallet-container {
-  width: 40vw;
+  font-family: 'Raleway', sans-serif;
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  height: 35vh;
+}
+
+.wallet-text {
+  color: #6d6e70;
+
+  font-weight: 500;
+}
+
+.wallet-line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0em;
+  padding: 1em;
+}
+
+.wallet-number {
+  font-family: 'Roboto', sans-serif;
+}
+
+.wallet-buttons {
+  margin-left: 10em;
 }
 
 .currency-container {
-  width: 60vw;
+  margin-top: 1em;
+  width: 57.5vw;
+}
+
+.currency-item {
+  font-family: 'Raleway', sans-serif;
+  color: #6d6e70;
+  text-decoration: none;
 }
 
 // define the container properties here
 .chart-container {
-  width: 700px;
+  width: 70vw;
+  height: 35vh;
 }
 
-.transactions {
-  padding: 0 1em;
+.chart-buttons {
+  display: flex;
+  justify-content: space-between;
 }

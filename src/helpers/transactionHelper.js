@@ -7,7 +7,7 @@ const axios = require('axios');
 // "year", "month", "week"
 
 const getUserTransactions = function(user_id) {
-   return axios.get('http://localhost:5432/transactions')
+   return axios.get('http://localhost:5432/users/1/transactions')
       .then(transactions => transactions.data.filter(transaction => transaction.user_id === user_id));
 };
 

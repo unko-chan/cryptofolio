@@ -6,7 +6,7 @@ export default function Exchange() {
   return (
     <>
       <div className="page-header">
-        <h1>Rebalance</h1>
+        Rebalance
       </div>
 
       <div className="trade-select">
