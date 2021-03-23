@@ -102,7 +102,7 @@ const Transaction = (props) => {
         <div className="transactions-header">
           Recent Transactions
         </div>
-        {transactionItems.splice(0, 3)}
+        {transactionItems.splice(4)}
       </List>
     </Paper>
   );
