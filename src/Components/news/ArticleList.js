@@ -15,11 +15,6 @@ const userCurrenciesFullNames = []
 let newArticles = []
 
 
-
-Object.keys(userCurrencies).map((key) => {
-  userCurrenciesFullNames.push(fullCurrencyName(key));
-});
-
 const ArticleList = (props) => {
   const [articles, setArticles] = useState([]);
 
@@ -47,11 +42,11 @@ const ArticleList = (props) => {
 
   const getArticles = (userCurrencies, x) => {
   userCurrencies.map((currency) => {
-    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=5&apiKey=${process.env.REACT_APP_NEWS}`)
+    axios.get(`https://newsapi.org/v2/everything?q="${currency}"&from=${date}&language=en&pageSize=5&apiKey=${process.env.REACT_APP_NEWS2}`)
     .then((results) => { 
       if (results.data.articles.length > 0)
         setArticles(prevState =>
-            [...prevState, [results.data.articles[x].title, results.data.articles[x].author, results.data.articles[x].description, results.data.articles[x].url]])})
+            [...prevState, [results.data.articles[x].title, results.data.articles[x].author, results.data.articles[x].description, results.data.articles[x].url, currency]])})
     .catch(err => console.log(err))
     })
   }
@@ -67,7 +62,8 @@ const ArticleList = (props) => {
         name={article[0]}
         author={article[1]}
         description={article[2]}
-        url={article[3]}   
+        url={article[3]}
+        symbol={article[4]}   
        />
      )
 
@@ -77,7 +73,7 @@ const ArticleList = (props) => {
 
   return (
     <section className='article-page'>
-    <h2>News Articles</h2>
+    <h1 className="page-header">News Articles</h1>
     <div className='article-container'>
     {articleData}
     </div>
