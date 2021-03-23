@@ -75,7 +75,7 @@ export default function BasicTable(props) {
   };
 
   return (
-    <Paper>
+    <Paper variant="outlined">
       <Toolbar>
         <Typography className={classes.title}>Rebalance</Typography>
         <IconButton>
