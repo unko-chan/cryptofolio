@@ -1,6 +1,4 @@
-.top-section,
-.middle-section,
-.bottom-section {
+.top-section {
   display: flex;
   flex-direction: row;
 }
@@ -21,8 +19,10 @@
 
 .doughnut-container {
   // margin-top: 5em;
-  margin-left: -5em;
-  width: 25vw;
+  // margin-left: -5em;
+  width: 30vw;
+  margin-left: 5em;
+  margin-bottom: 3em;
 }
 
 .transactions {
@@ -46,7 +46,6 @@
 
 .wallet-text {
   color: #6d6e70;
-
   font-weight: 500;
 }
 
@@ -66,8 +65,7 @@
 }
 
 .currency-container {
-  margin-top: 1em;
-  width: 37vw;
+  width: 49vw;
 }
 
 .currency-item {
@@ -85,4 +83,20 @@
 .chart-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (min-width: 1900px) {
+  .bottom-section {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .doughnut-container {
+    margin: 0;
+    width: 20vw;
+  }
+
+  .currency-container {
+    width: 40vw;
+  }
 }
