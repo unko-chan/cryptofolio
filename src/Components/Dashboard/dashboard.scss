@@ -1,11 +1,11 @@
 .wrapper1 {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto;
   justify-items: stretch;
 }
 
 .wrapper2 {
+  margin-top: 5em;
   display: grid;
   grid-template-columns: 2fr 2fr;
   justify-items: stretch;
@@ -22,6 +22,8 @@
 
 .chart-container {
   padding: 2em;
+  width: 80%;
+  height: 80%;
 }
 
 .wallet-container {
