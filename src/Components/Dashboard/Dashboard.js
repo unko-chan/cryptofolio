@@ -58,7 +58,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="page-header">
-        <h1> Dashboard </h1>
+        Dashboard
       </div>
       <section className="top-section">
         <div className="doughnut-container">

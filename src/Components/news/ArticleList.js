@@ -70,7 +70,7 @@ const ArticleList = (props) => {
   return (
     <>
       <div className="page-header">
-        <h1>News Articles</h1>
+        News Articles
       </div>
       <div className="article-container">{articleData}</div>
     </>
