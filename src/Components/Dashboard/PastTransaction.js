@@ -9,24 +9,40 @@ import Avatar from '@material-ui/core/Avatar';
 import CheckIcon from '@material-ui/icons/Check';
 import { makeStyles } from '@material-ui/core/styles';
 import transactions from '../../data/transactions.json';
-import { fullCurrencyName } from '../../helpers/transactionHelper'
+import { fullCurrencyName } from '../../helpers/transactionHelper';
+import Paper from '@material-ui/core/Paper';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: '30ch',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   heading: {
-    padding: theme.spacing(2)
-  }
+    padding: theme.spacing(2),
+  },
 }));
 
 const fullDateConverter = (date) => {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
   const monthNumber = parseInt(date.slice(5, 7));
-  return` ${months[monthNumber - 1]} ${date.slice(8, 10)}, ${date.slice(0, 4)}`;
+  return ` ${months[monthNumber - 1]} ${date.slice(8, 10)}, ${date.slice(
+    0,
+    4
+  )}`;
 };
 
 const Transaction = (props) => {
@@ -45,14 +61,22 @@ const Transaction = (props) => {
 
   const { transactions } = props;
 
-  const formatHeading = function(transaction) {
-    return transaction.transaction_type + " " + fullCurrencyName(transaction.currency_symbol);
+  const formatHeading = function (transaction) {
+    return (
+      transaction.transaction_type +
+      ' ' +
+      fullCurrencyName(transaction.currency_symbol)
+    );
   };
 
-  const formatDescription = function(transaction) {
-    return transaction.amount + " " +
-      transaction.currency_symbol + " on " +
-      fullDateConverter(transaction.date_occured);
+  const formatDescription = function (transaction) {
+    return (
+      transaction.amount +
+      ' ' +
+      transaction.currency_symbol +
+      ' on ' +
+      fullDateConverter(transaction.date_occured)
+    );
   };
 
   const transactionItems = transactions.map((transaction, index) => (
@@ -73,14 +97,15 @@ const Transaction = (props) => {
   ));
 
   return (
-    <List className={classes.root}>
-      <Typography variant="h5" className={classes.heading}>
-        Recent Transactions
-      </Typography>
-      <Divider component="li" />
-      { transactionItems.splice(5) }
-    </List>
-  )
+    <Paper variant="outlined">
+      <List className={classes.root}>
+        <div className="transactions-header">
+          Recent Transactions
+        </div>
+        {transactionItems.splice(0, 3)}
+      </List>
+    </Paper>
+  );
 };
 
 export default Transaction;

@@ -41,7 +41,7 @@ export default function LineChart(props) {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     legend: {
       display: false,
     },

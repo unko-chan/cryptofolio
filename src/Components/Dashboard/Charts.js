@@ -18,9 +18,9 @@ import {
 import { currencyColors } from '../../helpers/pieChartHelper';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(5),
-  },
+  // paper: {
+  //   padding: theme.spacing(5),
+  // },
   buttonGroup: {
     marginBottom: theme.spacing(3),
   },
@@ -98,9 +98,8 @@ const Charts = (props) => {
   };
 
   return (
-    <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={9}>
+    <>
+        <div className='chart-buttons'>
           <ButtonGroup
             size="small"
             aria-label="small outlined button group"
@@ -112,9 +111,7 @@ const Charts = (props) => {
               Multiline
             </Button>
           </ButtonGroup>
-        </Grid>
 
-        <Grid item xs={3}>
           <ButtonGroup
             size="small"
             aria-label="small outlined button group"
@@ -124,8 +121,7 @@ const Charts = (props) => {
             <Button onClick={showMonth}>Month</Button>
             <Button onClick={showWeek}>Week</Button>
           </ButtonGroup>
-        </Grid>
-      </Grid>
+        </div>
 
       {chart === 'lineChart' && totalBalance ? (
         <PerformanceLine
@@ -147,7 +143,7 @@ const Charts = (props) => {
         /> ) : (
         <div> Loading </div>
       )}
-    </Paper>
+    </>
   );
 };
 

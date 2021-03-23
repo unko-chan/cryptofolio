@@ -9,7 +9,7 @@ const Market = () => {
   return (
     <>
       <div className="page-header">
-        <h1> Market </h1>
+        Market
       </div>
       <Table className="table" />
     </>

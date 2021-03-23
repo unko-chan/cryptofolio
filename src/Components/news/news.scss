@@ -1,8 +1,19 @@
 .article-container {
-  padding-left: 20px;
   display: flex;
-  flex-flow: wrap;
-  justify-content: space-around;
+  flex-direction: row;
+}
+.article-container-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  margin-right: 20px;
+}
+
+.article-container-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .article-list-container {
@@ -10,46 +21,33 @@
   margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
+  font-family: "Raleway", sans-serif;
+  height: 100%;
 }
 
 .article-name {
   text-decoration: underline;
   font-size: large;
   align-self: flex-end;
-  filter: blur(2px);
 }
 
 .article-author {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
-  filter: blur(2px);
-}
-.article-description {
-  filter: blur(2px);
 }
 
 .article-url {
   position: absolute;
-  bottom: -10px;
-  left: 0;
+  bottom: 0;
+  right: 0;
   display: none;
 }
 .article-symbol {
   justify-self: flex-end;
 }
 
-.article-list-container:hover .article-description,
-.article-list-container:hover .article-author,
-.article-list-container:hover .article-name {
-  filter: blur(0);
-}
-
 .article-list-container:hover .article-url {
   display: block;
-}
-
-.article-list-container:hover {
-  width: 35.5%;
-  height: 40%;
+  color: #35a2eb;
 }

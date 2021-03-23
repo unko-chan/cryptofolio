@@ -11,7 +11,12 @@ import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
 import { yellow, green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
-import TradingWidget from './TradingWidget';
+import TradingWidget from './TradingWidget'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
 
 function createData(number, name, price, change, marketCap, symbol, image) {
   return { number, name, price, change, marketCap, symbol, image };
@@ -46,15 +51,33 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     margin: '1%',
     width: '98%',
-    marginTop: '3em',
+    marginTop: '3em'
   },
-}));
+  text: {
+    fontWeight: '300',
+    fontSize: 'medium'
+  },
+  headerRow: {
+    fontWeight: '600',
+    fontSize: 'medium',
+    color: 'gray'
+  },
+  icon: {
+    padding: '1em'
+  },
+  iconText: {
+    display: 'flex',
+    alignItems: 'center',
+  }
+}))
 
 const MarketTable = (props) => {
-  const [watchList, setWatchList] = useState(['BTC']);
-  const [rows, setRows] = useState([]);
-  const [symbolName, setSymbolName] = useState('');
   const classes = useStyles();
+
+  const [watchList, setWatchList] = useState(["BTC"]);
+  const [rows, setRows] = useState([]);
+  const [symbolName, setSymbolName] = useState("");
+  const [open, setOpen] = useState(false);
 
   const axios = require('axios');
 
@@ -92,95 +115,128 @@ const MarketTable = (props) => {
   };
 
   const handleClick = (symbol) => {
-    setWatchList((prevState) => {
-      return prevState.includes(symbol)
-        ? removeSymbol(prevState, symbol)
-        : [symbol];
-    });
+    // setWatchList((prevState) => {
+    //   return prevState.includes(symbol) ?
+    //     removeSymbol(prevState, symbol) :
+    //     [symbol]
+    // });
+    setSymbolName(symbol);
+
+    symbol === symbolName ?
+      setOpen(!open) :
+      setOpen(true);
   };
 
-  const tableRows = rows.map((row) => (
-    <TableRow key={row.name}>
-      <TableCell>
-        <Typography variant="h6" color="inherit">
-          {row.number}
-        </Typography>
-      </TableCell>
+  const tableRows = rows.map(row => (
+    <React.Fragment>
+      <TableRow key={row.name}>
+        <TableCell>
+          <Typography color="inherit" className={classes.text}>
+            {row.number}
+          </Typography>
+        </TableCell>
 
-      <TableCell>
-        <div className="name-list">
-          <img src={row.image} width="40" height="40" />
-          <Typography variant="h6" color="inherit">
+        <TableCell>
+          <Typography color="inherit" className={classes.iconText}>
+          <img src={row.image} width="40" height="40" className={classes.icon}/>
             {row.name}
           </Typography>
-        </div>
-      </TableCell>
+        </TableCell>
 
-      <TableCell>
-        <Typography variant="h6" color="inherit">
-          CA${row.price}
-        </Typography>
-      </TableCell>
+        <TableCell>
+          <Typography color="inherit" className={classes.text}>
+            CA${row.price}
+          </Typography>
+        </TableCell>
 
-      <TableCell
-        style={row.change >= 0 ? { color: green[600] } : { color: red[600] }}
-      >
-        <Typography variant="h6" color="inherit">
-          {row.change >= 0 ? '+' + row.change : row.change}%
-        </Typography>
-      </TableCell>
-
-      <TableCell>
-        <Typography variant="h6" color="inherit">
-          CA${row.marketCap}
-        </Typography>
-      </TableCell>
-
-      <TableCell>
-        <Button variant="contained" color="primary">
-          Trade
-        </Button>
-      </TableCell>
-
-      <TableCell>
-        <StarIcon
-          fontSize="large"
-          onClick={(e) => {
-            handleClick(row.symbol);
-            setSymbolName(row.symbol);
-          }}
-          style={
-            watchList.includes(row.symbol)
-              ? { color: yellow[600] }
-              : { color: 'grey' }
+        <TableCell
+          style={ row.change >= 0 ?
+            { color: green[600] } :
+            { color: red[600] }
           }
-        />
-      </TableCell>
-    </TableRow>
+        >
+          <Typography color="inherit" className={classes.text}>
+            { row.change >= 0 ? "+" + row.change : row.change }%
+          </Typography>
+        </TableCell>
+
+        <TableCell>
+          <Typography variant="h6" color="inherit" className={classes.text}>
+            CA${row.marketCap}
+          </Typography>
+        </TableCell>
+
+        <TableCell onClick = {() => handleClick(row.symbol)} >
+          <IconButton aria-label="expand row" size="small" >
+            {open && row.symbol === symbolName ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+
+      </TableRow>
+
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open && row.symbol === symbolName} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <TradingWidget symbol={symbolName} className="trading-widget" autosize />
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+
+    </React.Fragment>
   ));
 
   return (
     <section>
-      <div>
-        <TradingWidget symbol={symbolName} className="trading-widget" />
-      </div>
-      <TableContainer component={Paper} className={classes.table}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell> # </TableCell>
-              <TableCell> Name </TableCell>
-              <TableCell> Price </TableCell>
-              <TableCell> Change </TableCell>
-              <TableCell> Market Cap </TableCell>
-              <TableCell> Trade </TableCell>
-              <TableCell> Watch </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{tableRows}</TableBody>
-        </Table>
-      </TableContainer>
+    <TableContainer component={Paper} className={classes.table}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+
+            <TableCell> 
+              <Typography className={classes.headerRow}>
+                #
+              </Typography>
+            </TableCell>
+
+            <TableCell> 
+              <Typography className={classes.headerRow}>
+                Name
+              </Typography>
+            </TableCell>
+
+            <TableCell> 
+              <Typography className={classes.headerRow}>
+                Price
+              </Typography>
+            </TableCell>
+
+            <TableCell> 
+              <Typography className={classes.headerRow}>
+                Change
+              </Typography>
+            </TableCell>
+
+            <TableCell> 
+              <Typography className={classes.headerRow}>
+                Market Cap
+              </Typography>
+            </TableCell>
+
+            <TableCell> </TableCell>
+
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {tableRows}
+        </TableBody>
+
+      </Table>
+    </TableContainer>
     </section>
   );
 };
+
 export default MarketTable;

@@ -74,9 +74,21 @@ const ArticleList = (props) => {
   return (
     <section className='article-page'>
     <h1 className="page-header">News Articles</h1>
-    <div className='article-container'>
-    {articleData}
+    <span className="article-container">
+    <div className='article-container-left'>
+    {articleData[0]}
+    {articleData[2]}
+    {articleData[4]}
+    {articleData[6]}
     </div>
+
+    <div className='article-container-right'>
+    {articleData[1]}
+    {articleData[3]}
+    {articleData[5]}
+    {articleData[7]}
+    </div>
+    </span>
     </section>
     )
 }

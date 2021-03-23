@@ -7,8 +7,6 @@ const options = {
 
 export default function PieExample({ values }) {
 
-  console.log(values)
-
   const data = {
     labels: ['BTC', 'ETH', 'LTC'],
     datasets: [
