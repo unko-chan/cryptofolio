@@ -69,8 +69,12 @@ export default function(props) {
     datasets: [
       {
         label: currencies,
-        data: performance,
-        backgroundColor: barColors,
+        data: [10, -5, -8],
+        backgroundColor: [
+          'rgb(55, 155, 255)',
+          'rgb(255, 100, 100)',
+          'rgb(255, 100, 100)',
+        ],
         borderColor: barColors,
       },
     ],
@@ -79,9 +83,11 @@ export default function(props) {
   // x axis is the currency
   // y axis is the performance increase or decrease
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: false,
-    }
+    },
   };
 
   return <Bar data={data} options={options} />

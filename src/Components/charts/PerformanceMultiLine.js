@@ -7,20 +7,9 @@ export default function PerformanceMultiLine(props) {
     // labels: props.timeState,
     datasets: [
       {
-        label: 'Value 1',
+        label: 'BTC',
         //y axis data
         data: convertToLine(props.currencyBalances[0]),
-        fill: false,
-        borderColor: 'rgb(55, 155, 255)',
-        //sets chart line straight
-        lineTension: 0,
-        pointRadius: 1,
-        pointHitRadius: 10,
-      },
-      {
-        label: 'Value 2',
-        //y axis data
-        data: convertToLine(props.currencyBalances[1]),
         fill: false,
         borderColor: 'rgb(255, 100, 100)',
         //sets chart line straight
@@ -29,11 +18,22 @@ export default function PerformanceMultiLine(props) {
         pointHitRadius: 10,
       },
       {
-        label: 'Value 3',
+        label: 'ETH',
+        //y axis data
+        data: convertToLine(props.currencyBalances[1]),
+        fill: false,
+        borderColor: 'rgb(55, 155, 255)',
+        //sets chart line straight
+        lineTension: 0,
+        pointRadius: 1,
+        pointHitRadius: 10,
+      },
+      {
+        label: 'LTC',
         //y axis data
         data: convertToLine(props.currencyBalances[2]),
         fill: false,
-        borderColor: 'rgb(105, 100, 100)',
+        borderColor: 'rgb(255,206,87)',
         //sets chart line straight
         lineTension: 0,
         pointRadius: 1,
@@ -43,6 +43,8 @@ export default function PerformanceMultiLine(props) {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       xAxes: [
         {
@@ -50,10 +52,10 @@ export default function PerformanceMultiLine(props) {
           time: props.timeState,
           ticks: {
             autoSkip: true,
-            min: props.xTickState
-          }
+            min: props.xTickState,
+          },
         },
-      ]
+      ],
     },
   };
 

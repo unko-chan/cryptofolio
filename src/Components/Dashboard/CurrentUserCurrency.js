@@ -82,12 +82,6 @@ const CurrentCurrency = (props) => {
 
                   <TableCell align="right">
                     {(currencyBalance &&
-                      findMostRecentBalance(currencyBalance)) ||
-                      'unknown'}
-                  </TableCell>
-
-                  <TableCell align="right">
-                    {(currencyBalance &&
                       findMostRecentBalance(currencyBalance).toFixed(2)) ||
                       'unknown'}
                   </TableCell>
