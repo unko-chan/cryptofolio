@@ -109,7 +109,7 @@ const MarketTable = (props) => {
       );
     });
   }, []);
-
+  
   const removeSymbol = function (symbols, symbol) {
     return symbols.filter((s) => s !== symbol);
   };

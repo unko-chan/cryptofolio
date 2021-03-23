@@ -24,7 +24,6 @@ const SideNav = () => {
   };
 
   const currentPage = useHistory().location.pathname.toLowerCase().slice(1);
-  console.log(currentPage);
 
   return (
     <div className="side-nav">
