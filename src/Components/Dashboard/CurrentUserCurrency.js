@@ -71,11 +71,19 @@ const CurrentCurrency = (props) => {
               <a href="#">{currencies[index]}</a>
             </TableCell> */}
 
+<<<<<<< HEAD
                   <TableCell component="th" scope="row">
                     <Link to={`dashboard/${currencies[index]}`} className='currency-item'>
                       {currencies[index]}
                     </Link>
                   </TableCell>
+=======
+            <TableCell component="th" scope="row">
+              <Link to={`dashboard/${currencies[index]}`}>{currencies[index]}</Link>
+            </TableCell>
+
+            <TableCell align="right" >{currencyBalance && findMostRecentBalance(currencyBalance) || "unknown"}</TableCell>
+>>>>>>> dc2198e8ea6ea3957832a90fd27fd0e2351b2b04
 
                   <TableCell align="right">
                     {(currencyBalance &&
