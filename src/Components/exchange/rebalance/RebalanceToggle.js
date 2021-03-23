@@ -11,26 +11,28 @@ export default function RebalanceToggle() {
   );
 
   const toggle = () => {
-      if (rebalanceState) {
-        setRebalanceState(false);
-        setRebalanceLabelState('Auto-Rebalance Off');
-      } else {
-        setRebalanceState(true);
-        setRebalanceLabelState('Auto-Rebalance On');
-      }
+    if (rebalanceState) {
+      setRebalanceState(false);
+      setRebalanceLabelState('Auto-Rebalance Off');
+    } else {
+      setRebalanceState(true);
+      setRebalanceLabelState('Auto-Rebalance On');
+    }
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormGroup aria-label="position" row>
-        <FormControlLabel
-          control={<Switch color="primary" />}
-          label={rebalanceLabelState}
-          onChange={toggle}
-          checked={rebalanceState}
-          labelPlacement="start"
-        />
-      </FormGroup>
-    </FormControl>
+    <div>
+      <FormControl component="fieldset">
+        <FormGroup aria-label="position" row>
+          <FormControlLabel
+            control={<Switch color="primary" />}
+            label={rebalanceLabelState}
+            onChange={toggle}
+            checked={rebalanceState}
+            labelPlacement="start"
+          />
+        </FormGroup>
+      </FormControl>
+    </div>
   );
 }

@@ -21,7 +21,7 @@ export default function BasicTable() {
   const offsetLimit = 5
 
   return (
-    <Paper>
+    <Paper variant="outlined" className="settings">
       <Toolbar>
         <Typography className={classes.title}>Settings</Typography>
       </Toolbar>
@@ -40,7 +40,7 @@ export default function BasicTable() {
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
-                Min. offset limit
+                Minimum offset limit
               </TableCell>
               <TableCell align="right">{offsetLimit + '%'}</TableCell>
             </TableRow>

@@ -3,6 +3,8 @@ import PieExample from '../../charts/PieExample';
 import BasicTable from './BasicTable';
 import RebalanceSettings from './RebalanceSettings';
 import RebalanceToggle from './RebalanceToggle';
+import '../exchange.scss';
+
 
 export default function RebalanceView() {
   const [rows, setRows] = useState({
@@ -14,20 +16,21 @@ export default function RebalanceView() {
   return (
     <>
       <div className="rebalance-header">
-        <h1>Portfolio Rebalance</h1>
         <RebalanceToggle />
       </div>
       <div className="rebalance-view">
         <div className="allocation-chart">
-          <PieExample values={Object.values(rows).map(i => parseInt(i))} />
+          <PieExample values={Object.values(rows).map((i) => parseInt(i))} />
         </div>
         <div className="allocation-table">
           <BasicTable rows={rows} setRows={setRows} />
-        </div>
-        <div>
           <RebalanceSettings />
         </div>
       </div>
+      <blockquote className="rebalance-text">
+        <span className="span-style">Note:</span> Your portfolio will be
+        automatically rebalanced <span className="time-span">3 days</span> from now.
+      </blockquote>
     </>
   );
 }
