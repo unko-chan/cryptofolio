@@ -1,24 +1,30 @@
 import React from "react";
-import { Paper, Box } from '@material-ui/core'
+import { Paper, Box, } from '@material-ui/core'
+import OpenInNewSharpIcon from '@material-ui/icons/OpenInNewSharp';
+
+
 
 
 export default function ArticleListItem(props) {
+
   return (
-    <Box component={Paper} elevation={3}>
-      <div className="article-name">{props.name}</div>
-    <div className="article-author">Written by: {formatAuthor(props.author)}</div><br/>
-    <div className="article-description">{props.description}</div>
-     
-      <a href='#' onClick={(e) => {
-      e.preventDefault();
-      window.open(props.url);
-      }}>Click for full story</a>
+    
+    <Box component={Paper} width="100%" className='article-list-container'>
+      <div>{props.symbol}</div>
+      <div className="article-name">{props.name}</div><br/>
+    <div className="article-description">{props.description}</div><br/>
+      <a href='#' className='article-url' onClick={(e) => {
+        e.preventDefault();
+        window.open(props.url);
+      }}><OpenInNewSharpIcon/></a>
+      <div className="article-author">{formatAuthor(props.author)}</div>
       </Box>
+     
   );
 }
 
 const formatAuthor = (author) => {
-  if (!author) {
+  if (!author || author.includes('https')) {
     return 'Anonymous'
   } else {
     return author

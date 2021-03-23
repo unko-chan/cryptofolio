@@ -28,10 +28,10 @@ const Dashboard = () => {
   const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
 
   const getUsers = async () => {
-    const data = await fetch('http://localhost:5000/users', {
-      headers: { 'Content-Type': 'application/json' },
-    }).then(async (response) => {
-      const users = await response.json();
+    const data = await fetch("http://localhost:5432/users", {
+      headers: { "Content-Type": "application/json"}
+    }).then( async (response) => {
+      const users = await response.json()
       return users;
     });
     setUser(data[0].username);

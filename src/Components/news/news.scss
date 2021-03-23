@@ -1,3 +1,53 @@
 .article-container {
-  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+}
+.article-container-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  margin-right: 20px;
+}
+
+.article-container-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.article-list-container {
+  display: "flex";
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  font-family: "Raleway", sans-serif;
+  height: 100%;
+}
+
+.article-name {
+  text-decoration: underline;
+  font-size: large;
+  align-self: flex-end;
+}
+
+.article-author {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.article-url {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+.article-symbol {
+  justify-self: flex-end;
+}
+
+.article-list-container:hover .article-url {
+  display: block;
+  color: #35a2eb;
 }
