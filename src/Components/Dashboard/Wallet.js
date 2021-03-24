@@ -38,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
+const findMostRecentBalance = function(currencyBalance) {
+  const dates = Object.keys(currencyBalance);
+  const lastDate = dates[dates.length - 1];
+  console.log('log!', currencyBalance[lastDate]);
+  return currencyBalance[lastDate];
+};
+
 export default function WalletCard(props) {
   const classes = useStyles();
   const [period, setPeriod] = useState('month');
@@ -45,6 +52,8 @@ export default function WalletCard(props) {
   const [percentGrowth, setPercentGrowth] = useState(0);
 
   const { transactions, totalBalance } = props;
+
+  const totRecentBalance = findMostRecentBalance(totalBalance);
 
   useEffect(() => {
     // find monthly growth amount and percentage
@@ -67,7 +76,7 @@ export default function WalletCard(props) {
         {/* assuming that we know march 22nd is the last day */}
         <div className="wallet-number">
           {totalBalance
-            ? '$' + Number(totalBalance['2021-03-22']).toFixed(2)
+            ? '$' + totRecentBalance.toFixed(2)
             : 'unknown'}
         </div>
       </div>
