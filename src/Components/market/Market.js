@@ -4,14 +4,12 @@ import Table from './Table';
 import './Market.scss';
 
 const Market = () => {
-
-
   return (
     <>
-      <div className="page-header">
-        Market
+      <div className="page-header">Market</div>
+      <div className="market-table">
+        <Table className="table" />
       </div>
-      <Table className="table" />
     </>
   );
 };

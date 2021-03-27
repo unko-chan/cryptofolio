@@ -1,40 +1,52 @@
 .article-container {
   display: flex;
   flex-direction: row;
+  margin-right: 4em;
 }
 .article-container-left {
   display: flex;
   flex-direction: column;
-  width: 50%;
-
-  margin-right: 20px;
+  padding: 2em;
+  margin-right: 0.5em;
 }
 
 .article-container-right {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  margin-left: 0.5em;
+  padding: 2em;
 }
 
 .article-list-container {
-  display: "flex";
-  margin-top: 10px;
-  margin-bottom: 10px;
+  display: 'flex';
+  margin-bottom: 2em;
   position: relative;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   height: 100%;
+  padding: 1.5em;
+  border: rgb(187, 187, 187) solid 1px;
+  border-radius: 5px;
 }
 
 .article-name {
-  text-decoration: underline;
-  font-size: large;
+  margin-top: 1em;
+  font-size: 22px;
+  font-weight: 500;
   align-self: flex-end;
+}
+.article-description {
+  margin-top: 1em;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.article-type {
+  font-weight: 300;
 }
 
 .article-author {
-  position: absolute;
-  top: 0;
-  right: 0;
+  font-weight: 300;
+  font-size: 14px;
 }
 
 .article-url {

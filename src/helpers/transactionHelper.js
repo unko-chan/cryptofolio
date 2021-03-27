@@ -104,7 +104,7 @@ const getPeriodDays = function(period) {
 
 const findTransactionAmount = function(transaction) {
    switch(transaction.transaction_type) {
-      case "Sent":
+      case "Sold":
          return transaction.native_amount * -1;
       case "Bought":
          return transaction.native_amount;

@@ -12,14 +12,13 @@ import transactions from '../../data/transactions.json';
 import { fullCurrencyName } from '../../helpers/transactionHelper';
 import Paper from '@material-ui/core/Paper';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2),
+    // padding: theme.spacing(2),
   },
   heading: {
-    padding: theme.spacing(2),
+    // padding: theme.spacing(2),
   },
 }));
 
@@ -80,7 +79,7 @@ const Transaction = (props) => {
   };
 
   const transactionItems = transactions.map((transaction, index) => (
-    <div>
+    <div className="recent-transactions">
       <ListItem key={index}>
         <ListItemAvatar>
           <Avatar>
@@ -97,14 +96,11 @@ const Transaction = (props) => {
   ));
 
   return (
-    <Paper variant="outlined">
-      <List className={classes.root}>
-        <div className="transactions-header">
-          Recent Transactions
-        </div>
-        { transactionItems.splice(0, 3) }
-      </List>
-    </Paper>
+    <>
+      <Paper variant="outlined">
+        <List className={classes.root}>{transactionItems.splice(0, 8)}</List>
+      </Paper>
+    </>
   );
 };
 

@@ -8,8 +8,19 @@ const ethData = require('../walletData/ethData.json');
 
 const axios = require('axios');
 
+function makeid(length) {
+  var result = '';
+  var characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 const getCurrencyPricingData = function(currency) {
-  const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=undefined`;
+  const url = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${currency}&market=CAD&apikey=${makeid(6)}`;
   return axios.get(url).then((res) => {
     const data = res.data['Time Series (Digital Currency Daily)'];
 

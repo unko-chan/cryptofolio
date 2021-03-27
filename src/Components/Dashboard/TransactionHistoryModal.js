@@ -50,10 +50,6 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} className="past-transaction-button">
-        Recent Transactions
-      </button>
-      
       <Modal
         open={open}
         onClose={handleClose}

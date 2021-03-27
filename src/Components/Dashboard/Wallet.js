@@ -64,19 +64,17 @@ export default function WalletCard(props) {
   return (
     <Paper variant="outlined">
       <div className="wallet-buttons">
-        <ButtonGroup>
           <Button onClick={() => setPeriod('year')}>1y</Button>
           <Button onClick={() => setPeriod('month')}>1m</Button>
           <Button onClick={() => setPeriod('week')}>1w</Button>
           <Button onClick={() => setPeriod('day')}>1d</Button>
-        </ButtonGroup>
       </div>
       <div className="wallet-line">
         <div className="wallet-text">Portfolio Value</div>
         {/* assuming that we know march 22nd is the last day */}
         <div className="wallet-number">
           {totalBalance
-            ? '$' + totRecentBalance.toFixed(2)
+            ? '$' + Number(totRecentBalance).toFixed(2)
             : 'unknown'}
         </div>
       </div>
