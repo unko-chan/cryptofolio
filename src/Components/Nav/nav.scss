@@ -12,8 +12,8 @@
 .nav-body {
   margin-left: 1em;
   margin-top: 2.5em;
-  padding-right: 2em;
-}
+  padding-right: 20%;
+};
 
 .nav-header {
   margin-left: 0.5em;
@@ -29,10 +29,10 @@
 .list-item {
   text-decoration: none;
   color: #525a6e;
-}
+};
 
 .test {
-  border: lightgreen solid 1px;
+  border: rgb(114, 117, 114) solid 1px;
 }
 
 .link-list > * {
@@ -59,14 +59,6 @@
 @media only screen and (max-width: 1500px) {
   .nav-body {
     margin-left: 2em;
-    padding-right: 2.5em;
-  }
-}
-
-@media only screen and (max-width: 1400px) {
-  .nav-body {
-    margin-left: 1em;
-    padding-right: 0.5em;
   }
 }
 
@@ -77,14 +69,9 @@
 
   .nav-body {
     margin-left: 1em;
-    padding-right: 1.5em;
   }
 
-  .nav-header {
-    display: none;
-  }
-
-  .nav-link {
+  .nav-header, .list-item {
     display: none;
   }
 }
