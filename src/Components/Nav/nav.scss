@@ -10,12 +10,13 @@
 }
 
 .nav-body {
-  margin-left: 2.5em;
+  margin-left: 1em;
   margin-top: 2.5em;
-  padding-right: 2.5em;
+  padding-right: 2em;
 }
 
 .nav-header {
+  margin-left: 0.5em;
   font-size: 1.8em;
   margin-bottom: 1.5em;
 
@@ -52,5 +53,38 @@
 }
 
 .MuiListItemIcon-root {
-  min-width: 50px !important;
+  min-width: 40px !important;
+}
+
+@media only screen and (max-width: 1500px) {
+  .nav-body {
+    margin-left: 2em;
+    padding-right: 2.5em;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .nav-body {
+    margin-left: 1em;
+    padding-right: 0.5em;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .side-nav {
+    width: 10%;
+  }
+
+  .nav-body {
+    margin-left: 1em;
+    padding-right: 1.5em;
+  }
+
+  .nav-header {
+    display: none;
+  }
+
+  .nav-link {
+    display: none;
+  }
 }

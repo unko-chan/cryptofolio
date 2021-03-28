@@ -56,9 +56,11 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <>
+    <section>
       <div className="page-header">Portfolio</div>
-      <section className="top-section">
+      
+      <section className="wrapper1">
+
         {transactions && totalBalance && currencyBalances ? (
           <div className="chart-container">
             <div className="header-text">Performance</div>
@@ -66,6 +68,7 @@ const Dashboard = () => {
               transactions={transactions}
               totalBalance={totalBalance}
               currencyBalances={currencyBalances}
+              className="chart"
             />
           </div>
         ) : (
@@ -76,35 +79,36 @@ const Dashboard = () => {
           <div className="header-text">Value</div>
           {transactions && totalBalance ? (
             <Wallet transactions={transactions} totalBalance={totalBalance} />
-          ) : (
+            ) : (
             <div> Loading! </div>
           )}
-          <div className="header-text">Recent Transactions</div>
-          <div className="transactions">
-            <Transaction transactions={transactions} />
-          </div>
-        </div>
-      </section>
+        </div >
 
-      <div className="header-text-allocation">Allocation</div>
-      <section className="bottom-section">
         <div className="doughnut-container">
+          <div className="header-text">Allocation</div>
           <Doughnut
             totalBalance={totalBalance}
             currencyBalances={currencyBalances}
+            className="doughnut"
           />
         </div>
+
         <div className="currency-container">
-          <div className="header-text-wallet">Wallet</div>
+          <div className="header-text">Wallet</div>
           <Currency
             currencies={currencies}
             totalBalance={totalBalance}
             currencyBalances={currencyBalances}
           />
         </div>
+
+        <div className="transaction-container">
+          <div className="header-text">Recent Transactions</div>
+          <Transaction transactions={transactions} />
+        </div>
       </section>
-    </>
-  );
+    </section>
+  )
 };
 
 export default Dashboard;
