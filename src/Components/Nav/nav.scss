@@ -12,7 +12,7 @@
 .nav-body {
   margin-left: 1em;
   margin-top: 2.5em;
-  padding-right: 20%;
+  padding-right: 2.5em;
 };
 
 .nav-header {
@@ -56,22 +56,23 @@
   min-width: 40px !important;
 }
 
-@media only screen and (max-width: 1500px) {
-  .nav-body {
-    margin-left: 2em;
-  }
-}
-
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1200px) {
   .side-nav {
     width: 10%;
   }
 
   .nav-body {
     margin-left: 1em;
+    padding-right: 2.5em;
   }
 
   .nav-header, .list-item {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .nav-body {
+    padding-right: 10%;
   }
 }

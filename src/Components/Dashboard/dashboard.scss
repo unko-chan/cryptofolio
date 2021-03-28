@@ -2,7 +2,8 @@
   display: grid;
   justify-items: start;
   align-items: start;
-  grid-column-gap: 2em;
+  grid-row-gap: 1em;
+  grid-auto-rows: minmax(200px, auto);
 }
 
 .header-text {
@@ -70,7 +71,7 @@
   width: 98%;
   margin-bottom: 2em;
   grid-row: 4/5;
-  grid-column: 1/3;
+  grid-column: 1/4;
 }
 
 .MuiTableCell-head {
@@ -130,69 +131,26 @@
   margin-left: 0.5em !important;
 };
 
-@media only screen and (min-width: 1700px) {
+@media only screen and (min-width: 1500px) {
+  .doughnut-container {
+    height: 60%;
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
   .doughnut-container {
     height: 100%;
-    width: 90%;
+    width: 99%;
     grid-row: 3/4;
     grid-column: 1/2;
   };
 
   .currency-container {
-    height: 100%;
-    width: 90%;
-    margin: 0;
-    grid-column: 2/4;
+    margin-bottom: 2em;
+    margin-right: 2em;
+    width: 35vw;
     grid-row: 3/4;
+    grid-column: 2/3;
   }
-
-  .wallet-container {
-    font-family: 'Raleway', sans-serif;
-    display: flex;
-    flex-direction: column;
-    grid-row: 1/2;
-    grid-column: 4/5;
-    width: 95%;
-  };
-
-  .chart-container {
-    width: 90%;
-    height: 75%;
-    grid-row: 1/3;
-    grid-column: 1/4;
-    // border: 1px solid red;
-  };
-
-  .transaction-container {
-    font-family: 'Raleway', sans-serif;
-    grid-row: 2/4;
-    grid-column: 4/5;
-    width: 95%;
-  };
 }
-
-// @media only screen and (min-width: 1920px) {
-//   .chart-container {
-//     width: 90%;
-//     height: 75%;
-//     grid-row: 1/3;
-//     grid-column: 1/4;
-//     // border: 1px solid red;
-//   };
-
-//   .doughnut-container {
-//     width: 80%;
-//     height: 100%;
-//     grid-row: 3/4;
-//     grid-column: 1/2;
-//   };
-// };
-
-// @media only screen and (min-width: 2220px) {
-//   .doughnut-container {
-//     width: 70%;
-//     height: 75%;
-//     grid-row: 3/4;
-//     grid-column: 1/2;
-//   };
-// };
