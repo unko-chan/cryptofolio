@@ -43,8 +43,7 @@ const SideNav = () => {
                   <DashboardIcon />
                 </ListItemIcon>
               </Link>
-              {/* <NavLink page="dashboard" className="nav-link"/> */}
-              <span className="nav-link">Dashboard</span>
+              <NavLink page="dashboard" />
             </ListItem>
 
             <ListItem className={currentPage === 'market' ? 'active' : ''}>
@@ -53,8 +52,7 @@ const SideNav = () => {
                   <TrendingUpIcon />
                 </ListItemIcon>
               </Link>
-              {/* <NavLink page="market" className="nav-link"/> */}
-              <span className="nav-link">Market</span>
+              <NavLink page="market" />
             </ListItem>
             <ListItem className={currentPage === 'rebalance' ? 'active' : ''}>
               <Link to="rebalance">
@@ -62,8 +60,7 @@ const SideNav = () => {
                   <DataUsageIcon />
                 </ListItemIcon>
               </Link>
-              {/* <NavLink page="rebalance" className="nav-link"/> */}
-              <span className="nav-link">Rebalance</span>
+              <NavLink page="rebalance" />
             </ListItem>
             <ListItem className={currentPage === 'news' ? 'active' : ''}>
               <Link to="news">
@@ -71,8 +68,7 @@ const SideNav = () => {
                   <NotificationsIcon />
                 </ListItemIcon>
               </Link>
-              {/* <NavLink page="news" className="nav-link"/> */}
-              <span className="nav-link">News</span>
+              <NavLink page="news" />
             </ListItem>
           </div>
         </List>
