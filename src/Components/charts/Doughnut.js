@@ -53,6 +53,7 @@ export default function TokenPieChart(props) {
         backgroundColor: filteredColors,
         borderWidth: 4,
         borderColor: '#ffffff',
+        hoverOffset: 4
       },
     ],
   };

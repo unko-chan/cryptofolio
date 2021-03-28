@@ -59,15 +59,16 @@ const Dashboard = () => {
     <section>
       <div className="page-header">Portfolio</div>
       
-      <div className="header-text">Performance</div>
       <section className="wrapper1">
 
         {transactions && totalBalance && currencyBalances ? (
           <div className="chart-container">
+            <div className="header-text">Performance</div>
             <Charts
               transactions={transactions}
               totalBalance={totalBalance}
               currencyBalances={currencyBalances}
+              className="chart"
             />
           </div>
         ) : (
@@ -75,6 +76,7 @@ const Dashboard = () => {
         )}
 
         <div className="wallet-container">
+          <div className="header-text">Value</div>
           {transactions && totalBalance ? (
             <Wallet transactions={transactions} totalBalance={totalBalance} />
             ) : (
@@ -83,13 +85,16 @@ const Dashboard = () => {
         </div >
 
         <div className="doughnut-container">
+          <div className="header-text">Allocation</div>
           <Doughnut
             totalBalance={totalBalance}
             currencyBalances={currencyBalances}
+            className="doughnut"
           />
         </div>
 
         <div className="currency-container">
+          <div className="header-text">Wallet</div>
           <Currency
             currencies={currencies}
             totalBalance={totalBalance}
@@ -98,22 +103,10 @@ const Dashboard = () => {
         </div>
 
         <div className="transaction-container">
+          <div className="header-text">Recent Transactions</div>
           <Transaction transactions={transactions} />
         </div>
       </section>
-
-      {/* <div className="header-text">Your Assets</div> */}
-
-      {/* <section className="wrapper2">
-
-        <div className="currency-container">
-          <Currency
-            currencies={currencies}
-            totalBalance={totalBalance}
-            currencyBalances={currencyBalances}
-          />
-        </div>
-      </section> */}
     </section>
   )
 };
