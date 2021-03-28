@@ -98,7 +98,7 @@ const Transaction = (props) => {
   return (
     <>
       <Paper variant="outlined">
-        <List className={classes.root}>{transactionItems.splice(0, 7)}</List>
+        <List className={classes.root}>{transactionItems.splice(0, 11)}</List>
       </Paper>
     </>
   );

@@ -2,7 +2,7 @@
   display: grid;
   justify-items: start;
   align-items: start;
-  grid-gap: 1em;
+  grid-column-gap: 2em;
 }
 
 .header-text {
@@ -33,32 +33,34 @@
 }
 
 .chart-container {
-  width: 90%;
+  width: 95%;
   height: 70%;
   grid-row: 1/3;
-  grid-column: 1/4;
+  grid-column: 1/3;
+  // border: 1px solid red;
 };
 
 .wallet-container {
   font-family: 'Raleway', sans-serif;
+  grid-row: 1/2;
+  grid-column: 3/4;
+  width: 95%;
   display: flex;
   flex-direction: column;
-  grid-row: 1/2;
-  grid-column: 4/5;
-  width: 95%;
+  justify-content: space-between;
 };
 
 .doughnut-container {
-  width: 65%;
-  height: 65%;
+  width: 75%;
+  height: 75%;
   grid-row: 3/4;
-  grid-column: 1/4;
+  grid-column: 1/3;
 };
 
 .transaction-container {
   font-family: 'Raleway', sans-serif;
-  grid-row: 2/4;
-  grid-column: 4/5;
+  grid-row: 2/5;
+  grid-column: 3/4;
   width: 95%;
 };
 
@@ -66,8 +68,8 @@
   height: 100%;
   width: 98%;
   margin-bottom: 2em;
-  grid-column: 1/5;
-  grid-row: 4/5;;
+  grid-row: 4/5;
+  grid-column: 1/3;
 }
 
 .MuiTableCell-head {
@@ -142,24 +144,54 @@
     grid-column: 2/4;
     grid-row: 3/4;
   }
+
+  .wallet-container {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    grid-row: 1/2;
+    grid-column: 4/5;
+    width: 95%;
+  };
+
+  .chart-container {
+    width: 90%;
+    height: 75%;
+    grid-row: 1/3;
+    grid-column: 1/4;
+    // border: 1px solid red;
+  };
+
+  .transaction-container {
+    font-family: 'Raleway', sans-serif;
+    grid-row: 2/4;
+    grid-column: 4/5;
+    width: 95%;
+  };
 }
 
-@media only screen and (min-width: 1920px) {
-  .doughnut-container {
-    width: 80%;
-    height: 100%;
-    grid-row: 3/4;
-    grid-column: 1/2;
-  };
-};
+// @media only screen and (min-width: 1920px) {
+//   .chart-container {
+//     width: 90%;
+//     height: 75%;
+//     grid-row: 1/3;
+//     grid-column: 1/4;
+//     // border: 1px solid red;
+//   };
 
+//   .doughnut-container {
+//     width: 80%;
+//     height: 100%;
+//     grid-row: 3/4;
+//     grid-column: 1/2;
+//   };
+// };
 
-@media only screen and (min-width: 2220px) {
-  .doughnut-container {
-    width: 70%;
-    height: 80%;
-    grid-row: 3/4;
-    grid-column: 1/2;
-  };
-};
-
+// @media only screen and (min-width: 2220px) {
+//   .doughnut-container {
+//     width: 70%;
+//     height: 75%;
+//     grid-row: 3/4;
+//     grid-column: 1/2;
+//   };
+// };
