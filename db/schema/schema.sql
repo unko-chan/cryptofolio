@@ -200,15 +200,28 @@ INSERT INTO currency_balance (user_id, currency_symbol, date_occured, balance) v
 (1, 'LTC', '2021-03-02', 24.23873),
 (1, 'LTC', '2021-03-08', 24.45655);
 
+
+DROP TABLE IF EXISTS transactions CASCADE;
+CREATE TABLE transactions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  date_occured DATE,
+  transaction_type VARCHAR(255),
+  amount FLOAT,
+  native_amount FLOAT,
+  transaction_fee FLOAT,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  currency_symbol VARCHAR(5)
+);
+
 INSERT INTO transactions (id, date_occured, transaction_type, amount, native_amount, transaction_fee, user_id, currency_symbol) values
-( 1, '2019-03-15', 'Bought', 0.02, 1432.32, 5, 1, 'BTC'),
-( 2, '2021-03-12', 'Bought', 0.0012, 2.70, 5, 1, 'ETH'),
-( 3, '2021-03-07', 'Bought', 0.03, 7.41, 5, 1, 'LTC'),
-( 4, '2021-03-05', 'Bought', 0.03, 7.1, 5.05, 1, 'LTC'),
-( 5, '2021-03-15', 'Bought', 0.01, 720.86, 5.05, 1, 'BTC'),
-( 6, '2020-09-04', 'Bought', 0.005, 350.32, 5, 1, 'BTC'),
-( 7, '2021-11-20', 'Bought', 0.003, 0.74, 5, 1, 'LTC'),
-( 8, '2020-10-25', 'Bought', 100, 70.9, 5, 1, 'NU'),
-( 9, '2020-12-14', 'Bought', 3, 2.50, 5, 1, 'NU'),
-( 10, '2021-01-08', 'Bought', 0.00600000, 13.52, 5, 1, 'ETH'),
-( 11, '2021-02-02', 'Bought', 0.002, 144.17, 5, 1, 'BTC')
+( 1, '2021-03-24', 'Bought', 0.02, 1432.32, 5, 1, 'BTC'),
+( 2, '2021-03-22', 'Bought', 0.0012, 2.70, 5, 1, 'ETH'),
+( 3, '2021-03-17', 'Bought', 0.03, 7.41, 5, 1, 'LTC'),
+( 4, '2021-03-15', 'Bought', 0.03, 7.1, 5.05, 1, 'LTC'),
+( 5, '2021-03-05', 'Bought', 0.01, 720.86, 5.05, 1, 'BTC'),
+( 6, '2021-03-04', 'Bought', 0.005, 350.32, 5, 1, 'BTC'),
+( 7, '2021-02-25', 'Bought', 0.003, 0.74, 5, 1, 'LTC'),
+( 8, '2021-02-25', 'Sold', 100, 70.9, 5, 1, 'NU'),
+( 19, '2021-01-08', 'Bought', 0.00600000, 13.52, 5, 1, 'ETH'),
+( 10, '2021-01-02', 'Bought', 0.002, 144.17, 5, 1, 'BTC'),
+( 11, '2020-12-14', 'Sold', 3, 2.50, 5, 1, 'NU')
