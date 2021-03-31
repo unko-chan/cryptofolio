@@ -7,6 +7,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TrendingUpIcon from '@material-ui/icons/TrendingUpOutlined';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Hidden from '@material-ui/core/Hidden';
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import './nav.scss';
 import { PagesSharp } from '@material-ui/icons';
@@ -34,27 +38,36 @@ const SideNav = () => {
         <List>
           <div className="link-list">
             <ListItem className={currentPage === 'dashboard' ? 'active' : ''}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
+              <Link to="dashboard">
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+              </Link>
               <NavLink page="dashboard" />
             </ListItem>
+
             <ListItem className={currentPage === 'market' ? 'active' : ''}>
-              <ListItemIcon>
-                <TrendingUpIcon />
-              </ListItemIcon>
+              <Link to="market">
+                <ListItemIcon>
+                  <TrendingUpIcon />
+                </ListItemIcon>
+              </Link>
               <NavLink page="market" />
             </ListItem>
             <ListItem className={currentPage === 'rebalance' ? 'active' : ''}>
-              <ListItemIcon>
-                <DataUsageIcon />
-              </ListItemIcon>
+              <Link to="rebalance">
+                <ListItemIcon>
+                  <DataUsageIcon />
+                </ListItemIcon>
+              </Link>
               <NavLink page="rebalance" />
             </ListItem>
             <ListItem className={currentPage === 'news' ? 'active' : ''}>
-              <ListItemIcon>
-                <NotificationsIcon />
-              </ListItemIcon>
+              <Link to="news">
+                <ListItemIcon>
+                  <NotificationsIcon />
+                </ListItemIcon>
+              </Link>
               <NavLink page="news" />
             </ListItem>
           </div>

@@ -10,12 +10,13 @@
 }
 
 .nav-body {
-  margin-left: 2.5em;
+  margin-left: 1em;
   margin-top: 2.5em;
   padding-right: 2.5em;
-}
+};
 
 .nav-header {
+  margin-left: 0.5em;
   font-size: 1.8em;
   margin-bottom: 1.5em;
 
@@ -28,10 +29,10 @@
 .list-item {
   text-decoration: none;
   color: #525a6e;
-}
+};
 
 .test {
-  border: lightgreen solid 1px;
+  border: rgb(114, 117, 114) solid 1px;
 }
 
 .link-list > * {
@@ -52,5 +53,26 @@
 }
 
 .MuiListItemIcon-root {
-  min-width: 50px !important;
+  min-width: 40px !important;
+}
+
+@media only screen and (max-width: 1200px) {
+  .side-nav {
+    width: 10%;
+  }
+
+  .nav-body {
+    margin-left: 1em;
+    padding-right: 2.5em;
+  }
+
+  .nav-header, .list-item {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .nav-body {
+    padding-right: 10%;
+  }
 }
