@@ -15,11 +15,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    // padding: theme.spacing(2),
-  },
-  heading: {
-    // padding: theme.spacing(2),
-  },
+  }
 }));
 
 const fullDateConverter = (date) => {
@@ -46,18 +42,6 @@ const fullDateConverter = (date) => {
 
 const Transaction = (props) => {
   const classes = useStyles();
-  // const [transactionList, setTransactionList] = useState([]);
-
-  // const getTransactions = async () => {
-  //   const data = await fetch('http://localhost:5000/transactions', {
-  //     headers: {"Content-Type": "application/json"}
-  //   }).then( async (response) => {
-  //    const transaction = await response.json();
-  //    setTransactionList(transaction);
-  //   })
-  //   return data;
-  // }
-
   const { transactions } = props;
 
   const formatHeading = function (transaction) {

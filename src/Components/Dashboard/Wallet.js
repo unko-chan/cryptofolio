@@ -13,40 +13,13 @@ import {
   calculatePercentGrowth,
 } from '../../helpers/transactionHelper';
 
-import { Breadcrumbs } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   padding: theme.spacing(2),
-  // },
-  // paper: {
-  //   padding: theme.spacing(1),
-  //   textAlign: 'center',
-  //   color: theme.palette.text.secondary,
-  //   margin: '1em',
-  // },
-  // icon: {
-  //   fontSize: 30,
-  //   padding: '0 15px',
-  // },
-  // heading: {
-  //   padding: theme.spacing(2),
-  // },
-  // breadcrumbs: {
-  //   padding: theme.spacing(1),
-  //   marginTop: '0.7em',
-  // },
-}));
-
 const findMostRecentBalance = function(currencyBalance) {
   const dates = Object.keys(currencyBalance);
   const lastDate = dates[dates.length - 1];
-  console.log('log!', currencyBalance[lastDate]);
   return currencyBalance[lastDate];
 };
 
 export default function WalletCard(props) {
-  const classes = useStyles();
   const [period, setPeriod] = useState('month');
   const [dollarGrowth, setDollarGrowth] = useState(0);
   const [percentGrowth, setPercentGrowth] = useState(0);
@@ -89,7 +62,7 @@ export default function WalletCard(props) {
             : 'Daily'}{' '}
           Growth ($)
         </div>
-        <div className="wallet-number">${dollarGrowth}</div>
+        <div className="wallet-growth">${dollarGrowth}</div>
       </div>
       <div className="wallet-line">
         <div className="wallet-text">
@@ -102,7 +75,7 @@ export default function WalletCard(props) {
             : 'Daily'}{' '}
           Change (%)
         </div>
-        <div className="wallet-number">{percentGrowth}%</div>
+        <div className="wallet-growth">{percentGrowth}%</div>
       </div>
     </Paper>
   );

@@ -1,7 +1,7 @@
-const prices = require('../walletData/btcPrices.json');
-const ltcData = require('../walletData/ltcData.json');
-const btcData = require('../walletData/btcData.json');
-const ethData = require('../walletData/ethData.json');
+// const prices = require('../walletData/btcPrices.json');
+// const ltcData = require('../walletData/ltcData.json');
+// const btcData = require('../walletData/btcData.json');
+// const ethData = require('../walletData/ethData.json');
 // // import moment from 'moment';
 
 // const moment = require('moment');

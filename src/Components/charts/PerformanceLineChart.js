@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import { Line } from 'react-chartjs-2';
-import { makeStyles } from '@material-ui/core/styles';
-import { getCurrencyPricingData, convertCurrencyOwnings } from '../../helpers/CurrencyPricings';
-import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
-const balances = require('../../walletData/btcData.json');
+// import { makeStyles } from '@material-ui/core/styles';
+// import { getCurrencyPricingData, convertCurrencyOwnings } from '../../helpers/CurrencyPricings';
+// import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
+// const balances = require('../../data/walletData/btcData.json');
 
 export function convertToLine(history) {
   let chartData = [];

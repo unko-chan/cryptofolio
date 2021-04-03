@@ -7,7 +7,7 @@ export default function ArticleListItem(props) {
     <Box width="100%" className="article-list-container">
       <div className="article-type">{props.symbol}</div>
       <div className="article-name">{props.name}</div>
-      <div className="article-author">By {formatAuthor(props.author)}</div>
+      <div className="article-author">{formatAuthor(props.author)}</div>
       <div className="article-description">{props.description}</div>
 
       <a

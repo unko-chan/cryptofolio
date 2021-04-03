@@ -217,7 +217,7 @@ const MarketTable = (props) => {
                 </TableCell>
 
                 <TableCell>
-                  <Typography className={classes.headerRow}>Change (24h)</Typography>
+                  <Typography className={classes.headerRow}>Change (hr)</Typography>
                 </TableCell>
 
                 <TableCell>

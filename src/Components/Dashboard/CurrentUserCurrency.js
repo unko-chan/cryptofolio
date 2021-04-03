@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import data from '../../data/accounts.json';
-// import { owningRatios, getBalances, } from '../../helpers/pieChartHelper';
 
 import variable from '../currency_details/CurrencyDetails'
 import Typography from '@material-ui/core/Typography';

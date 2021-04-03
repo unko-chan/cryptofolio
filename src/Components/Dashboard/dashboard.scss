@@ -104,8 +104,12 @@
   padding: 1em;
 }
 
-.wallet-number {
+.wallet-number, .wallet-growth {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.wallet-growth {
+  color: green;
 }
 
 .wallet-buttons {
