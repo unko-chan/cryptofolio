@@ -16,7 +16,7 @@ import {
   sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
 
-import './dashboard.scss';
+import './styles/dashboard.scss';
 import { currencyColors } from '../../helpers/pieChartHelper';
 
 const Dashboard = () => {
@@ -63,7 +63,7 @@ const Dashboard = () => {
 
         {transactions && totalBalance && currencyBalances ? (
           <div className="chart-container">
-            <div className="header-text">Performance</div>
+            <header className="header-text">Performance</header>
             <Charts
               transactions={transactions}
               totalBalance={totalBalance}
@@ -76,7 +76,7 @@ const Dashboard = () => {
         )}
 
         <div className="wallet-container">
-          <div className="header-text">Value</div>
+          <header className="header-text">Value</header>
           {transactions && totalBalance ? (
             <Wallet transactions={transactions} totalBalance={totalBalance} />
             ) : (
@@ -85,7 +85,7 @@ const Dashboard = () => {
         </div >
 
         <div className="doughnut-container">
-          <div className="header-text">Allocation</div>
+          <header className="header-text">Allocation</header>
           <Doughnut
             totalBalance={totalBalance}
             currencyBalances={currencyBalances}
@@ -94,7 +94,7 @@ const Dashboard = () => {
         </div>
 
         <div className="currency-container">
-          <div className="header-text">Wallet</div>
+          <header className="header-text">Wallet</header>
           <Currency
             currencies={currencies}
             totalBalance={totalBalance}
@@ -103,7 +103,7 @@ const Dashboard = () => {
         </div>
 
         <div className="transaction-container">
-          <div className="header-text">Recent Transactions</div>
+          <header className="header-text">Recent Transactions</header>
           <Transaction transactions={transactions} />
         </div>
       </section>
