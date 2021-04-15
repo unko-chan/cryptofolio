@@ -3,7 +3,7 @@ import PieExample from '../../charts/PieExample';
 import BasicTable from './BasicTable';
 import RebalanceSettings from './RebalanceSettings';
 import RebalanceToggle from './RebalanceToggle';
-import '../exchange.scss';
+import '../styles/exchange.scss';
 
 
 export default function RebalanceView() {

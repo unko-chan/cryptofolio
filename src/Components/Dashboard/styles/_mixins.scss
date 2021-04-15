@@ -1,0 +1,5 @@
+@mixin spaceBetween($direction) {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: $direction;
+}

@@ -1,0 +1,26 @@
+$primaryFont: 'Raleway', sans-serif;
+
+@import './header';
+@import './chart';
+@import './wallet';
+@import './doughnut';
+@import './transactions';
+@import './currency';
+
+.wrapper1 {
+  display: grid;
+  justify-items: start;
+  align-items: start;
+  grid-row-gap: 1em;
+  grid-auto-rows: minmax(200px, auto);
+}
+
+// .MuiTableCell-head {
+//   color: #4f4f4f !important;
+// };
+
+// .MuiButton-root {
+//   border-radius: 0 !important;
+//   border-bottom: #35a2eb solid 2px !important;
+//   margin-left: 0.5em !important;
+// };

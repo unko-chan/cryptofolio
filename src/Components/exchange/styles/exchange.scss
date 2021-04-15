@@ -1,0 +1,39 @@
+$primaryFont: 'Raleway', sans-serif;
+
+@import './rebalance.scss';
+
+// .trade-select {
+//   margin-top: 2em;
+//   display: flex;
+//   width: 100%;
+//   border-bottom: 1px lightgrey solid;
+
+//   button {
+//     margin-right: 1em;
+//     margin-bottom: 1em;
+//   }
+// }
+
+.allocation-field {
+  width: 3em;
+}
+
+.settings {
+  margin-top: -0.15em;
+}
+
+.time-span {
+  color: #ff6384;
+}
+
+.span-style {
+  font-weight: 600;
+}
+
+button {
+  border-radius: 0 !important;
+  border:none;
+  background: none;
+  border-bottom: #35a2eb solid 2px !important;
+  margin-left: 0.5em !important;
+}

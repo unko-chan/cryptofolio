@@ -1,0 +1,32 @@
+.rebalance-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 2em;
+}
+
+.rebalance-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 6em;
+
+  .allocation-chart {
+    position: relative;
+    width: 50%;
+    margin-left: -10%;
+  }
+}
+
+.rebalance-text {
+  font-family: $primaryFont;
+  width: 60vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+  text-align: left;
+  margin-top: 7em;
+  font-size: 16px;
+  background: rgba(53, 162, 235, 0.105);
+  border-left: #35a2eb solid 7px;
+}

@@ -13,6 +13,10 @@ const useStyles = makeStyles({
   table: {
     minWidth: 450,
   },
+  title: {
+    marginLeft: '-0.5em',
+    fontWeight: '500'
+  }
 });
 
 export default function BasicTable() {

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Grid from '@material-ui/core/Grid';
 import PerformanceBar from '../charts/PerformanceBar';
 import PerformanceMultiLine from '../charts/PerformanceMultiLine';
 import PerformanceLine from '../charts/PerformanceLineChart';
@@ -11,16 +8,9 @@ import moment from 'moment';
 
 import {
   findMinPeriodBalance,
-  findAllCurrencyOwnings,
-  sumAllOwnings,
 } from '../../helpers/CurrencyPricings';
 
-import { currencyColors } from '../../helpers/pieChartHelper';
-
 const useStyles = makeStyles((theme) => ({
-  // paper: {
-  //   padding: theme.spacing(5),
-  // },
   buttonGroup: {
     marginBottom: theme.spacing(3),
   },
@@ -34,26 +24,9 @@ const Charts = (props) => {
     unit: 'month',
     displayFormats: { month: 'MMM YYYY' },
   });
-  // '2019-09-22'
 
-  const classes = useStyles();
   const [chart, setChart] = useState('lineChart');
-  // const [totalBalance, setTotalBalance] = useState({});
-  // const [currencyBalances, setCurrencyBalances] = useState([]);
-  // const [currencies, setCurrencies] = useState(['BTC', 'ETH', 'LTC']);
-
   const { transactions, totalBalance, currencyBalances } = props;
-
-  // useEffect(() => {
-  //   findAllCurrencyOwnings(currencies)
-  //   .then(res => {
-  //     setCurrencyBalances(res);
-  //     return sumAllOwnings(res);
-  //   })
-  //   .then(res => {
-  //     setTotalBalance(res);
-  //   })
-  // }, []);
 
   const showAll = () => {
     if (viewState !== 'showAll') {

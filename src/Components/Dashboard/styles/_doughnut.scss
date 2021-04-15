@@ -1,0 +1,15 @@
+.doughnut-container {
+  width: 75%;
+  height: 75%;
+  grid-row: 3/4;
+  grid-column: 1/3;
+};
+
+@media only screen and (min-width: 1500px) {
+  .doughnut-container {
+    height: 100%;
+    width: 100%;
+    grid-row: 3/4;
+    grid-column: 1/2;
+  };
+};

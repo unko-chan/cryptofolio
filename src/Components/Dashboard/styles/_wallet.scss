@@ -1,0 +1,30 @@
+@import './mixins';
+
+.wallet-container {
+  @include spaceBetween(column);
+  font-family: $primaryFont;
+  grid-row: 1/2;
+  grid-column: 3/4;
+  width: 95%;
+};
+
+.wallet-text {
+  color: #6d6e70;
+};
+
+.wallet-line {
+  @include spaceBetween(row);
+  padding: 1em;
+};
+
+.wallet-number, .wallet-growth {
+  font-family: $primaryFont;
+};
+
+.wallet-growth {
+  color: green;
+};
+
+.wallet-buttons {
+  @include spaceBetween(row);
+};

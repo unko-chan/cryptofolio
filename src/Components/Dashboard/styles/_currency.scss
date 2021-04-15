@@ -1,0 +1,23 @@
+.currency-container {
+  height: 100%;
+  width: 98%;
+  margin-bottom: 2em;
+  grid-row: 4/5;
+  grid-column: 1/4;
+}
+
+.currency-item {
+  font-family: $primaryFont;
+  color: #6d6e70;
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 1500px) {
+  .currency-container {
+    margin-bottom: 2em;
+    margin-right: 2em;
+    width: 35vw;
+    grid-row: 3/4;
+    grid-column: 2/3;
+  }
+}
