@@ -29,7 +29,9 @@ const useStyles = makeStyles({
     minWidth: 450,
   },
   title: {
-    flex: '1 1 100%',
+    flex: '100%',
+    marginLeft: '-0.5em',
+    fontWeight: '500'
   },
 });
 

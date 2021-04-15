@@ -5,7 +5,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 export default function RebalanceToggle() {
-
   return (
     <div>
       <FormControl component="fieldset">
