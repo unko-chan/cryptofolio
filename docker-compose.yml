@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web-app:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node-modules
+      - ./client:/app
+    ports:
+      - '3000:3000'
+    restart: on-failure
+    container_name: web-app
+  
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    ports:
+      - '5432:5432'
+    restart: on-failure
+    container_name: api
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - REACT_APP_DB_URL=postgres://benqzxel:qkTIRLOakdivRZ6fng5lH7KtxwGSvMl3@kashin.db.elephantsql.com:5432/benqzxel
+  
