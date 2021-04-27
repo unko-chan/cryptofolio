@@ -1,6 +1,6 @@
-require('dotenv').config()
-const { Pool, Client } = require("pg")
-const connectionString = process.env.REACT_APP_DB_URL
+require('dotenv').config();
+const { Pool, Client } = require("pg");
+const connectionString = process.env.REACT_APP_DB_URL;
 
 // SQL_ELEPHANT=
 // postgres://username:password@hostname/databasename

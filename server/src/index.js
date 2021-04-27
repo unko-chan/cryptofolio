@@ -66,8 +66,6 @@ app.get('/users/1/wallet', async (req, res) => {
 });
   
 app.post('/users/:id/balances', async (req, res) => {
-  // console.log(req.body);
-  // res.json(req.body);
   const { id } = req.params;
   const { currency_symbol, date_occured, balance } = req.body;
   try {
@@ -82,7 +80,7 @@ app.post('/users/:id/balances', async (req, res) => {
 });
 
 app.get('/', function (req, res) {
-  res.send('hello oh');
+  res.send('Oh, this route is a catch route');
 });
 
 app.listen(5432, () => {
