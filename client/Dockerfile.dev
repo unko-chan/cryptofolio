@@ -1,6 +1,12 @@
 FROM node:10-alpine AS alpine
 WORKDIR /app
-COPY package*.json .
+COPY package.json .
+
+# install dependencies
 RUN npm install
+# RUN mkdir node_modules/node-sass/vendor/linux_musl-x64-64
+# RUN curl -L https://github.com/sass/node-sass/releases/download/v5.0.0/linux_musl-x64-64_binding.node -o node_modules/node-sass/vendor/linux_musl-x64-64
+RUN npm uninstall node-sass && npm install node-sass --sass-binary-name=linux_musl-x64-64
+RUN npm rebuild node-sass
 COPY . .
 CMD ["npm", "run", "start"]
